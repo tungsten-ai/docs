@@ -6,7 +6,7 @@
 </p>
 
 
-Tungsten is an open-sourced, developer-frendly tool for building, sharing, testing, and deploying your ML models.
+Tungsten is an open-sourced, developer-frendly tool for building, sharing, testing, and deploying ML models.
 
 The key features are:
  
