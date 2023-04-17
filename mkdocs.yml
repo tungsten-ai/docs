@@ -22,7 +22,9 @@ nav:
       - Getting Started: tutorial/getting_started.md
       - Inputs and Outputs: tutorial/inputs_and_outputs.md
       - The Tungsten Model: tutorial/tungsten_model.md
+  - Runners: runners.md
   - Self-hosting: self-hosting.md
+  - API
 
 markdown_extensions:
   - admonition
