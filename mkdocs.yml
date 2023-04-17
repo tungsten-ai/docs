@@ -24,7 +24,7 @@ nav:
       - The Tungsten Model: tutorial/tungsten_model.md
   - Runners: runners.md
   - Self-hosting: self-hosting.md
-  - Model Server API: model_server_pi.md
+  - Model Server API: model_server_api.md
 
 markdown_extensions:
   - admonition
