@@ -1,5 +1,6 @@
 site_name: Tungsten Docs
-
+site_description: "Tungsten: The Best Home for Your ML Models"
+site_url: https://tungsten-ai.github.io/tungsten-docs
 theme:
   name: material
   logo: images/favicon.ico
