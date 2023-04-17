@@ -32,17 +32,7 @@ The key features are:
 
 - Tungsten Runners: allow your own machines to be used to run remote predictions
 
-## Requirements
-- Python >= 3.7
-- [Docker](https://docs.docker.com/engine/install/)
-- (Optional) [nvidia-docker](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker) for running GPU models locally. You can build and push a GPU model without a GPU and nvidia-docker.
-
-## Installation
-```
-pip install tungstenkit
-```
-
-## Example
+## How it works
 ### Define a model
 Define a Tungsten model in ``tungsten_model.py``:
 ```python
@@ -88,11 +78,11 @@ tungsten build
 ### Run it locally
 Now you can run predictions locally:
 ```shell
-# Start the prediction service
-tungsten serve
-
 # Start the web demo
 tungsten demo
+
+# Start the prediction service
+tungsten serve
 ```
 
 ### Push it
@@ -108,6 +98,15 @@ tungsten push exampleuser/exampleproject
 ### Run it remotely
 Now you can run the model remotely in the web.
 
+## Requirements
+- Python >= 3.7
+- [Docker](https://docs.docker.com/engine/install/)
+- (Optional) [nvidia-docker](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker) for running GPU models locally. You can build and push a GPU model without a GPU and nvidia-docker.
+
+## Installation
+```
+pip install tungstenkit
+```
+
 ## License
 This project is licensed under the terms of the Apache License 2.0.
-.

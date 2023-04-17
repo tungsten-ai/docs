@@ -1,4 +1,4 @@
-## Install Tungstenkit
+## Installation
 
 The first step is to install Tungstenkit.
 
@@ -12,15 +12,15 @@ If they are ready, you can install Tungstenkit as follows:
 ```shell
 pip install tungstenkit
 ```
-
-## Create a directory
+## Run an example model
+### Create a directory
 Let's start by creating a working directory:
 ```shell
 mkdir tungsten-quickstart
 cd tungsten-quickstart
 ```
 
-## Build a model
+### Build a model
 
 To build a Tungsten model, you should define your input, output, setup & predict functions, and dependencies in ``tungsten_model.py`` file.
 
@@ -99,7 +99,7 @@ tungsten models
 ```
 
 
-## Run locally
+### Run locally
 Now, you can test the model in your local machine by running predictions.
 
 Tungstenkit provides multiple options for that.
@@ -116,7 +116,7 @@ tungsten serve -p 3000
 ```
 Visit [http://localhost:3000/docs](http://localhost:3000/docs) to check.
 
-## Run remotely
+### Run remotely
 To do this, you should have an account and an entered project in a Tungsten server running at [https://tungsten-ai.com](https://tungsten-ai.com).  
 
 If you have them, let's login first.
@@ -137,6 +137,6 @@ Also, you can pull the model as follows:
 ```
 tungsten pull <username>/<project name>:<model version>
 ```
-
-## Use GPUs
-To run GPU models locally, [nvidia-docker](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker) should be installed.
+## Upgrade the example
+<!-- ## Use GPUs
+To run GPU models locally, [nvidia-docker](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker) should be installed. -->

@@ -10,14 +10,18 @@ theme:
     repo: fontawesome/brands/github
 
 repo_name: tungsten-ai/tungsten
-repo_url: https://github.com/tungsten-ai/tungsten
+repo_url: https://github.com/tungsten-ai/tungsten-docs
 
 extra_css:
   - stylesheets/extra.css
 
 nav:
   - Tungsten: index.md
-  - Getting Started: getting_started.md
+  - Tutorial:
+      - Getting Started: tutorial/getting_started.md
+      - Inputs and Outputs: tutorial/inputs_and_outputs.md
+      - The Tungsten Model: tutorial/tungsten_model.md
+  - Self-hosting: self-hosting.md
 
 markdown_extensions:
   - admonition
