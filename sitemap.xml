@@ -6,7 +6,7 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://tungsten-ai.github.io/tungsten-docs/api/</loc>
+         <loc>https://tungsten-ai.github.io/tungsten-docs/model_server_api/</loc>
          <lastmod>2023-04-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
