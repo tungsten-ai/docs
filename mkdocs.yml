@@ -1,0 +1,32 @@
+site_name: Tungsten Docs
+
+theme:
+  name: material
+  logo: images/favicon.ico
+  favicon: images/favicon.ico
+  palette:
+    - scheme: tungsten
+  icon:
+    repo: fontawesome/brands/github
+
+repo_name: tungsten-ai/tungsten
+repo_url: https://github.com/tungsten-ai/tungsten
+
+extra_css:
+  - stylesheets/extra.css
+
+nav:
+  - Tungsten: index.md
+  - Getting Started: getting_started.md
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
