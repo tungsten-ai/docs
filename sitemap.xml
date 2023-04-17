@@ -6,6 +6,16 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://tungsten-ai.github.io/tungsten-docs/api/</loc>
+         <lastmod>2023-04-17</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://tungsten-ai.github.io/tungsten-docs/runners/</loc>
+         <lastmod>2023-04-17</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://tungsten-ai.github.io/tungsten-docs/self-hosting/</loc>
          <lastmod>2023-04-17</lastmod>
          <changefreq>daily</changefreq>

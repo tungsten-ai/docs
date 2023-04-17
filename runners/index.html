@@ -10,27 +10,27 @@
       
       
       
-        <link rel="canonical" href="https://tungsten-ai.github.io/tungsten-docs/tutorial/inputs_and_outputs/">
+        <link rel="canonical" href="https://tungsten-ai.github.io/tungsten-docs/runners/">
       
       
-        <link rel="prev" href="../getting_started/">
+        <link rel="prev" href="../tutorial/tungsten_model/">
       
       
-        <link rel="next" href="../tungsten_model/">
+        <link rel="next" href="../self-hosting/">
       
-      <link rel="icon" href="../../images/favicon.ico">
+      <link rel="icon" href="../images/favicon.ico">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.6">
     
     
       
-        <title>Inputs and Outputs - Tungsten Docs</title>
+        <title>Runners - Tungsten Docs</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.ded33207.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.ded33207.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.a0c5b2b5.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.a0c5b2b5.min.css">
       
       
 
@@ -46,9 +46,9 @@
       
     
     
-      <link rel="stylesheet" href="../../stylesheets/extra.css">
+      <link rel="stylesheet" href="../stylesheets/extra.css">
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -76,11 +76,6 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
-        
-        <a href="#the-baseio-class" class="md-skip">
-          Skip to content
-        </a>
-      
     </div>
     <div data-md-component="announce">
       
@@ -93,9 +88,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="Tungsten Docs" class="md-header__button md-logo" aria-label="Tungsten Docs" data-md-component="logo">
+    <a href=".." title="Tungsten Docs" class="md-header__button md-logo" aria-label="Tungsten Docs" data-md-component="logo">
       
-  <img src="../../images/favicon.ico" alt="logo">
+  <img src="../images/favicon.ico" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -111,7 +106,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Inputs and Outputs
+              Runners
             
           </span>
         </div>
@@ -198,9 +193,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="Tungsten Docs" class="md-nav__button md-logo" aria-label="Tungsten Docs" data-md-component="logo">
+    <a href=".." title="Tungsten Docs" class="md-nav__button md-logo" aria-label="Tungsten Docs" data-md-component="logo">
       
-  <img src="../../images/favicon.ico" alt="logo">
+  <img src="../images/favicon.ico" alt="logo">
 
     </a>
     Tungsten Docs
@@ -228,7 +223,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href=".." class="md-nav__link">
         Tungsten
       </a>
     </li>
@@ -241,16 +236,14 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
       
       
       
@@ -259,7 +252,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_2">
           <span class="md-nav__icon md-icon"></span>
           Tutorial
@@ -272,7 +265,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../getting_started/" class="md-nav__link">
+      <a href="../tutorial/getting_started/" class="md-nav__link">
         Getting Started
       </a>
     </li>
@@ -284,62 +277,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Inputs and Outputs
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../tutorial/inputs_and_outputs/" class="md-nav__link">
         Inputs and Outputs
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#the-baseio-class" class="md-nav__link">
-    The BaseIO class
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#files" class="md-nav__link">
-    Files
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#supported-types" class="md-nav__link">
-    Supported types
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -351,7 +293,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tungsten_model/" class="md-nav__link">
+      <a href="../tutorial/tungsten_model/" class="md-nav__link">
         The Tungsten Model
       </a>
     </li>
@@ -371,11 +313,19 @@
 
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../../runners/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Runners
       </a>
+      
     </li>
   
 
@@ -388,7 +338,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../self-hosting/" class="md-nav__link">
+      <a href="../self-hosting/" class="md-nav__link">
         Self-hosting
       </a>
     </li>
@@ -403,7 +353,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../API" class="md-nav__link">
+      <a href="../API" class="md-nav__link">
         None
       </a>
     </li>
@@ -428,35 +378,6 @@
   
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#the-baseio-class" class="md-nav__link">
-    The BaseIO class
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#files" class="md-nav__link">
-    Files
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#supported-types" class="md-nav__link">
-    Supported types
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -473,11 +394,9 @@
   
 
 
-  <h1>Inputs and Outputs</h1>
+  <h1>Runners</h1>
 
-<h2 id="the-baseio-class">The BaseIO class</h2>
-<h2 id="files">Files</h2>
-<h2 id="supported-types">Supported types</h2>
+
 
 
 
@@ -515,10 +434,10 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.51198bba.min.js"></script>
+      <script src="../assets/javascripts/bundle.51198bba.min.js"></script>
       
     
   </body>
