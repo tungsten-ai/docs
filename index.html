@@ -75,7 +75,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#how-it-works" class="md-skip">
+        <a href="#features" class="md-skip">
           Skip to content
         </a>
       
@@ -254,6 +254,33 @@
       Table of contents
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#features" class="md-nav__link">
+    Features
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#take-the-tour" class="md-nav__link">
+    Take the tour
+  </a>
+  
+    <nav class="md-nav" aria-label="Take the tour">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#require-only-a-few-lines-of-python-codes-to-containerize-a-model" class="md-nav__link">
+    Require only a few lines of Python codes to containerize a model
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
   <a href="#how-it-works" class="md-nav__link">
@@ -449,6 +476,33 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#features" class="md-nav__link">
+    Features
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#take-the-tour" class="md-nav__link">
+    Take the tour
+  </a>
+  
+    <nav class="md-nav" aria-label="Take the tour">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#require-only-a-few-lines-of-python-codes-to-containerize-a-model" class="md-nav__link">
+    Require only a few lines of Python codes to containerize a model
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#how-it-works" class="md-nav__link">
     How it works
   </a>
@@ -538,20 +592,40 @@
   <h1>Tungsten</h1>
 
 <p align="center">
-  <a href="https://tungsten-docs.github.io"><img src="images/logo.svg" alt="Tungsten" width="50%" height="50%"></a>
+  <a href="https://tungsten-ai.github.io/tungsten-docs"><img src="images/logo.svg" alt="Tungsten" width="50%" height="50%"></a>
+</p>
+<p align="center">
+  <img src="images/demo.gif" alt="Tungsten" width="100%" height="100%">
 </p>
 
-<p>Tungsten is the easiest way to build, share, and test ML models. The key features are:</p>
+<hr />
+<p>Tungsten is the easiest way to share and manage ML models. The main benefits you can enjoy are:</p>
+<p>🚀 <strong>Hessle-free model sharing</strong><br />
+Have you ever spent a lot of time setting up CUDA and the conda environment to use a model?
+Also, have you ever felt lazy about matching versions of codes and weights?
+We have, yet Tungsten enables to put all together and build a standardized Docker container <em>by just writing a few lines of Python codes</em>.
+So, others can run it without any model-specific setup.
+Also, Tungsten wraps it with a web UI as easy as non-developers can run.
+The web UI is available on both the Tungsten platform and a local machine.</p>
+<p>⚙️ <strong>Systematic model management</strong><br />
+If models, data and the test spec can change over time, the situation becomes chaotic easily. 
+Whenever test data or the test spec is updated, all evaluation scores become outdated, so you should evaluate all models again. 
+Also, each model has its own implementation to calculate it, but you may not trust all of them. 
+Using Tungsten, you can keep all evaluation scores up-to-date.
+Tungsten detects updates and automatically runs evaluations.</p>
+<h2 id="features">Features</h2>
 <ul>
-<li>Require only a few lines of Python codes to containerize a model</li>
+<li><a href="#require-only-a-few-lines-of-python-codes-to-containerize-a-model">Require only a few lines of Python codes to containerize a model</a></li>
 <li>Automatically generate a RESTful API for a model</li>
 <li>Provide a clean and intuitive web UI for a model</li>
 <li>Model, test data, and test spec versioning</li>
-<li>Automatic testing</li>
+<li>Keep test scores up-to-date</li>
 <li>Allow your own machines to be used to run remote predictions</li>
 </ul>
-<h2 id="how-it-works">How it works</h2>
-<h3 id="define-a-model">Define a model</h3>
+<hr />
+<h2 id="take-the-tour">Take the tour</h2>
+<h3 id="require-only-a-few-lines-of-python-codes-to-containerize-a-model">Require only a few lines of Python codes to containerize a model</h3>
+<p>You don't have to write a DockerFile or any complex configuration file.</p>
 <p>Define a Tungsten model in <code>tungsten_model.py</code>:
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
@@ -585,25 +659,64 @@
 </span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>        <span class="n">outputs</span> <span class="o">=</span> <span class="n">postprocess</span><span class="p">(</span><span class="n">output_tensor</span><span class="p">)</span>
 </span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>        <span class="k">return</span> <span class="n">outputs</span>
 </span></code></pre></div></p>
-<h3 id="build-it">Build it</h3>
 <p>Containerize the model:
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>tungsten build
+</span></code></pre></div>
+That's it!</p>
+<h2 id="how-it-works">How it works</h2>
+<h3 id="define-a-model">Define a model</h3>
+<p>Define a Tungsten model in <code>tungsten_model.py</code>:
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="kn">import</span> <span class="nn">torch</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="kn">from</span> <span class="nn">tungstenkit.io</span> <span class="kn">import</span> <span class="n">BaseIO</span><span class="p">,</span> <span class="n">Image</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="kn">from</span> <span class="nn">tungstenkit.model</span> <span class="kn">import</span> <span class="n">TungstenModel</span><span class="p">,</span> <span class="n">config</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="k">class</span> <span class="nc">Input</span><span class="p">(</span><span class="n">BaseIO</span><span class="p">):</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>    <span class="n">image</span><span class="p">:</span> <span class="n">Image</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="k">class</span> <span class="nc">Output</span><span class="p">(</span><span class="n">BaseIO</span><span class="p">):</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>    <span class="n">score</span><span class="p">:</span> <span class="nb">float</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>    <span class="n">label</span><span class="p">:</span> <span class="nb">str</span>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>
+</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="nd">@config</span><span class="p">(</span>
+</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>    <span class="n">gpu</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>    <span class="n">python_packages</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;torch&quot;</span><span class="p">,</span> <span class="s2">&quot;torchvision&quot;</span><span class="p">],</span>
+</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>    <span class="n">batch_size</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span>
+</span><span id="__span-2-21"><a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;A torch model&quot;</span>
+</span><span id="__span-2-22"><a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="p">)</span>
+</span><span id="__span-2-23"><a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a><span class="k">class</span> <span class="nc">Model</span><span class="p">(</span><span class="n">TungstenModel</span><span class="p">[</span><span class="n">Input</span><span class="p">,</span> <span class="n">Output</span><span class="p">]):</span>
+</span><span id="__span-2-24"><a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="__span-2-25"><a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;./weights.pth&quot;</span><span class="p">)</span>
+</span><span id="__span-2-26"><a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a>
+</span><span id="__span-2-27"><a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a>    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Input</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Output</span><span class="p">]:</span>
+</span><span id="__span-2-28"><a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a>        <span class="n">input_tensor</span> <span class="o">=</span> <span class="n">preprocess</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>
+</span><span id="__span-2-29"><a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a>        <span class="n">output_tensor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">input_tensor</span><span class="p">)</span>
+</span><span id="__span-2-30"><a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a>        <span class="n">outputs</span> <span class="o">=</span> <span class="n">postprocess</span><span class="p">(</span><span class="n">output_tensor</span><span class="p">)</span>
+</span><span id="__span-2-31"><a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a>        <span class="k">return</span> <span class="n">outputs</span>
+</span></code></pre></div></p>
+<h3 id="build-it">Build it</h3>
+<p>Containerize the model:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>tungsten build
 </span></code></pre></div></p>
 <h3 id="run-it-locally">Run it locally</h3>
 <p>Now you can run predictions locally:
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Start the web demo</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>tungsten<span class="w"> </span>demo
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1"># Start the prediction service</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>tungsten<span class="w"> </span>serve
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># Start the web demo</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>tungsten<span class="w"> </span>demo
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="c1"># Start the prediction service</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>tungsten<span class="w"> </span>serve
 </span></code></pre></div></p>
 <h3 id="push-it">Push it</h3>
 <p>Also, you can push the model to a Tungsten server:
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># Login to a Tungsten server</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>tungsten<span class="w"> </span>login<span class="w"> </span>https://tungsten.example.com
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1"># Push a model</span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>tungsten<span class="w"> </span>push<span class="w"> </span>exampleuser/exampleproject
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># Login to a Tungsten server</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>tungsten<span class="w"> </span>login<span class="w"> </span>https://tungsten.example.com
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1"># Push a model</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>tungsten<span class="w"> </span>push<span class="w"> </span>exampleuser/exampleproject
 </span></code></pre></div></p>
 <h3 id="run-it-remotely">Run it remotely</h3>
 <p>Now you can run the model remotely in the web.</p>
@@ -614,7 +727,7 @@
 <li>(Optional) <a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker">nvidia-docker</a> for running GPU models locally. You can build and push a GPU model without a GPU and nvidia-docker.</li>
 </ul>
 <h2 id="installation">Installation</h2>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>pip install tungstenkit
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>pip install tungstenkit
 </span></code></pre></div>
 <h2 id="license">License</h2>
 <p>This project is licensed under the terms of the Apache License 2.0.</p>
