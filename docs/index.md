@@ -10,11 +10,17 @@
 Tungsten is the easiest way to share and manage ML models. The main benefits you can enjoy are:
 
 🚀 **Hessle-free model sharing**  
+server, GUI application, CLI application, and FaaS function
 Tungsten stores an ML model as a standardized Docker container.
 So, any user can run it without any model-specific setup.
 Also, Tungsten wraps it with a web UI as easy as non-developers can run.
 
-⚙️ **Systematic model management**  
+⚙️ **Systematic model management**
+all in one place  
+We save every version
+easily compare
+easily download 
+later 
 If ML models, data and the test spec change over time, the situation becomes chaotic easily. 
 Tungsten manages them and keep all evaluation scores up-to-date.
 
