@@ -10,21 +10,15 @@
 Tungsten is the easiest way to share and manage ML models. The main benefits you can enjoy are:
 
 🚀 **Hessle-free model sharing**  
-Have you ever spent a lot of time setting up CUDA and the conda environment to use a model?
-Also, have you ever felt lazy about matching versions of codes and weights?
-We have, yet Tungsten enables to put all together and build a standardized Docker container *by just writing a few lines of Python codes*.
-So, others can run it without any model-specific setup.
+Tungsten stores an ML model as a standardized Docker container.
+So, any user can run it without any model-specific setup.
 Also, Tungsten wraps it with a web UI as easy as non-developers can run.
-The web UI is available on both the Tungsten platform and a local machine.
 
 ⚙️ **Systematic model management**  
-If models, data and the test spec can change over time, the situation becomes chaotic easily. 
-Whenever test data or the test spec is updated, all evaluation scores become outdated, so you should evaluate all models again. 
-Also, each model has its own implementation to calculate it, but you may not trust all of them. 
-Using Tungsten, you can keep all evaluation scores up-to-date.
-Tungsten detects updates and automatically runs evaluations.
+If ML models, data and the test spec change over time, the situation becomes chaotic easily. 
+Tungsten manages them and keep all evaluation scores up-to-date.
 
-## Features
+## Key Features
 - [Require only a few lines of Python codes to containerize a model](#require-only-a-few-lines-of-python-codes-to-containerize-a-model)
 - [Automatically generate a RESTful API for a model](#automatically-generate-a-restful-api-for-a-model)
 - Provide a clean and intuitive web UI for a model
@@ -49,7 +43,7 @@ pip install tungstenkit
 
 ## Take the tour
 ### Require only a few lines of Python codes to containerize a model
-You don't have to write a DockerFile or any complex configuration file.
+You don't have to write a DockerFile or any complex configuration file.  
 
 Define a Tungsten model in ``tungsten_model.py`` like this:
 ```python
@@ -93,18 +87,33 @@ tungsten build -n tungsten-example
 That's it!
 
 ### Automatically generate a RESTful API for a model
-The container built in above contains a standardized RESTful API. So, you can deploy using it.
-Run the server:
-```
-tungsten serve tungsten-example -p 3000
-```
-or
+The model container contains a standardized RESTful API. So, you can deploy using it.
+
+Run the container:
 ```
 docker run -p 3000 tungsten-example:latest
 ```
+<div class="termy">
+
+```console
+$ docker run -p 3000 tungsten-example:latest
+
+INFO:     Setting up the model
+INFO:     Getting inputs from the input queue
+INFO:     Starting the prediction service
+INFO:     Started server process [1]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:3000 (Press CTRL+C to quit)
+```
+
+</div>
 Then, visit [http://localhost:3000](http://localhost:3000) in a browser:
 
 ![tungsten-model-api](images/model-api.png "Tungsten Model API")
+
+### Provide a clean and intuitive web UI for a model
+
 
 ## How it works
 ### Define a model

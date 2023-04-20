@@ -14,7 +14,7 @@ repo_name: tungsten-ai/tungsten
 repo_url: https://github.com/tungsten-ai/tungsten-docs
 
 extra_css:
-  - stylesheets/extra.css
+  - css/scheme.css
 
 nav:
   - Tungsten: index.md
