@@ -2,7 +2,7 @@
   <a href="https://tungsten-ai.github.io/tungsten-docs"><img src="images/logo.svg" alt="Tungsten" width="50%" height="50%"></a>
 </p>
 <p align="center">
-  <img src="images/demo.gif" alt="Tungsten" width="100%" height="100%">
+  <img src="images/demo.gif" alt="Tungsten">
 </p>
 
 ---
@@ -26,7 +26,7 @@ Tungsten detects updates and automatically runs evaluations.
 
 ## Features
 - [Require only a few lines of Python codes to containerize a model](#require-only-a-few-lines-of-python-codes-to-containerize-a-model)
-- Automatically generate a RESTful API for a model
+- [Automatically generate a RESTful API for a model](#automatically-generate-a-restful-api-for-a-model)
 - Provide a clean and intuitive web UI for a model
 - Model, test data, and test spec versioning
 - Keep test scores up-to-date
@@ -34,11 +34,24 @@ Tungsten detects updates and automatically runs evaluations.
 
 ---
 
+## Requirements
+- Python >= 3.7
+- [Docker](https://docs.docker.com/engine/install/)
+- (Optional) [nvidia-docker](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker) for running GPU models locally. You can build and push a GPU model without a GPU and nvidia-docker.
+
+## Installation
+```
+pip install tungstenkit
+```
+
+---
+
+
 ## Take the tour
 ### Require only a few lines of Python codes to containerize a model
 You don't have to write a DockerFile or any complex configuration file.
 
-Define a Tungsten model in ``tungsten_model.py``:
+Define a Tungsten model in ``tungsten_model.py`` like this:
 ```python
 from typing import List, Tuple
 
@@ -75,9 +88,23 @@ class Model(TungstenModel[Input, Output]):
 
 Containerize the model:
 ```
-tungsten build
+tungsten build -n tungsten-example
 ```
 That's it!
+
+### Automatically generate a RESTful API for a model
+The container built in above contains a standardized RESTful API. So, you can deploy using it.
+Run the server:
+```
+tungsten serve tungsten-example -p 3000
+```
+or
+```
+docker run -p 3000 tungsten-example:latest
+```
+Then, visit [http://localhost:3000](http://localhost:3000) in a browser:
+
+![tungsten-model-api](images/model-api.png "Tungsten Model API")
 
 ## How it works
 ### Define a model
@@ -145,15 +172,7 @@ tungsten push exampleuser/exampleproject
 ### Run it remotely
 Now you can run the model remotely in the web.
 
-## Requirements
-- Python >= 3.7
-- [Docker](https://docs.docker.com/engine/install/)
-- (Optional) [nvidia-docker](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker) for running GPU models locally. You can build and push a GPU model without a GPU and nvidia-docker.
 
-## Installation
-```
-pip install tungstenkit
-```
 
 ## License
 This project is licensed under the terms of the Apache License 2.0.
