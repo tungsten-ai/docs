@@ -1,36 +1,17 @@
 <p align="center">
   <a href="https://tungsten-docs.github.io"><img src="images/logo.svg" alt="Tungsten" width="50%" height="50%"></a>
 </p>
-<p align="center">
-    <em>The best home for your ML models</em>
-</p>
 
 
-Tungsten is an open-sourced, developer-frendly tool for building, sharing, testing, and deploying ML models.
+Tungsten is the easiest way to build, share, and test ML models. The key features are:
 
-The key features are:
- 
-📦 **Framework-agnostic & hastle-free model containerization**  
-
-- No dependencies on specific ML frameworks  
-- No complex configuration files: require only a few lines of Python codes
-- Easy to setup CUDA
-
-🚀 **Easy to share models**  
-
-- Automatically generate a RESTful API using [FastAPI](https://fastapi.tiangolo.com/)
-- Provide a clean, intuitive, and locally available web inferface
-- Automatic faas deployment: enable to run predictions remotely right after pushing a model 
-
-⚙️ **Systematic model management (TBA)**
-
+- Require only a few lines of Python codes to containerize a model
+- Automatically generate a RESTful API for a model
+- Provide a clean and intuitive web UI for a model
 - Model, test data, and test spec versioning
 - Automatic testing
-- Automatically keep model scores up-to-date
+- Allow your own machines to be used to run remote predictions
 
-💸 **Bring your own GPUs**
-
-- Tungsten Runners: allow your own machines to be used to run remote predictions
 
 ## How it works
 ### Define a model
