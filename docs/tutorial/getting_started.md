@@ -121,7 +121,7 @@ To do this, you should have an account and an entered project in a Tungsten serv
 
 If you have them, let's login first.
 ```shell
-tungsten login https://tungsten-ai.com
+tungsten login
 ```
 
 Then, you can push the built model:
@@ -129,9 +129,9 @@ Then, you can push the built model:
 tungsten push <username>/<project name>
 ```
 
-Now you can visit https://tungsten-ai.com and find a new model is added to the project.
+Now you can find a new model is added to the project.
 
-You can run it in the web.
+Visit [https://tungsten-ai.com](https://tungsten-ai.com) in a browser and run it.
 
 Also, you can pull the model as follows:
 ```

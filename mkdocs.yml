@@ -15,6 +15,9 @@ repo_url: https://github.com/tungsten-ai/tungsten-docs
 
 extra_css:
   - css/scheme.css
+  - css/termynal.css
+extra_javascript:
+  - js/termynal.js
 
 nav:
   - Tungsten: index.md
