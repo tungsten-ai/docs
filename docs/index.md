@@ -6,38 +6,31 @@
 </p>
 
 ---
+Tungsten is the easiest way to share and manage ML models.
 
-Tungsten is the easiest way to share and manage ML models. The main benefits you can enjoy are:
+🚀 **Build once, use everywhere**  
+Tungsten-built ML model containers can be used as RESTful API servers, GUI/CLI applications, serverless functions, and functions in Python scripts without any model-specific setup.
 
-🚀 **Hessle-free model sharing**  
-server, GUI application, CLI application, and FaaS function
-Tungsten stores an ML model as a standardized Docker container.
-So, any user can run it without any model-specific setup.
-Also, Tungsten wraps it with a web UI as easy as non-developers can run.
-
-⚙️ **Systematic model management**
-all in one place  
-We save every version
-easily compare
-easily download 
-later 
-If ML models, data and the test spec change over time, the situation becomes chaotic easily. 
-Tungsten manages them and keep all evaluation scores up-to-date.
+⚙️ **Manage all in one place**  
+Tungsten stores every version of ML models, data, and test specs. Also, it automatically runs tests and keeps evaluation scores up-to-date.
+So, users can easily run, compare, and download ML models.
 
 ## Key Features
-- [Require only a few lines of Python codes to containerize a model](#require-only-a-few-lines-of-python-codes-to-containerize-a-model)
+- [Build only with a few lines of Python codes](#build-only-with-a-few-lines-of-python-codes)
 - [Automatically generate a RESTful API for a model](#automatically-generate-a-restful-api-for-a-model)
 - Provide a clean and intuitive web UI for a model
-- Model, test data, and test spec versioning
-- Keep test scores up-to-date
 - Allow your own machines to be used to run remote predictions
+- Run a prediction using CLI (comming soon)
+- Run a prediction in a Python script (comming soon)
+- Model, test data, and test spec versioning (comming soon)
+- Keep test scores up-to-date (comming soon)
 
 ---
 
 ## Requirements
 - Python >= 3.7
 - [Docker](https://docs.docker.com/engine/install/)
-- (Optional) [nvidia-docker](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker) for running GPU models locally. You can build and push a GPU model without a GPU and nvidia-docker.
+- (Optional) [nvidia-docker](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker) for running GPU models locally. But you can build, push, run remotely a GPU model without it.
 
 ## Installation
 ```
@@ -48,10 +41,8 @@ pip install tungstenkit
 
 
 ## Take the tour
-### Require only a few lines of Python codes to containerize a model
-You don't have to write a DockerFile or any complex configuration file.  
-
-Define a Tungsten model in ``tungsten_model.py`` like this:
+### Build only with a few lines of Python codes
+Tungsten does not require any complex configuration file for building. All you have to do is write a simple ``tungsten_model.py`` like below:
 ```python
 from typing import List, Tuple
 
@@ -85,15 +76,13 @@ class Model(TungstenModel[Input, Output]):
         outputs = postprocess(output_tensor)
         return outputs
 ```
-
-Containerize the model:
+Now you can start building:
 ```
 tungsten build -n tungsten-example
 ```
-That's it!
 
 ### Automatically generate a RESTful API for a model
-The model container contains a standardized RESTful API. So, you can deploy using it.
+The model container is a standardized RESTful API server itself.
 
 Run the container:
 ```
