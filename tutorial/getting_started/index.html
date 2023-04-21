@@ -48,6 +48,8 @@
     
       <link rel="stylesheet" href="../../css/scheme.css">
     
+      <link rel="stylesheet" href="../../css/termynal.css">
+    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -650,13 +652,13 @@ Visit <a href="http://localhost:3000/docs">http://localhost:3000/docs</a> to che
 <h3 id="run-remotely">Run remotely</h3>
 <p>To do this, you should have an account and an entered project in a Tungsten server running at <a href="https://tungsten-ai.com">https://tungsten-ai.com</a>.  </p>
 <p>If you have them, let's login first.
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>tungsten<span class="w"> </span>login<span class="w"> </span>https://tungsten-ai.com
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>tungsten<span class="w"> </span>login
 </span></code></pre></div></p>
 <p>Then, you can push the built model:
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>tungsten<span class="w"> </span>push<span class="w"> </span>&lt;username&gt;/&lt;project<span class="w"> </span>name&gt;
 </span></code></pre></div></p>
-<p>Now you can visit https://tungsten-ai.com and find a new model is added to the project.</p>
-<p>You can run it in the web.</p>
+<p>Now you can find a new model is added to the project.</p>
+<p>Visit <a href="https://tungsten-ai.com">https://tungsten-ai.com</a> in a browser and run it.</p>
 <p>Also, you can pull the model as follows:
 <div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>tungsten pull &lt;username&gt;/&lt;project name&gt;:&lt;model version&gt;
 </span></code></pre></div></p>
@@ -704,6 +706,8 @@ To run GPU models locally, [nvidia-docker](https://docs.nvidia.com/datacenter/cl
     
     
       <script src="../../assets/javascripts/bundle.51198bba.min.js"></script>
+      
+        <script src="../../js/termynal.js"></script>
       
     
   </body>
