@@ -83,14 +83,16 @@ class Model(TungstenModel[Input, Output]):
 Copy that to a file ``tungsten_model.py``.
 
 
-To setup a model, you should download model weights:
+To setup a model, model weights should be downloaded:
 ```
 curl -o mobilenetv2_weights.pth https://download.pytorch.org/models/mobilenet_v2-7ebf99e0.pth
 ```
 
 Now, you can build a model using the definition:
-```shell
-tungsten build
+```console
+$ tungsten build -n tungsten-example
+
+✅ Successfully built tungsten model: 'tungsten-example:latest'
 ```
 
 You can see that the model you've just created is added to the model list:

@@ -10,7 +10,7 @@
 Tungsten is a containerization tool and platform for easily sharing and managing ML models.
 
 Tungsten enables to build [a versatile and standardized container for an ML model](#tungsten-model).
-Without any model-specific setup, it can be run as a RESTful API server, a GUI application, a CLI application, a serverless function, and a function in Python scripts.
+Without any model-specific setup, it can be run as a RESTful API server, a GUI application, a CLI application, and a serverless function, and a Python script.
 
 Also, Tungsten provides [a centralized place to manage ML models systematically](#tungsten-platform). It supports remote execution and test automation for them as well as storing models.
 
@@ -20,16 +20,16 @@ Also, Tungsten provides [a centralized place to manage ML models systematically]
 The Tungsten model is the basic unit of ML model in Tungsten. It is a Docker container and contains a standardized API and all dependencies for an ML model.
 
 ### Key Features
+- **Easy to build**: [Require only a few lines of Python codes.](#build-a-tungsten-model)
+- **Easy to use**: [Do not require any model-specific setup for running.](#run-it-as-a-restful-api-server)
 - **Versatile**: Can be used in multiple ways:
-    - RESTful API server
-    - GUI application
-    - CLI application
-    - Serverless function
-    - Function in Python scripts
-- **Easy to use**: Do not require any model-specific setup for running.
-- **Easy to build**: Require only a few lines of Python codes.
-- **Standardized**: Contain a standardized RESTful API.
-- **Scalable**: Support adaptive batching and clustring with Redis and a cloud storage.
+    - [RESTful API server](#run-it-as-a-restful-api-server)
+    - [GUI application](#run-it-as-a-gui-application)
+    - [Serverless function](#run-it-as-a-serverless-function)
+    - CLI application (comming soon)
+    - Within Python scripts (comming soon)
+- **Standardized**: [Communicate with JSONs through a standardized RESTful API](#run-it-as-a-restful-api-server).
+- **Scalable**: Support adaptive batching and clustering with Redis and a cloud storage.
 
 For learning more with a complete example, see the [Tungsten Model - Getting Started](https://tungsten-ai.github.io/tungsten-docs/tungsten_model/getting_started/).
 
@@ -73,12 +73,7 @@ class Model(TungstenModel[Input, Output]):
         outputs = postprocess(output_tensor)
         return outputs
 ```
-Now you can start building:
-```console
-$ tungsten build -n tungsten-example
 
-✅ Successfully built tungsten model: 'tungsten-basic:latest'
-```
 #### Run it as a RESTful API server
 
 The built container can be run as a standardized RESTful API server itself.
@@ -86,7 +81,7 @@ The built container can be run as a standardized RESTful API server itself.
 Run the container:
 
 ```console
-$ docker run -p 3000:3000 tungsten-example:latest
+$ docker run -p 3000:3000 --gpus all tungsten-example:latest
 
 INFO:     Setting up the model
 INFO:     Getting inputs from the input queue
