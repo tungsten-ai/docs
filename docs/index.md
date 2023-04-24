@@ -6,42 +6,38 @@
 </p>
 
 ---
-Tungsten is the easiest way to share and manage ML models.
+## What is Tungsten?
+Tungsten is a containerization tool and platform for easily sharing and managing ML models.
 
-🚀 **Build once, use everywhere**  
-Tungsten-built ML model containers can be used as RESTful API servers, GUI/CLI applications, serverless functions, and functions in Python scripts without any model-specific setup.
+Tungsten enables to build [a versatile and standardized container for an ML model](#tungsten-model).
+Without any model-specific setup, it can be run as a RESTful API server, a GUI application, a CLI application, a serverless function, and a function in Python scripts.
 
-⚙️ **Manage all in one place**  
-Tungsten stores every version of ML models, data, and test specs. Also, it automatically runs tests and keeps evaluation scores up-to-date.
-So, users can easily run, compare, and download ML models.
-
-## Key Features
-- [Build only with a few lines of Python codes](#build-only-with-a-few-lines-of-python-codes)
-- [Automatically generate a standardized RESTful API for a model](#automatically-generate-a-standardized-restful-api-for-a-model)
-- [Provide a clean and intuitive web UI for a model](#provide-a-clean-and-intuitive-web-ui-for-a-model)
-- [Allow your own machines to be used to run models](#allow-your-own-machines-to-be-used-to-run-models)
-- Model, test data, and test spec versioning (comming soon)
-- Keep test scores up-to-date (comming soon)
-
-For a complete example including more features, see the [Tutorial - Getting Started](https://tungsten-ai.github.io/tungsten-docs/tutorial/getting_started/).
+Also, Tungsten provides [a centralized place to manage ML models systematically](#tungsten-platform). It supports remote execution and test automation for them as well as storing models.
 
 ---
 
-## Requirements
-- Python >= 3.7
-- [Docker](https://docs.docker.com/engine/install/)
-- (Optional) [nvidia-docker](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker) for running GPU models locally. But you can build, push, run remotely a GPU model without it.
+## Tungsten Model
+The Tungsten model is the basic unit of ML model in Tungsten. It is a Docker container and contains a standardized API and all dependencies for an ML model.
 
-## Installation
-```
-pip install tungstenkit
-```
+### Key Features
+- **Versatile**: Can be used in multiple ways:
+    - RESTful API server
+    - GUI application
+    - CLI application
+    - Serverless function
+    - Function in Python scripts
+- **Easy to use**: Do not require any model-specific setup for running.
+- **Easy to build**: Require only a few lines of Python codes.
+- **Standardized**: Contain a standardized RESTful API.
+- **Scalable**: Support adaptive batching and clustring with Redis and a cloud storage.
+
+For learning more with a complete example, see the [Tungsten Model - Getting Started](https://tungsten-ai.github.io/tungsten-docs/tungsten_model/getting_started/).
 
 ---
 
-## Take the tour
-### Build only with a few lines of Python codes
-Tungsten does not require any complex configuration file for building. 
+### Take the tour
+#### Build a Tungsten model
+Building a Tungsten model does not require any complex configuration file for building. 
 
 All you have to do is write a simple ``tungsten_model.py`` like below:
 ```python
@@ -83,10 +79,9 @@ $ tungsten build -n tungsten-example
 
 ✅ Successfully built tungsten model: 'tungsten-basic:latest'
 ```
+#### Run it as a RESTful API server
 
-### Automatically generate a standardized RESTful API for a model
-
-The model container is a standardized RESTful API server itself.
+The built container can be run as a standardized RESTful API server itself.
 
 Run the container:
 
@@ -122,40 +117,44 @@ Visit [http://localhost:3000/docs](http://localhost:3000/docs) in a browser:
 
 ![tungsten-model-api](images/model-api.png "Tungsten Model API")
 
-### Provide a clean and intuitive web UI for a model
-#### Option 1. Run remotely
-First, login to a Tungsten server:
-```
-$ tungsten login
+#### Run it as a GUI application
+You can run a GUI app in a single command:
+```console
+$ tungsten demo tungsten-example:latest -p 8080
 
-Login Success!
+INFO:     Uvicorn running on http://localhost:8080 (Press CTRL+C to quit)
 ```
-Then, push a model:
+Now you can visit [http://localhost:8080](http://localhost:8080) in a browser and run a prediction:
+
+![tungsten-dashboard](images/demo.gif "Tungsten Dashboard")
+
+#### Run it as a serverless function
+Push a model to [a Tungsten platform](#tungsten-platform):
 ```
-$ tungsten push <user name>/<project name> -n tungsten-example:latest
+$ tungsten push exampleuser/exampleproject -n tungsten-example:latest
 
 ✅ Successfully pushed to 'https://server.tungsten-ai.com'
 ```
 
-Now you can run this model in the Tungsten dashboard.
+Now you can run predictions for the model in the Tungsten platform.
 
 Visit [https://tungsten-ai.com](https://tungsten-ai.com) in a browser:
 
 ![tungsten-dashboard](images/demo.gif "Tungsten Dashboard")
 
-#### Option 2. Run locally
-You can run a GUI app locally in a single command:
-```
-$ tungsten demo tungsten-example:latest -p 8080
+---
 
-INFO:     Uvicorn running on http://localhost:8080 (Press CTRL+C to quit)
-```
+## Tungsten Platform
+The Tungsten platform is where you store, run, compare, and test Tungsten models.
 
-Visit [http://localhost:8080](http://localhost:8080) in a browser:
+### Key Features
+- Automatic serverless deployment
+- Allow your own machines to be used to run models
+- Model, test data, and test spec versioning (comming soon)
+- Automatically keep evaluation scores up-to-date (comming soon)
 
-![tungsten-dashboard](images/demo.gif "Tungsten Dashboard")
 
-
+### Take the tour
 ### Allow your own machines to be used to run models
 You can register Tungsten runners to a Tungsten server and make the server use your own machines for running models.
 
@@ -183,6 +182,8 @@ Runner 0   | running  2023-04-21 16:59:14.490 | INFO     | Fetching a prediction
                       2023-04-21 16:59:49.184 | INFO     | Job 0f7c50867417456ebd1389cfb74e489f assigned
 Runner 1   | running  2023-04-21 16:59:14.490 | INFO     | Fetching a prediction job
 ```
+
+### Architecture
 
 
 ## License
