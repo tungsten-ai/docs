@@ -26,10 +26,10 @@ The Tungsten model is the basic unit of ML model in Tungsten. It is a Docker con
     - [RESTful API server](#run-it-as-a-restful-api-server)
     - [GUI application](#run-it-as-a-gui-application)
     - [Serverless function](#run-it-as-a-serverless-function)
-    - CLI application (comming soon)
-    - Within Python scripts (comming soon)
+    - CLI application (coming soon)
+    - Within Python scripts (coming soon)
 - **Standardized**: [Communicate with JSONs through a standardized RESTful API](#run-it-as-a-restful-api-server).
-- **Scalable**: Support adaptive batching and clustering with Redis and a cloud storage.
+- **Scalable**: Support adaptive batching and clustering with Redis and a cloud storage (coming soon).
 
 For learning more with a complete example, see the [Tungsten Model - Getting Started](https://tungsten-ai.github.io/tungsten-docs/tungsten_model/getting_started/).
 
@@ -75,7 +75,7 @@ class Model(model.TungstenModel[Input, Output]):
 
 #### Run it as a RESTful API server
 
-The built container can be run as a standardized RESTful API server itself.
+A Tungsten model includes a standardized RESTful API.
 
 Run the container:
 
@@ -91,7 +91,7 @@ INFO:     Application startup complete.
 INFO:     Uvicorn running on http://0.0.0.0:3000 (Press CTRL+C to quit)
 ```
 
-Now you can run predictions using the server. For example,
+Then, you can send a prediction request with a JSON payload. For example,
 ```console
 $ curl -X 'POST' 'http://localhost:3000/predict' \
   -H 'accept: application/json' \
@@ -105,20 +105,17 @@ $ curl -X 'POST' 'http://localhost:3000/predict' \
 }
 ```
 
-Also, a Swagger documentation for the server is automatically generated.
-
-Visit [http://localhost:3000/docs](http://localhost:3000/docs) in a browser:
+Also, a Swagger documentation is automatically generated. You can find it in ``/docs`` endpoint:
 
 ![tungsten-model-api](images/model-api.png "Tungsten Model API")
 
 #### Run it as a GUI application
-You can run a GUI app in a single command:
+With a Tungsten model, you can run a GUI app in a single command:
 ```console
 $ tungsten demo tungsten-example:latest -p 8080
 
 INFO:     Uvicorn running on http://localhost:8080 (Press CTRL+C to quit)
 ```
-Visiting [http://localhost:8080](http://localhost:8080) in a browser, you can run a prediction:
 
 ![tungsten-dashboard](images/demo.gif "Tungsten Dashboard")
 
@@ -130,16 +127,14 @@ $ tungsten push exampleuser/exampleproject -n tungsten-example:latest
 ✅ Successfully pushed to 'https://server.tungsten-ai.com'
 ```
 
-Then you can run predictions for the model in the Tungsten platform.
-
-Visit [https://tungsten-ai.com](https://tungsten-ai.com) in a browser:
+Then you can run it in the Tungsten platform:
 
 ![tungsten-dashboard](images/demo.gif "Tungsten Dashboard")
 
 ---
 
 ## Tungsten Platform
-The Tungsten platform is where you store, run, compare, and test Tungsten models.
+The Tungsten platform is where you store, run, test, and compare ML models.
 
 ### Key Features
 - [Hassle-free model deployment](#hassle-free-model-deployment)
@@ -152,7 +147,7 @@ The Tungsten platform is where you store, run, compare, and test Tungsten models
 ### Take the tour
 #### Hassle-free model deployment
 The Tungsten platform supports automatic serverless deployment of models.
-So, uyou don't need to spend time managing infrastructure for serving them.
+So, you don't need to spend time managing infrastructure for serving them.
 
 You can run all uploaded models through Tungsten platform's API or web UI.
 
