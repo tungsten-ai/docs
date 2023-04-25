@@ -630,12 +630,12 @@ Without any model-specific setup, it can be run as a RESTful API server, a GUI a
 <li><a href="#run-it-as-a-restful-api-server">RESTful API server</a></li>
 <li><a href="#run-it-as-a-gui-application">GUI application</a></li>
 <li><a href="#run-it-as-a-serverless-function">Serverless function</a></li>
-<li>CLI application (comming soon)</li>
-<li>Within Python scripts (comming soon)</li>
+<li>CLI application (coming soon)</li>
+<li>Within Python scripts (coming soon)</li>
 </ul>
 </li>
 <li><strong>Standardized</strong>: <a href="#run-it-as-a-restful-api-server">Communicate with JSONs through a standardized RESTful API</a>.</li>
-<li><strong>Scalable</strong>: Support adaptive batching and clustering with Redis and a cloud storage.</li>
+<li><strong>Scalable</strong>: Support adaptive batching and clustering with Redis and a cloud storage (coming soon).</li>
 </ul>
 <p>For learning more with a complete example, see the <a href="https://tungsten-ai.github.io/tungsten-docs/tungsten_model/getting_started/">Tungsten Model - Getting Started</a>.</p>
 <hr />
@@ -675,7 +675,7 @@ Without any model-specific setup, it can be run as a RESTful API server, a GUI a
 </span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>        <span class="k">return</span> <span class="n">outputs</span>
 </span></code></pre></div></p>
 <h4 id="run-it-as-a-restful-api-server">Run it as a RESTful API server</h4>
-<p>The built container can be run as a standardized RESTful API server itself.</p>
+<p>A Tungsten model includes a standardized RESTful API.</p>
 <p>Run the container:</p>
 <div class="language-console highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="gp">$ </span>docker<span class="w"> </span>run<span class="w"> </span>-p<span class="w"> </span><span class="m">3000</span>:3000<span class="w"> </span>--gpus<span class="w"> </span>all<span class="w"> </span>tungsten-example:latest
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
@@ -687,7 +687,7 @@ Without any model-specific setup, it can be run as a RESTful API server, a GUI a
 </span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="go">INFO:     Application startup complete.</span>
 </span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="go">INFO:     Uvicorn running on http://0.0.0.0:3000 (Press CTRL+C to quit)</span>
 </span></code></pre></div>
-<p>Now you can run predictions using the server. For example,
+<p>Then, you can send a prediction request with a JSON payload. For example,
 <div class="language-console highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="gp">$ </span>curl<span class="w"> </span>-X<span class="w"> </span><span class="s1">&#39;POST&#39;</span><span class="w"> </span><span class="s1">&#39;http://localhost:3000/predict&#39;</span><span class="w"> </span><span class="se">\</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span>-H<span class="w"> </span><span class="s1">&#39;accept: application/json&#39;</span><span class="w"> </span><span class="se">\</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span><span class="se">\</span>
@@ -699,16 +699,14 @@ Without any model-specific setup, it can be run as a RESTful API server, a GUI a
 </span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="go">    &quot;error_message&quot;: null</span>
 </span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="go">}</span>
 </span></code></pre></div></p>
-<p>Also, a Swagger documentation for the server is automatically generated.</p>
-<p>Visit <a href="http://localhost:3000/docs">http://localhost:3000/docs</a> in a browser:</p>
+<p>Also, a Swagger documentation is automatically generated. You can find it in <code>/docs</code> endpoint:</p>
 <p><img alt="tungsten-model-api" src="images/model-api.png" title="Tungsten Model API" /></p>
 <h4 id="run-it-as-a-gui-application">Run it as a GUI application</h4>
-<p>You can run a GUI app in a single command:
+<p>With a Tungsten model, you can run a GUI app in a single command:
 <div class="language-console highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="gp">$ </span>tungsten<span class="w"> </span>demo<span class="w"> </span>tungsten-example:latest<span class="w"> </span>-p<span class="w"> </span><span class="m">8080</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="go">INFO:     Uvicorn running on http://localhost:8080 (Press CTRL+C to quit)</span>
-</span></code></pre></div>
-Visiting <a href="http://localhost:8080">http://localhost:8080</a> in a browser, you can run a prediction:</p>
+</span></code></pre></div></p>
 <p><img alt="tungsten-dashboard" src="images/demo.gif" title="Tungsten Dashboard" /></p>
 <h4 id="run-it-as-a-serverless-function">Run it as a serverless function</h4>
 <p>Push a model to <a href="#tungsten-platform">a Tungsten platform</a>:
@@ -716,12 +714,11 @@ Visiting <a href="http://localhost:8080">http://localhost:8080</a> in a browser,
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="go">✅ Successfully pushed to &#39;https://server.tungsten-ai.com&#39;</span>
 </span></code></pre></div></p>
-<p>Then you can run predictions for the model in the Tungsten platform.</p>
-<p>Visit <a href="https://tungsten-ai.com">https://tungsten-ai.com</a> in a browser:</p>
+<p>Then you can run it in the Tungsten platform:</p>
 <p><img alt="tungsten-dashboard" src="images/demo.gif" title="Tungsten Dashboard" /></p>
 <hr />
 <h2 id="tungsten-platform">Tungsten Platform</h2>
-<p>The Tungsten platform is where you store, run, compare, and test Tungsten models.</p>
+<p>The Tungsten platform is where you store, run, test, and compare ML models.</p>
 <h3 id="key-features_1">Key Features</h3>
 <ul>
 <li><a href="#hassle-free-model-deployment">Hassle-free model deployment</a></li>
@@ -733,7 +730,7 @@ Visiting <a href="http://localhost:8080">http://localhost:8080</a> in a browser,
 <h3 id="take-the-tour_1">Take the tour</h3>
 <h4 id="hassle-free-model-deployment">Hassle-free model deployment</h4>
 <p>The Tungsten platform supports automatic serverless deployment of models.
-So, uyou don't need to spend time managing infrastructure for serving them.</p>
+So, you don't need to spend time managing infrastructure for serving them.</p>
 <p>You can run all uploaded models through Tungsten platform's API or web UI.</p>
 <h4 id="allow-your-own-machines-to-be-used-to-run-models">Allow your own machines to be used to run models</h4>
 <p>You can register Tungsten runners to a Tungsten server and make the server use your own machines for running models.</p>
