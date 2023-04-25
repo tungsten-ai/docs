@@ -124,7 +124,7 @@ Visiting [http://localhost:8080](http://localhost:8080) in a browser, you can ru
 
 #### Run it as a serverless function
 Push a model to [a Tungsten platform](#tungsten-platform):
-```
+```console
 $ tungsten push exampleuser/exampleproject -n tungsten-example:latest
 
 ✅ Successfully pushed to 'https://server.tungsten-ai.com'
