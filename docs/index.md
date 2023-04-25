@@ -12,7 +12,7 @@ Tungsten is a containerization tool and platform for easily sharing and managing
 Tungsten enables to build [a versatile and standardized container for an ML model](#tungsten-model).
 Without any model-specific setup, it can be run as a RESTful API server, a GUI application, a CLI application, and a serverless function, and a Python script.
 
-Also, Tungsten provides [a centralized place to manage ML models systematically](#tungsten-platform). It supports remote execution and test automation for them as well as storing models.
+Also, Tungsten provides [a centralized place to manage ML models systematically](#tungsten-platform). It supports remote execution and test automation as well as storing models.
 
 ---
 
@@ -44,26 +44,25 @@ All you have to do is write a simple ``tungsten_model.py`` like below:
 from typing import List, Tuple
 
 import torch
-from tungstenkit.io import BaseIO, Image
-from tungstenkit.model import TungstenModel, config
+from tungstenkit import io, model
 
 
-class Input(BaseIO):
-    image: Image
+class Input(io.BaseIO):
+    image: io.Image
 
 
-class Output(BaseIO):
+class Output(io.BaseIO):
     score: float
     label: str
 
 
-@config(
+@model.config(
     gpu=True,
     python_packages=["torch", "torchvision"],
     batch_size=64,
-    description="A torch model"
+    description="Image classification model"
 )
-class Model(TungstenModel[Input, Output]):
+class Model(model.TungstenModel[Input, Output]):
     def setup(self):
         self.model = torch.load("./weights.pth")
 
@@ -119,7 +118,7 @@ $ tungsten demo tungsten-example:latest -p 8080
 
 INFO:     Uvicorn running on http://localhost:8080 (Press CTRL+C to quit)
 ```
-Now you can visit [http://localhost:8080](http://localhost:8080) in a browser and run a prediction:
+Visiting [http://localhost:8080](http://localhost:8080) in a browser, you can run a prediction:
 
 ![tungsten-dashboard](images/demo.gif "Tungsten Dashboard")
 
@@ -131,7 +130,7 @@ $ tungsten push exampleuser/exampleproject -n tungsten-example:latest
 ✅ Successfully pushed to 'https://server.tungsten-ai.com'
 ```
 
-Now you can run predictions for the model in the Tungsten platform.
+Then you can run predictions for the model in the Tungsten platform.
 
 Visit [https://tungsten-ai.com](https://tungsten-ai.com) in a browser:
 
@@ -143,14 +142,21 @@ Visit [https://tungsten-ai.com](https://tungsten-ai.com) in a browser:
 The Tungsten platform is where you store, run, compare, and test Tungsten models.
 
 ### Key Features
-- Automatic serverless deployment
-- Allow your own machines to be used to run models
+- [Hassle-free model deployment](#hassle-free-model-deployment)
+- [Allow your own machines to be used to run models](#allow-your-own-machines-to-be-used-to-run-models)
 - Model, test data, and test spec versioning (comming soon)
 - Automatically keep evaluation scores up-to-date (comming soon)
 
+---
 
 ### Take the tour
-### Allow your own machines to be used to run models
+#### Hassle-free model deployment
+The Tungsten platform supports automatic serverless deployment of models.
+So, uyou don't need to spend time managing infrastructure for serving them.
+
+You can run all uploaded models through Tungsten platform's API or web UI.
+
+#### Allow your own machines to be used to run models
 You can register Tungsten runners to a Tungsten server and make the server use your own machines for running models.
 
 Register a runner:
@@ -177,8 +183,6 @@ Runner 0   | running  2023-04-21 16:59:14.490 | INFO     | Fetching a prediction
                       2023-04-21 16:59:49.184 | INFO     | Job 0f7c50867417456ebd1389cfb74e489f assigned
 Runner 1   | running  2023-04-21 16:59:14.490 | INFO     | Fetching a prediction job
 ```
-
-### Architecture
 
 
 ## License

@@ -2,25 +2,27 @@
 
 The first step is to install Tungstenkit.
 
-The prerequisites for installing tungstenkit are:
+The prerequisites are:
 
 - Python >= 3.7
 - [Docker](https://docs.docker.com/engine/install/)
+- (Optional) [nvidia-docker](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker) for running GPU models locally. You can build and push a GPU model without a GPU and nvidia-docker.
 
 If they are ready, you can install Tungstenkit as follows:
 
 ```shell
 pip install tungstenkit
 ```
+
 ## Run an example model
 ### Create a directory
 Let's start by creating a working directory:
 ```shell
-mkdir tungsten-quickstart
-cd tungsten-quickstart
+mkdir tungsten-getting-started
+cd tungsten-getting-started
 ```
 
-### Build a model
+### Write ``tungsten_model.py``
 
 To build a Tungsten model, you should define your input, output, setup & predict functions, and dependencies in ``tungsten_model.py`` file.
 
@@ -31,25 +33,26 @@ from typing import List
 import torch
 from torchvision import transforms
 from torchvision.models.mobilenetv2 import MobileNet_V2_Weights, MobileNetV2
-from tungstenkit.io import BaseIO, Image
-from tungstenkit.model import TungstenModel, config
+
+from tungstenkit import io, model
 
 
-class Input(BaseIO):
-    image: Image
+class Input(io.BaseIO):
+    image: io.Image
 
 
-class Output(BaseIO):
+class Output(io.BaseIO):
     score: float
     label: str
 
 
-@config(
+@model.config(
+    gpu=False,
     description="Image classification model",
     python_packages=["torch", "torchvision"],
     batch_size=64,
 )
-class Model(TungstenModel[Input, Output]):
+class Model(model.TungstenModel[Input, Output]):
     def setup(self):
         self.model = MobileNetV2()
         self.model.load_state_dict(torch.load("mobilenetv2_weights.pth"))
@@ -82,39 +85,53 @@ class Model(TungstenModel[Input, Output]):
 ```
 Copy that to a file ``tungsten_model.py``.
 
+### Prepare the build environment
+Tungstenkit loads ``tungsten_model.py`` to check input/output types and model configuration. 
+So, install ``torch`` and ``torchvision`` loaded in ``tungsten_model.py``:
+```
+pip install torch torchvision
+```
 
-To setup a model, model weights should be downloaded:
+Also, we should prepare files used in ``setup`` function of ``Model`` class in ``tungsten_model.py``. Refering to the definition, ``mobilenetv2_weights.pth`` is required. Let's download it:
 ```
 curl -o mobilenetv2_weights.pth https://download.pytorch.org/models/mobilenet_v2-7ebf99e0.pth
 ```
 
-Now, you can build a model using the definition:
+
+
+### Build a Tungsten model
+Now everything is ready. Let's start building a Tungsten model:
 ```console
 $ tungsten build -n tungsten-example
 
-✅ Successfully built tungsten model: 'tungsten-example:latest'
+✅ Successfully built tungsten model: 'tungsten-example:e3a5de5616a743fe9021e2dcfe1cd19a' (also tagged as 'tungsten-example:latest')
 ```
 
-You can see that the model you've just created is added to the model list:
-```shell
-tungsten models
+Also you can see that the model is added to the list of models:
+```console
+$ tungsten models
+
+Repository        Tag                               Description       Model Class           Created              Docker Image ID
+----------------  --------------------------------  ----------------  --------------------  -------------------  -----------------
+tungsten-example  latest                            Blur after delay  tungsten_model:Model  2023-04-26 05:23:58  830eb82f0fcd
+tungsten-example  e3a5de5616a743fe9021e2dcfe1cd19a  Blur after delay  tungsten_model:Model  2023-04-26 05:23:58  830eb82f0fcd
 ```
 
 
 ### Run locally
-Now, you can test the model in your local machine by running predictions.
+Now, you can run the model in your local machine.
 
 Tungstenkit provides multiple options for that.
 
 #### Option 1: an interactive web demo
 ```
-tungsten demo -p 8080
+tungsten demo tungsten-example -p 8080
 ```
 Visit [http://localhost:8080](http://localhost:8080) to check.
 
 #### Option 2: a RESTful API
 ```
-tungsten serve -p 3000
+tungsten serve tungsten-example -p 3000
 ```
 Visit [http://localhost:3000/docs](http://localhost:3000/docs) to check.
 

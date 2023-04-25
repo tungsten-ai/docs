@@ -21,13 +21,11 @@ extra_javascript:
 
 nav:
   - Tungsten: index.md
-  - Tutorial:
-      - Getting Started: tutorial/getting_started.md
-      - Inputs and Outputs: tutorial/inputs_and_outputs.md
-      - The Tungsten Model: tutorial/tungsten_model.md
+  - Tungsten Model:
+      - Getting Started: tungsten_model/getting_started.md
   # - Runners: runners.md
   # - Self-hosting: self-hosting.md
-  - Model Server API: model_server_api.md
+  # - Model Server API: model_server_api.md
 
 markdown_extensions:
   - admonition
