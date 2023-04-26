@@ -17,7 +17,7 @@
       
       
       <link rel="icon" href="../../images/favicon.ico">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.8">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.6">
     
     
       
@@ -65,7 +65,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="tungsten" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="tungsten" data-md-color-primary="" data-md-color-accent="">
   
     
     
@@ -118,17 +118,13 @@
       </div>
     </div>
     
-      
-        <form class="md-header__option" data-md-component="palette">
+      <form class="md-header__option" data-md-component="palette">
+        
           
-            
-            
-            
-            <input class="md-option" data-md-color-media="" data-md-color-scheme="tungsten" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_1">
-            
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="tungsten" data-md-color-primary="" data-md-color-accent=""  aria-hidden="true"  type="radio" name="__palette" id="__palette_1">
           
-        </form>
-      
+        
+      </form>
     
     
     
@@ -619,50 +615,46 @@
 </span></code></pre></div>
 Copy that to a file <code>tungsten_model.py</code>.</p>
 <h3 id="prepare-the-build-environment">Prepare the build environment</h3>
-<p>Tungstenkit loads <code>tungsten_model.py</code> to check input/output types and model configuration. 
-So, install <code>torch</code> and <code>torchvision</code> loaded in <code>tungsten_model.py</code>:
-<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>pip install torch torchvision
-</span></code></pre></div></p>
-<p>Also, we should prepare files used in <code>setup</code> function of <code>Model</code> class in <code>tungsten_model.py</code>. Refering to the definition, <code>mobilenetv2_weights.pth</code> is required. Let's download it:
-<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>curl -o mobilenetv2_weights.pth https://download.pytorch.org/models/mobilenet_v2-7ebf99e0.pth
+<p>We should prepare files used in <code>setup</code> function of <code>Model</code> class in <code>tungsten_model.py</code>. Refering to the definition, <code>mobilenetv2_weights.pth</code> is required. Let's download it:
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>curl -o mobilenetv2_weights.pth https://download.pytorch.org/models/mobilenet_v2-7ebf99e0.pth
 </span></code></pre></div></p>
 <h3 id="build-a-tungsten-model">Build a Tungsten model</h3>
 <p>Now everything is ready. Let's start building a Tungsten model:
-<div class="language-console highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="gp">$ </span>tungsten<span class="w"> </span>build<span class="w"> </span>-n<span class="w"> </span>tungsten-example
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="go">✅ Successfully built tungsten model: &#39;tungsten-example:e3a5de5616a743fe9021e2dcfe1cd19a&#39; (also tagged as &#39;tungsten-example:latest&#39;)</span>
+<div class="language-console highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="gp">$ </span>tungsten<span class="w"> </span>build<span class="w"> </span>-n<span class="w"> </span>tungsten-example
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="go">✅ Successfully built tungsten model: &#39;tungsten-example:e3a5de5616a743fe9021e2dcfe1cd19a&#39; (also tagged as &#39;tungsten-example:latest&#39;)</span>
 </span></code></pre></div></p>
 <p>Also you can see that the model is added to the list of models:
-<div class="language-console highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="gp">$ </span>tungsten<span class="w"> </span>models
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="go">Repository        Tag                               Description       Model Class           Created              Docker Image ID</span>
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="go">----------------  --------------------------------  ----------------  --------------------  -------------------  -----------------</span>
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="go">tungsten-example  latest                            Blur after delay  tungsten_model:Model  2023-04-26 05:23:58  830eb82f0fcd</span>
-</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="go">tungsten-example  e3a5de5616a743fe9021e2dcfe1cd19a  Blur after delay  tungsten_model:Model  2023-04-26 05:23:58  830eb82f0fcd</span>
+<div class="language-console highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="gp">$ </span>tungsten<span class="w"> </span>models
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="go">Repository        Tag                               Description       Model Class           Created              Docker Image ID</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="go">----------------  --------------------------------  ----------------  --------------------  -------------------  -----------------</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="go">tungsten-example  latest                            Blur after delay  tungsten_model:Model  2023-04-26 05:23:58  830eb82f0fcd</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="go">tungsten-example  e3a5de5616a743fe9021e2dcfe1cd19a  Blur after delay  tungsten_model:Model  2023-04-26 05:23:58  830eb82f0fcd</span>
 </span></code></pre></div></p>
 <h3 id="run-locally">Run locally</h3>
 <p>Now, you can run the model in your local machine.</p>
 <p>Tungstenkit provides multiple options for that.</p>
 <h4 id="option-1-an-interactive-web-demo">Option 1: an interactive web demo</h4>
-<p><div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>tungsten demo tungsten-example -p 8080
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>tungsten demo tungsten-example -p 8080
 </span></code></pre></div>
 Visit <a href="http://localhost:8080">http://localhost:8080</a> to check.</p>
 <h4 id="option-2-a-restful-api">Option 2: a RESTful API</h4>
-<p><div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>tungsten serve tungsten-example -p 3000
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>tungsten serve tungsten-example -p 3000
 </span></code></pre></div>
 Visit <a href="http://localhost:3000/docs">http://localhost:3000/docs</a> to check.</p>
 <h3 id="run-remotely">Run remotely</h3>
 <p>To do this, you should have an account and an entered project in a Tungsten server running at <a href="https://tungsten-ai.com">https://tungsten-ai.com</a>.  </p>
 <p>If you have them, let's login first.
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>tungsten<span class="w"> </span>login
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>tungsten<span class="w"> </span>login
 </span></code></pre></div></p>
 <p>Then, you can push the built model:
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>tungsten<span class="w"> </span>push<span class="w"> </span>&lt;username&gt;/&lt;project<span class="w"> </span>name&gt;
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>tungsten<span class="w"> </span>push<span class="w"> </span>&lt;username&gt;/&lt;project<span class="w"> </span>name&gt;
 </span></code></pre></div></p>
 <p>Now you can find a new model is added to the project.</p>
 <p>Visit <a href="https://tungsten-ai.com">https://tungsten-ai.com</a> in a browser and run it.</p>
 <p>Also, you can pull the model as follows:
-<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>tungsten pull &lt;username&gt;/&lt;project name&gt;:&lt;model version&gt;
+<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>tungsten pull &lt;username&gt;/&lt;project name&gt;:&lt;model version&gt;
 </span></code></pre></div></p>
 <h2 id="upgrade-the-example">Upgrade the example</h2>
 <!-- ## Use GPUs
