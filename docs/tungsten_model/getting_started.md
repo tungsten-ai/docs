@@ -86,13 +86,7 @@ class Model(model.TungstenModel[Input, Output]):
 Copy that to a file ``tungsten_model.py``.
 
 ### Prepare the build environment
-Tungstenkit loads ``tungsten_model.py`` to check input/output types and model configuration. 
-So, install ``torch`` and ``torchvision`` loaded in ``tungsten_model.py``:
-```
-pip install torch torchvision
-```
-
-Also, we should prepare files used in ``setup`` function of ``Model`` class in ``tungsten_model.py``. Refering to the definition, ``mobilenetv2_weights.pth`` is required. Let's download it:
+We should prepare files used in ``setup`` function of ``Model`` class in ``tungsten_model.py``. Refering to the definition, ``mobilenetv2_weights.pth`` is required. Let's download it:
 ```
 curl -o mobilenetv2_weights.pth https://download.pytorch.org/models/mobilenet_v2-7ebf99e0.pth
 ```
