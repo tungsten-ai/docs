@@ -1,18 +1,23 @@
 <p align="center">
   <a href="https://tungsten-ai.github.io/tungsten-docs"><img src="images/logo.svg" alt="Tungsten" width="50%" height="50%"></a>
 </p>
-<p align="center">
-  <img src="images/demo.gif" alt="Tungsten">
-</p>
+
 
 ---
 ## What is Tungsten?
+
 Tungsten is a containerization tool and platform for easily sharing and managing ML models.
 
 Tungsten enables to build [a versatile and standardized container for an ML model](#tungsten-model).
 Without any model-specific setup, it can be run as a RESTful API server, a GUI application, a CLI application, and a serverless function, and a Python script.
 
 Also, Tungsten provides [a centralized place to manage ML models systematically](#tungsten-platform). It supports remote execution and test automation as well as storing models.
+
+
+<p align="center">
+  <img src="images/demo.gif" alt="Tungsten">
+</p>
+
 
 ---
 
@@ -41,7 +46,7 @@ Building a Tungsten model does not require any complex configuration file for bu
 
 All you have to do is write a simple ``tungsten_model.py`` like below:
 ```python
-from typing import List, Tuple
+from typing import List
 
 import torch
 from tungstenkit import io, model
@@ -110,14 +115,16 @@ Also, a Swagger documentation is automatically generated. You can find it in ``/
 ![tungsten-model-api](images/model-api.png "Tungsten Model API")
 
 #### Run it as a GUI application
-With a Tungsten model, you can run a GUI app in a single command:
+You can run a Tungsten model as a GUI app in a single command:
 ```console
 $ tungsten demo tungsten-example:latest -p 8080
 
 INFO:     Uvicorn running on http://localhost:8080 (Press CTRL+C to quit)
 ```
 
-![tungsten-dashboard](images/demo.gif "Tungsten Dashboard")
+You can run it in a browser:
+
+![tungsten-dashboard](images/main-page-local-demo.gif "Tungsten Dashboard")
 
 #### Run it as a serverless function
 Push a model to [a Tungsten platform](#tungsten-platform):
@@ -134,6 +141,7 @@ Then you can run it in the Tungsten platform:
 ---
 
 ## Tungsten Platform
+
 The Tungsten platform is where you store, run, test, and compare ML models.
 
 ### Key Features
