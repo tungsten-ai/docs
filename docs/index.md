@@ -9,7 +9,7 @@
 Tungsten is a containerization tool and platform for easily sharing and managing ML models.
 
 Tungsten enables to build [a versatile and standardized container for an ML model](#tungsten-model).
-Without any model-specific setup, it can be run as a RESTful API server, a GUI application, a CLI application, and a serverless function, and a Python script.
+Without any model-specific setup, it can be run as a RESTful API server, a GUI application, a CLI application, a serverless function, and a Python script.
 
 Also, Tungsten provides [a centralized place to manage ML models systematically](#tungsten-platform). It supports remote execution and test automation as well as storing models.
 
