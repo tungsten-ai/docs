@@ -127,7 +127,9 @@ Visit [http://localhost:8080](http://localhost:8080) to check.
 ```
 tungsten serve tungsten-example -p 3000
 ```
-Visit [http://localhost:3000/docs](http://localhost:3000/docs) to check.
+A Swagger documentation is automatically generated. You can find it in [http://localhost:3000](http://localhost:3000):
+
+![tungsten-model-api](images/model-api.png "Tungsten Model API")
 
 ### Run remotely
 To do this, you should have an account and an entered project in a Tungsten server running at [https://tungsten-ai.com](https://tungsten-ai.com).  

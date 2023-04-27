@@ -6,7 +6,7 @@
 ---
 ## What is Tungsten?
 
-Tungsten is a containerization tool and platform for easily sharing and managing ML models.
+Tungsten is an open-source tool for easily sharing and managing ML models.
 
 Tungsten enables to build [a versatile and standardized container for an ML model](#tungsten-model).
 Without any model-specific setup, it can be run as a RESTful API server, a GUI application, a CLI application, a serverless function, and a Python script.
@@ -69,7 +69,8 @@ class Output(io.BaseIO):
 )
 class Model(model.TungstenModel[Input, Output]):
     def setup(self):
-        self.model = torch.load("./weights.pth")
+        weights = torch.load("./weights.pth")
+        self.model = load_torch_model(weights)
 
     def predict(self, inputs: List[Input]) -> List[Output]:
         input_tensor = preprocess(inputs)
@@ -85,7 +86,7 @@ A Tungsten model includes a standardized RESTful API.
 Run the container:
 
 ```console
-$ docker run -p 3000:3000 --gpus all tungsten-example:latest
+$ docker run -p 3000:3000 --gpus all image-classification:latest
 
 INFO:     Setting up the model
 INFO:     Getting inputs from the input queue
@@ -109,10 +110,6 @@ $ curl -X 'POST' 'http://localhost:3000/predict' \
     "error_message": null
 }
 ```
-
-Also, a Swagger documentation is automatically generated. You can find it in ``/docs`` endpoint:
-
-![tungsten-model-api](images/model-api.png "Tungsten Model API")
 
 #### Run it as a GUI application
 You can run a Tungsten model as a GUI app in a single command:
@@ -145,22 +142,50 @@ Then you can run it in the Tungsten platform:
 The Tungsten platform is where you store, run, test, and compare ML models.
 
 ### Key Features
-- [Hassle-free model deployment](#hassle-free-model-deployment)
-- [Allow your own machines to be used to run models](#allow-your-own-machines-to-be-used-to-run-models)
-- Model, test data, and test spec versioning (comming soon)
+- [Function-as-a-Service (FaaS) with micro-batching](#function-as-a-service-faas-with-micro-batching)
+- [Scale with your own GPU/CPU devices](#scale-with-your-own-gpucpu-devices)
+- [Organize ML models by project](#organize-ml-models-by-project)
+- ML Model, test data, and test spec versioning (comming soon)
 - Automatically keep evaluation scores up-to-date (comming soon)
 
 ---
 
 ### Take the tour
-#### Hassle-free model deployment
-The Tungsten platform supports automatic serverless deployment of models.
+
+#### Function-as-a-Service (FaaS) with micro-batching
+The Tungsten platform supports automatic [serverless deployment](https://en.wikipedia.org/wiki/Function_as_a_service) of ML models.
 So, you don't need to spend time managing infrastructure for serving them.
 
-You can run all uploaded models through Tungsten platform's API or web UI.
+You can run all uploaded models in a browser:
+![tungsten-dashboard](images/demo.gif "Tungsten Dashboard")
 
-#### Allow your own machines to be used to run models
-You can register Tungsten runners to a Tungsten server and make the server use your own machines for running models.
+
+Also, it is possible to run through the Tungsten platform's RESTful API.
+
+```console
+$ curl -X 'POST' 'https://server.tungsten-ai.com/api/v1/projects/tungsten/image-classification/models/2910c07e/predict' \
+  -H 'Authorization: ************''
+  -d '{"input": {"image": "https://picsum.photos/200.jpg"}}'
+
+{
+  "id": "c88e7de9",
+  "status": "running",
+}
+
+$ curl -X 'GET' \
+  'https://server.tungsten-ai.com/api/v1/predictions/c88e7de9' \
+  -H 'Authorization: ************''
+{
+  "output": {
+    "score": 0.168,
+    "label": "seashore"
+  },
+  "status": "success"
+}
+```
+
+#### Scale with your own GPU/CPU devices
+You can register Tungsten runners to the platform and make it use your own machines for running models.
 
 Register a runner:
 
@@ -171,9 +196,9 @@ Enter runner mode (pipeline, prediction) [prediction]: prediction
 Enter URL of the tungsten server: https://server.tungsten-ai.com
 Enter registration token: C6r5rp2PhfdXbJtFbBMhifgLDhagAc
 Enter runner name [mydesktop]: myrunner 
-Enter tags (comma separated) []: myrunnergroup
+Enter tags (comma separated) []: NVIDIA-A100
 Enter GPU index to use []: 0
-Runner 'mjpyeon-desktop' is registered - id: 245
+Runner 'myrunner' is registered - id: 245
 Updated runner config
 ```
 
@@ -186,6 +211,20 @@ Runner 0   | running  2023-04-21 16:59:14.490 | INFO     | Fetching a prediction
                       2023-04-21 16:59:49.184 | INFO     | Job 0f7c50867417456ebd1389cfb74e489f assigned
 Runner 1   | running  2023-04-21 16:59:14.490 | INFO     | Fetching a prediction job
 ```
+
+#### Organize ML models by project
+The Tungsten platform manages models by project to faciliate collaboration. 
+
+If every model is managed separately, the situation easily becomes chaotic. First, input/output formats are all different. Then, it is hard to compare them directly by feeding a same input. Also, each model has its own impelementation for evaluation. So, you cannot trust the evaluation score.
+
+In the Tungsten Platform, multiple settings are unified across all models in a project:
+
+- Input/output schemas
+- Evaluation metrics
+- Test cases
+- Test data
+
+So, it becomes clear and easy to compare models. 
 
 
 ## License
