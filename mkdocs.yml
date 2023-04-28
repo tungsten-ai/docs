@@ -24,8 +24,8 @@ nav:
   - Tungsten Model:
       - Getting Started: tungsten_model/getting_started.md
       - Use GPUs: tungsten_model/use_gpus.md
-      - Input/Output: tungsten_model/inputs_and_outputs.md
-      - Advanced Containerization: tungsten_model/advanced_containerization.md
+      # - Input/Output: tungsten_model/inputs_and_outputs.md
+      # - Advanced Containerization: tungsten_model/advanced_containerization.md
   - Tungsten Server:
       - Getting Started: tungsten_server/getting_started.md
   # - Runners: runners.md

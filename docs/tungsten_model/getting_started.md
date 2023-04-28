@@ -85,8 +85,10 @@ class Model(model.TungstenModel[Input, Output]):
 ```
 Copy that to a file ``tungsten_model.py``.
 
-### Prepare the build environment
-We should prepare files used in ``setup`` function of ``Model`` class in ``tungsten_model.py``. Refering to the definition, ``mobilenetv2_weights.pth`` is required. Let's download it:
+### Download weights
+Before building, you should prepare files used in ``setup`` function of ``Model`` class in ``tungsten_model.py``. 
+
+As you can see above, ``mobilenetv2_weights.pth`` is required. Let's download it:
 ```
 curl -o mobilenetv2_weights.pth https://download.pytorch.org/models/mobilenet_v2-7ebf99e0.pth
 ```
@@ -127,9 +129,9 @@ Visit [http://localhost:8080](http://localhost:8080) to check.
 ```
 tungsten serve tungsten-example -p 3000
 ```
-A Swagger documentation is automatically generated. You can find it in [http://localhost:3000/docs](http://localhost:3000/docs):
+A Swagger documentation is automatically generated. You can find it in [http://localhost:3000/docs](http://localhost:3000/docs).
 
-![tungsten-model-api](../images/model-api.png "Tungsten Model API")
+<!-- ![tungsten-model-api](../images/model-api.png "Tungsten Model API") -->
 
 ### Run remotely
 To do this, you should have an account and an entered project in a Tungsten server running at [https://tungsten-ai.com](https://tungsten-ai.com).  
@@ -155,7 +157,7 @@ tungsten pull <username>/<project name>:<model version>
 ```
 ## Update the example
 ### Use GPUs
-Setting ``gpu=True`` in ``model.config`` decorator is enough to use GPUs. 
+All you have to do is just setting``gpu=True`` in ``model.config`` decorator:
 
 ```python hl_lines="20 29 55"
 from typing import List
@@ -216,7 +218,7 @@ class Model(model.TungstenModel[Input, Output]):
         return input_tensor
 ```
 
-Tungstenkit automatically selects a compatible CUDA version and installs it in the container.
+Then, Tungstenkit automatically selects a compatible CUDA version and installs it in the container.
 The cuda version inference is currently supported on ``torch``, ``torchvision``, ``torchaudio``, and ``tensorflow``.
 
 If you want to manually set the CUDA version, modify ``model.config`` decorator as follows:
