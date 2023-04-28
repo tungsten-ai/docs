@@ -736,7 +736,7 @@ Visit <a href="http://localhost:8080">http://localhost:8080</a> to check.</p>
 <h4 id="option-2-a-restful-api">Option 2: a RESTful API</h4>
 <p><div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>tungsten serve tungsten-example -p 3000
 </span></code></pre></div>
-A Swagger documentation is automatically generated. You can find it in <a href="http://localhost:3000">http://localhost:3000</a>:</p>
+A Swagger documentation is automatically generated. You can find it in <a href="http://localhost:3000/docs">http://localhost:3000/docs</a>:</p>
 <p><img alt="tungsten-model-api" src="../../images/model-api.png" title="Tungsten Model API" /></p>
 <h3 id="run-remotely">Run remotely</h3>
 <p>To do this, you should have an account and an entered project in a Tungsten server running at <a href="https://tungsten-ai.com">https://tungsten-ai.com</a>.  </p>
@@ -817,7 +817,7 @@ A Swagger documentation is automatically generated. You can find it in <a href="
 As you see, just setting <code>gpu=True</code> in <code>model.config</code> decorator is enough. 
 Then, Tungstenkit automatically selects a compatible CUDA version and installs it in the container.
 Currently, the automatic cuda version inference is supported on <code>torch</code>, <code>torchvision</code>, <code>torchaudio</code>, and <code>tensorflow</code>.</p>
-<p>If you want to manually set the CUDA version, modify <code>model.config</code> decorator as follows:
+<p>If you want to manually set the CUDA version, modify <code>model.config</code> decorator as follows:</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nd">@model</span><span class="o">.</span><span class="n">config</span><span class="p">(</span>
 </span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>    <span class="n">gpu</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 </span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="hll">    <span class="n">cuda_version</span><span class="o">=</span><span class="s2">&quot;11.6&quot;</span><span class="p">,</span>
@@ -825,7 +825,7 @@ Currently, the automatic cuda version inference is supported on <code>torch</cod
 </span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>    <span class="n">python_packages</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;torch&quot;</span><span class="p">,</span> <span class="s2">&quot;torchvision&quot;</span><span class="p">],</span>
 </span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>    <span class="n">batch_size</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span>
 </span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="p">)</span>
-</span></code></pre></div></p>
+</span></code></pre></div>
 
 
 
