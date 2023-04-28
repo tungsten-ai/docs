@@ -113,9 +113,7 @@ $ curl -X 'POST' 'http://localhost:3000/predict' \
   -d '[{"prompt": "a professional photograph of an astronaut riding a horse"}]'
 
 {
-    "status": "success",
     "outputs": [{"image": "data:image/png;base64,..."}],
-    "error_message": null
 }
 ```
 

@@ -6,7 +6,7 @@ The prerequisites are:
 
 - Python 3.7+
 - [Docker](https://docs.docker.com/engine/install/)
-- (Optional) [nvidia-docker](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker) only for running GPU models locally.
+- (Optional) [nvidia-docker](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker) if you want to run GPU models locally.
 
 If they are ready, you can install Tungstenkit as follows:
 
@@ -47,6 +47,7 @@ class Output(io.BaseIO):
 
 
 @model.config(
+    gpu=False,
     description="Image classification model",
     python_packages=["torch", "torchvision"],
     batch_size=16,
@@ -152,16 +153,9 @@ Also, you can pull the model as follows:
 ```
 tungsten pull <username>/<project name>:<model version>
 ```
-## Use GPUs
-
-### Setup
-You can build and push a GPU model without any extra setup.
-
-However, for running GPU models locally, [nvidia-docker](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker) should be installed. It enables to use NVIDIA GPUs in a Docker container.
-
-
-### Update ``tungsten_model.py``
-Now modify the file ``tungsten_model.py`` to use GPUs.
+## Update the example
+### Use GPUs
+Setting ``gpu=True`` in ``model.config`` decorator is enough to use GPUs. 
 
 ```python hl_lines="20 29 55"
 from typing import List
@@ -221,9 +215,9 @@ class Model(model.TungstenModel[Input, Output]):
         input_tensor = input_tensor.cuda()
         return input_tensor
 ```
-As you see, just setting ``gpu=True`` in ``model.config`` decorator is enough. 
-Then, Tungstenkit automatically selects a compatible CUDA version and installs it in the container.
-Currently, the automatic cuda version inference is supported on ``torch``, ``torchvision``, ``torchaudio``, and ``tensorflow``.
+
+Tungstenkit automatically selects a compatible CUDA version and installs it in the container.
+The cuda version inference is currently supported on ``torch``, ``torchvision``, ``torchaudio``, and ``tensorflow``.
 
 If you want to manually set the CUDA version, modify ``model.config`` decorator as follows:
 
