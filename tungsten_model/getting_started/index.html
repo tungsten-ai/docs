@@ -337,8 +337,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#prepare-the-build-environment" class="md-nav__link">
-    Prepare the build environment
+  <a href="#download-weights" class="md-nav__link">
+    Download weights
   </a>
   
 </li>
@@ -541,8 +541,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#prepare-the-build-environment" class="md-nav__link">
-    Prepare the build environment
+  <a href="#download-weights" class="md-nav__link">
+    Download weights
   </a>
   
 </li>
@@ -709,8 +709,9 @@
 </span><span id="__span-2-54"><a id="__codelineno-2-54" name="__codelineno-2-54" href="#__codelineno-2-54"></a>        <span class="k">return</span> <span class="n">input_tensor</span>
 </span></code></pre></div>
 Copy that to a file <code>tungsten_model.py</code>.</p>
-<h3 id="prepare-the-build-environment">Prepare the build environment</h3>
-<p>We should prepare files used in <code>setup</code> function of <code>Model</code> class in <code>tungsten_model.py</code>. Refering to the definition, <code>mobilenetv2_weights.pth</code> is required. Let's download it:
+<h3 id="download-weights">Download weights</h3>
+<p>Before building, you should prepare files used in <code>setup</code> function of <code>Model</code> class in <code>tungsten_model.py</code>. </p>
+<p>As you can see above, <code>mobilenetv2_weights.pth</code> is required. Let's download it:
 <div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>curl -o mobilenetv2_weights.pth https://download.pytorch.org/models/mobilenet_v2-7ebf99e0.pth
 </span></code></pre></div></p>
 <h3 id="build-a-tungsten-model">Build a Tungsten model</h3>
