@@ -817,7 +817,7 @@ A Swagger documentation is automatically generated. You can find it in <a href="
 As you see, just setting <code>gpu=True</code> in <code>model.config</code> decorator is enough. 
 Then, Tungstenkit automatically selects a compatible CUDA version and installs it in the container.
 Currently, the automatic cuda version inference is supported on <code>torch</code>, <code>torchvision</code>, <code>torchaudio</code>, and <code>tensorflow</code>.</p>
-<p>If you want to manually set the CUDA version, modify <code>model.config</code> decorator as follows. 
+<p>If you want to manually set the CUDA version, modify <code>model.config</code> decorator as follows:
 <div class="language-python highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nd">@model</span><span class="o">.</span><span class="n">config</span><span class="p">(</span>
 </span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>    <span class="n">gpu</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 </span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="hll">    <span class="n">cuda_version</span><span class="o">=</span><span class="s2">&quot;11.6&quot;</span><span class="p">,</span>
