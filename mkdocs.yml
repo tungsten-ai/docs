@@ -1,6 +1,6 @@
 site_name: Tungsten Docs
 site_description: "Tungsten: The Best Home for Your ML Models"
-site_url: https://tungsten-ai.github.io/tungsten-docs
+site_url: https://tungsten-ai.github.io/docs
 theme:
   name: material
   logo: images/favicon.ico
@@ -11,7 +11,7 @@ theme:
     repo: fontawesome/brands/github
 
 repo_name: tungsten-ai/tungsten
-repo_url: https://github.com/tungsten-ai/tungsten-docs
+repo_url: https://github.com/tungsten-ai/docs
 
 extra_css:
   - css/scheme.css
@@ -23,8 +23,8 @@ nav:
   - Tungsten: index.md
   - Tungsten Model:
       - Getting Started: tungsten_model/getting_started.md
-  - Tungsten Platform:
-      - Getting Started: tungsten_platform/getting_started.md
+  - Tungsten Server:
+      - Getting Started: tungsten_server/getting_started.md
   # - Runners: runners.md
   # - Self-hosting: self-hosting.md
   # - Model Server API: model_server_api.md

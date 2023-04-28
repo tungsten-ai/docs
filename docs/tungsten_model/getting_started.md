@@ -4,9 +4,9 @@ The first step is to install Tungstenkit.
 
 The prerequisites are:
 
-- Python >= 3.7
+- Python 3.7+
 - [Docker](https://docs.docker.com/engine/install/)
-- (Optional) [nvidia-docker](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker) for running GPU models locally. You can build and push a GPU model without a GPU and nvidia-docker.
+- (Optional) [nvidia-docker](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker) for running GPU models locally. It enables to use NVIDIA GPUs in a Docker container. However, you can build and push a GPU model without a GPU and nvidia-docker.
 
 If they are ready, you can install Tungstenkit as follows:
 

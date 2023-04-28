@@ -1,50 +1,50 @@
 <p align="center">
-  <a href="https://tungsten-ai.github.io/tungsten-docs"><img src="images/logo.svg" alt="Tungsten" width="50%" height="50%"></a>
+  <a href="https://tungsten-ai.github.io/docs"><img src="images/logo.svg" alt="Tungsten" width="50%" height="50%"></a>
 </p>
 
 
 ---
 ## What is Tungsten?
+Tungsten is an open-source ML containerization tool/platform with a focus on developer productivity and collaboration.
 
-Tungsten is an open-source tool for easily sharing and managing ML models.
+Tungsten builds [a versatile and standardized container for your model](#tungsten-model).
+Once built, it can run as a REST API server, GUI application, CLI application, serverless function, or scriptable Python function.
 
-Tungsten enables to build [a versatile and standardized container for an ML model](#tungsten-model).
-Without any model-specific setup, it can be run as a RESTful API server, a GUI application, a CLI application, a serverless function, and a Python script.
-
-Also, Tungsten provides [a centralized place to manage ML models systematically](#tungsten-platform). It supports remote execution and test automation as well as storing models.
+We also provide [a server application for managing and sharing your ML models](#tungsten-server).
+It currently supports remote execution, test automation as well as basic versioning feature.
 
 
 <p align="center">
-  <img src="images/main-page-platform-model-demo.gif" alt="Tungsten Dashboard">
+  <img src="images/platform-model-demo.gif" alt="Tungsten Dashboard">
 </p>
 
 
 ---
 
 ## Tungsten Model
-The Tungsten model is the basic unit of ML model in Tungsten. It is a Docker container and contains a standardized API and all dependencies for an ML model.
+The Tungsten model packages up everything required to run your model, and exposes a standardized API to support convenient features.
+
 
 ### Key Features
-- **Easy to build**: [Require only a few lines of Python codes.](#build-a-tungsten-model)
-- **Easy to use**: [Do not require any model-specific setup for running.](#run-it-as-a-restful-api-server)
-- **Versatile**: Can be used in multiple ways:
+- **Easy**: [Requires only a few lines of Python code.](#build-a-tungsten-model)
+- **Versatile**: Supports multiple usages:
     - [RESTful API server](#run-it-as-a-restful-api-server)
     - [GUI application](#run-it-as-a-gui-application)
     - [Serverless function](#run-it-as-a-serverless-function)
     - CLI application (coming soon)
-    - Within Python scripts (coming soon)
-- **Standardized**: [Communicate with JSONs through a standardized RESTful API](#run-it-as-a-restful-api-server).
-- **Scalable**: Support adaptive batching and clustering with Redis and a cloud storage (coming soon).
+    - Python function (coming soon)
+- **Abstracted**: [User-defined JSON input/output.](#run-it-as-a-restful-api-server)
+- **Standardized**: [Supports advanced workflows.](#run-it-as-a-restful-api-server)
+- **Scalable**: Supports adaptive batching and clustering (coming soon).
 
-For learning more with a complete example, see the [Tungsten Model - Getting Started](https://tungsten-ai.github.io/tungsten-docs/tungsten_model/getting_started/).
+See [Tungsten Model - Getting Started](https://tungsten-ai.github.io/docs/tungsten_model/getting_started/) to learn more.
 
 ---
 
 ### Take the tour
 #### Build a Tungsten model
-Building a Tungsten model does not require any complex configuration file. 
+Building a Tungsten model is easy. All you have to do is write a simple ``tungsten_model.py`` like below:
 
-All you have to do is write a simple ``tungsten_model.py`` like below:
 ```python
 from typing import List
 
@@ -78,18 +78,19 @@ class Model(model.TungstenModel[Input, Output]):
         return outputs
 ```
 
-Then, you can start building a Tungsten model:
+Now, you can start a build process with the following command:
 ```console
 $ tungsten build
 
 ✅ Successfully built tungsten model: 'text-to-image:latest'
 ```
 
+
 #### Run it as a RESTful API server
 
-A Tungsten model includes a standardized RESTful API.
+You can start a prediction with a REST API call.
 
-Run the container:
+Start a server:
 
 ```console
 $ docker run -p 3000:3000 --gpus all text-to-image:latest
@@ -103,7 +104,8 @@ INFO:     Application startup complete.
 INFO:     Uvicorn running on http://0.0.0.0:3000 (Press CTRL+C to quit)
 ```
 
-Then, you can send a prediction request with a JSON payload. For example,
+Send a prediction request with a JSON payload:
+
 ```console
 $ curl -X 'POST' 'http://localhost:3000/predict' \
   -H 'accept: application/json' \
@@ -118,7 +120,7 @@ $ curl -X 'POST' 'http://localhost:3000/predict' \
 ```
 
 #### Run it as a GUI application
-You can run a Tungsten model as a GUI app in a single command:
+If you need a more user-friendly way to make predictions, start a GUI app with the following command:
 
 ```console
 $ tungsten demo text-to-image:latest -p 8080
@@ -126,12 +128,12 @@ $ tungsten demo text-to-image:latest -p 8080
 INFO:     Uvicorn running on http://localhost:8080 (Press CTRL+C to quit)
 ```
 
-You can run it in a browser:
-
-![tungsten-dashboard](images/main-page-local-demo.gif "Tungsten Dashboard")
+![tungsten-dashboard](images/local-model-demo.gif "Tungsten Dashboard")
 
 #### Run it as a serverless function
-Push a model to [a Tungsten platform](#tungsten-platform):
+We support remote, serverless executions via a [Tungsten server](#tungsten-server).
+
+Push a model:
 
 ```console
 $ tungsten push exampleuser/exampleproject -n text-to-image:latest
@@ -139,37 +141,37 @@ $ tungsten push exampleuser/exampleproject -n text-to-image:latest
 ✅ Successfully pushed to 'https://server.tungsten-ai.com'
 ```
 
-Then you can run it in the Tungsten platform:
+Now, you can start a remote prediction in the Tungsten server:
 
-![tungsten-platform-model-demo](images/main-page-platform-model-demo.gif "Tungsten Platform Model Demo")
+![tungsten-platform-model-demo](images/platform-model-demo.gif "Tungsten Platform Model Demo")
+
+See [Tungsten Model - Getting Started](https://tungsten-ai.github.io/docs/tungsten_model/getting_started/) to learn more.
 
 ---
 
-## Tungsten Platform
-
-The Tungsten platform is where you store, run, test, and compare ML models.
+## Tungsten Server
+The Tungsten server provides a platform where you can store, run, and test models.
 
 ### Key Features
-- [Function-as-a-Service (FaaS) with micro-batching](#function-as-a-service-faas-with-micro-batching)
+- [Function-as-a-Service (FaaS)](#function-as-a-service-faas)
 - [Scale with your own GPU/CPU devices](#scale-with-your-own-gpucpu-devices)
-- [Organize ML models by project](#organize-ml-models-by-project)
-- ML Model, test data, and test spec versioning (comming soon)
-- Automatically keep evaluation scores up-to-date (comming soon)
+- [Project management](#project-management)
+- Automated testing for CI/CD (coming soon)
+ 
+ See [Tungsten Server - Getting Started](https://tungsten-ai.github.io/docs/tungsten_server/getting_started/) to learn more.
 
 ---
 
 ### Take the tour
 
-#### Function-as-a-Service (FaaS) with micro-batching
-The Tungsten platform supports automatic [serverless deployment](https://en.wikipedia.org/wiki/Function_as_a_service) of ML models.
-So, you don't need to spend time managing infrastructure for serving them.
+#### Function-as-a-Service (FaaS)
+The Tungsten server supports executing models as serverless functions.
 
-You can run all uploaded models in a browser:
+In a browser, you can test any uploaded model:
 
-![tungsten-platform-model-demo](images/main-page-platform-model-demo.gif "Tungsten Platform Model Demo")
+![tungsten-platform-model-demo](images/platform-model-demo.gif "Tungsten Platform Model Demo")
 
-
-Also, it is possible to run through the Tungsten platform's RESTful API.
+Also, it is possible to make a prediction through the Tungsten server's REST API:
 
 ```console
 $ curl -X 'POST' \
@@ -196,10 +198,11 @@ $ curl -X 'GET' \
 }
 ```
 
-#### Scale with your own GPU/CPU devices
-You can register Tungsten runners to the platform and make it use your own machines for running models.
 
-Register a runner:
+#### Scale with your own GPU/CPU devices
+You can easily scale serverless infrastructure with your Tungsten runners.
+
+Register one or more runners with the following command:
 
 ```console
 $ tungsten-runner register
@@ -214,7 +217,7 @@ Runner 'myrunner' is registered - id: 245
 Updated runner config
 ```
 
-Run all registered runners:
+Then, start the runners to fetch jobs:
 
 ```console
 $ tungsten-runner run
@@ -224,19 +227,15 @@ Runner 0   | running  2023-04-21 16:59:14.490 | INFO     | Fetching a prediction
 Runner 1   | running  2023-04-21 16:59:14.490 | INFO     | Fetching a prediction job
 ```
 
-#### Organize ML models by project
-The Tungsten platform manages models by project to faciliate collaboration. 
+#### Project management
+In a Tungsten server, you can organize models by grouping them into projects. 
 
-If every model is managed separately, the situation easily becomes chaotic. First, input/output formats are all different. Then, it is hard to use and directly compare them. Also, each model has its own impelementation for evaluation. So, you cannot trust the evaluation score.
-
-In the Tungsten Platform, multiple settings are unified across all models in a project:
+Multiple settings are unified in a project:
 
 - Input/output schemas
 - Evaluation metrics
 - Test cases
 - Test data
-
-So, it becomes clear and easy to compare models. 
 
 
 ## License
