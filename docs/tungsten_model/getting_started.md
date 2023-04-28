@@ -6,7 +6,7 @@ The prerequisites are:
 
 - Python 3.7+
 - [Docker](https://docs.docker.com/engine/install/)
-- (Optional) [nvidia-docker](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker) for running GPU models locally. It enables to use NVIDIA GPUs in a Docker container. However, you can build and push a GPU model without a GPU and nvidia-docker.
+- (Optional) [nvidia-docker](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker) only for running GPU models locally.
 
 If they are ready, you can install Tungstenkit as follows:
 
@@ -126,7 +126,7 @@ Visit [http://localhost:8080](http://localhost:8080) to check.
 ```
 tungsten serve tungsten-example -p 3000
 ```
-A Swagger documentation is automatically generated. You can find it in [http://localhost:3000](http://localhost:3000):
+A Swagger documentation is automatically generated. You can find it in [http://localhost:3000/docs](http://localhost:3000/docs):
 
 ![tungsten-model-api](../images/model-api.png "Tungsten Model API")
 
@@ -225,7 +225,8 @@ As you see, just setting ``gpu=True`` in ``model.config`` decorator is enough.
 Then, Tungstenkit automatically selects a compatible CUDA version and installs it in the container.
 Currently, the automatic cuda version inference is supported on ``torch``, ``torchvision``, ``torchaudio``, and ``tensorflow``.
 
-If you want to manually set the CUDA version, modify ``model.config`` decorator as follows. 
+If you want to manually set the CUDA version, modify ``model.config`` decorator as follows:
+
 ```python hl_lines="3"
 @model.config(
     gpu=True,

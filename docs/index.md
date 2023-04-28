@@ -145,7 +145,6 @@ Now, you can start a remote prediction in the Tungsten server:
 
 ![tungsten-platform-model-demo](images/platform-model-demo.gif "Tungsten Platform Model Demo")
 
-See [Tungsten Model - Getting Started](https://tungsten-ai.github.io/docs/tungsten_model/getting_started/) to learn more.
 
 ---
 
