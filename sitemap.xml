@@ -36,6 +36,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://tungsten-ai.github.io/docs/tungsten_model/use_gpus/</loc>
+         <lastmod>2023-04-28</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://tungsten-ai.github.io/docs/tungsten_server/getting_started/</loc>
          <lastmod>2023-04-28</lastmod>
          <changefreq>daily</changefreq>
