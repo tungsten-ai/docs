@@ -23,6 +23,8 @@ nav:
   - Tungsten: index.md
   - Tungsten Model:
       - Getting Started: tungsten_model/getting_started.md
+  - Tungsten Platform:
+      - Getting Started: tungsten_platform/getting_started.md
   # - Runners: runners.md
   # - Self-hosting: self-hosting.md
   # - Model Server API: model_server_api.md

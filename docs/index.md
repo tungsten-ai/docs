@@ -15,7 +15,7 @@ Also, Tungsten provides [a centralized place to manage ML models systematically]
 
 
 <p align="center">
-  <img src="images/demo.gif" alt="Tungsten">
+  <img src="images/main-page-platform-model-demo.gif" alt="Tungsten Dashboard">
 </p>
 
 
@@ -42,7 +42,7 @@ For learning more with a complete example, see the [Tungsten Model - Getting Sta
 
 ### Take the tour
 #### Build a Tungsten model
-Building a Tungsten model does not require any complex configuration file for building. 
+Building a Tungsten model does not require any complex configuration file. 
 
 All you have to do is write a simple ``tungsten_model.py`` like below:
 ```python
@@ -53,19 +53,18 @@ from tungstenkit import io, model
 
 
 class Input(io.BaseIO):
-    image: io.Image
+    prompt: str
 
 
 class Output(io.BaseIO):
-    score: float
-    label: str
+    image: io.Image
 
 
 @model.config(
     gpu=True,
     python_packages=["torch", "torchvision"],
-    batch_size=64,
-    description="Image classification model"
+    batch_size=4,
+    description="Text to image"
 )
 class Model(model.TungstenModel[Input, Output]):
     def setup(self):
@@ -79,6 +78,13 @@ class Model(model.TungstenModel[Input, Output]):
         return outputs
 ```
 
+Then, you can start building a Tungsten model:
+```console
+$ tungsten build
+
+✅ Successfully built tungsten model: 'text-to-image:latest'
+```
+
 #### Run it as a RESTful API server
 
 A Tungsten model includes a standardized RESTful API.
@@ -86,7 +92,7 @@ A Tungsten model includes a standardized RESTful API.
 Run the container:
 
 ```console
-$ docker run -p 3000:3000 --gpus all image-classification:latest
+$ docker run -p 3000:3000 --gpus all text-to-image:latest
 
 INFO:     Setting up the model
 INFO:     Getting inputs from the input queue
@@ -102,19 +108,20 @@ Then, you can send a prediction request with a JSON payload. For example,
 $ curl -X 'POST' 'http://localhost:3000/predict' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
-  -d '[{"image": "https://picsum.photos/200.jpg"}]'
+  -d '[{"prompt": "a professional photograph of an astronaut riding a horse"}]'
 
 {
     "status": "success",
-    "outputs": [{"score": 0.5, "label": "dog"}],
+    "outputs": [{"image": "data:image/png;base64,..."}],
     "error_message": null
 }
 ```
 
 #### Run it as a GUI application
 You can run a Tungsten model as a GUI app in a single command:
+
 ```console
-$ tungsten demo tungsten-example:latest -p 8080
+$ tungsten demo text-to-image:latest -p 8080
 
 INFO:     Uvicorn running on http://localhost:8080 (Press CTRL+C to quit)
 ```
@@ -125,15 +132,16 @@ You can run it in a browser:
 
 #### Run it as a serverless function
 Push a model to [a Tungsten platform](#tungsten-platform):
+
 ```console
-$ tungsten push exampleuser/exampleproject -n tungsten-example:latest
+$ tungsten push exampleuser/exampleproject -n text-to-image:latest
 
 ✅ Successfully pushed to 'https://server.tungsten-ai.com'
 ```
 
 Then you can run it in the Tungsten platform:
 
-![tungsten-dashboard](images/demo.gif "Tungsten Dashboard")
+![tungsten-platform-model-demo](images/main-page-platform-model-demo.gif "Tungsten Platform Model Demo")
 
 ---
 
@@ -157,15 +165,19 @@ The Tungsten platform supports automatic [serverless deployment](https://en.wiki
 So, you don't need to spend time managing infrastructure for serving them.
 
 You can run all uploaded models in a browser:
-![tungsten-dashboard](images/demo.gif "Tungsten Dashboard")
+
+![tungsten-platform-model-demo](images/main-page-platform-model-demo.gif "Tungsten Platform Model Demo")
 
 
 Also, it is possible to run through the Tungsten platform's RESTful API.
 
 ```console
-$ curl -X 'POST' 'https://server.tungsten-ai.com/api/v1/projects/tungsten/image-classification/models/2910c07e/predict' \
-  -H 'Authorization: ************''
-  -d '{"input": {"image": "https://picsum.photos/200.jpg"}}'
+$ curl -X 'POST' \
+  'https://server.tungsten-ai.com/api/v1/projects/tungsten/text-to-image/models/2910c07e/predict' \
+  -H 'Authorization: ************' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{"input": {"prompt": "a professional photograph of an astronaut riding a horse"}}'
 
 {
   "id": "c88e7de9",
@@ -174,11 +186,11 @@ $ curl -X 'POST' 'https://server.tungsten-ai.com/api/v1/projects/tungsten/image-
 
 $ curl -X 'GET' \
   'https://server.tungsten-ai.com/api/v1/predictions/c88e7de9' \
-  -H 'Authorization: ************''
+  -H 'Authorization: ************' \
+  -H 'accept: application/json' \
 {
   "output": {
-    "score": 0.168,
-    "label": "seashore"
+    "image": "https://server.tungsten-ai.com/api/v1/files/1/93fd2ac4/output.png"
   },
   "status": "success"
 }
@@ -215,7 +227,7 @@ Runner 1   | running  2023-04-21 16:59:14.490 | INFO     | Fetching a prediction
 #### Organize ML models by project
 The Tungsten platform manages models by project to faciliate collaboration. 
 
-If every model is managed separately, the situation easily becomes chaotic. First, input/output formats are all different. Then, it is hard to compare them directly by feeding a same input. Also, each model has its own impelementation for evaluation. So, you cannot trust the evaluation score.
+If every model is managed separately, the situation easily becomes chaotic. First, input/output formats are all different. Then, it is hard to use and directly compare them. Also, each model has its own impelementation for evaluation. So, you cannot trust the evaluation score.
 
 In the Tungsten Platform, multiple settings are unified across all models in a project:
 
