@@ -5,7 +5,7 @@ But you can still build, push, and pull GPU models without it.
 
 ## Declare as a GPU model
 
-You can set ``gpu=True`` in ``model.config`` decorator. 
+You can set ``gpu=True`` in ``model.config`` decorator:
 
 ```python hl_lines="20"
 from typing import List
