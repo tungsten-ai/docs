@@ -349,15 +349,22 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#hassle-free-model-deployment" class="md-nav__link">
-    Hassle-free model deployment
+  <a href="#function-as-a-service-faas-with-micro-batching" class="md-nav__link">
+    Function-as-a-Service (FaaS) with micro-batching
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#allow-your-own-machines-to-be-used-to-run-models" class="md-nav__link">
-    Allow your own machines to be used to run models
+  <a href="#scale-with-your-own-gpucpu-devices" class="md-nav__link">
+    Scale with your own GPU/CPU devices
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#organize-ml-models-by-project" class="md-nav__link">
+    Organize ML models by project
   </a>
   
 </li>
@@ -423,6 +430,55 @@
   
     <li class="md-nav__item">
       <a href="tungsten_model/getting_started/" class="md-nav__link">
+        Getting Started
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          Tungsten Platform
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Tungsten Platform
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tungsten_platform/getting_started/" class="md-nav__link">
         Getting Started
       </a>
     </li>
@@ -552,15 +608,22 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#hassle-free-model-deployment" class="md-nav__link">
-    Hassle-free model deployment
+  <a href="#function-as-a-service-faas-with-micro-batching" class="md-nav__link">
+    Function-as-a-Service (FaaS) with micro-batching
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#allow-your-own-machines-to-be-used-to-run-models" class="md-nav__link">
-    Allow your own machines to be used to run models
+  <a href="#scale-with-your-own-gpucpu-devices" class="md-nav__link">
+    Scale with your own GPU/CPU devices
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#organize-ml-models-by-project" class="md-nav__link">
+    Organize ML models by project
   </a>
   
 </li>
@@ -608,12 +671,12 @@
 
 <hr />
 <h2 id="what-is-tungsten">What is Tungsten?</h2>
-<p>Tungsten is a containerization tool and platform for easily sharing and managing ML models.</p>
+<p>Tungsten is an open-source tool for easily sharing and managing ML models.</p>
 <p>Tungsten enables to build <a href="#tungsten-model">a versatile and standardized container for an ML model</a>.
 Without any model-specific setup, it can be run as a RESTful API server, a GUI application, a CLI application, a serverless function, and a Python script.</p>
 <p>Also, Tungsten provides <a href="#tungsten-platform">a centralized place to manage ML models systematically</a>. It supports remote execution and test automation as well as storing models.</p>
 <p align="center">
-  <img src="images/demo.gif" alt="Tungsten">
+  <img src="images/main-page-platform-model-demo.gif" alt="Tungsten Dashboard">
 </p>
 
 <hr />
@@ -638,7 +701,7 @@ Without any model-specific setup, it can be run as a RESTful API server, a GUI a
 <hr />
 <h3 id="take-the-tour">Take the tour</h3>
 <h4 id="build-a-tungsten-model">Build a Tungsten model</h4>
-<p>Building a Tungsten model does not require any complex configuration file for building. </p>
+<p>Building a Tungsten model does not require any complex configuration file. </p>
 <p>All you have to do is write a simple <code>tungsten_model.py</code> like below:
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
@@ -647,23 +710,23 @@ Without any model-specific setup, it can be run as a RESTful API server, a GUI a
 </span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
 </span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
 </span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="k">class</span> <span class="nc">Input</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">BaseIO</span><span class="p">):</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    <span class="n">image</span><span class="p">:</span> <span class="n">io</span><span class="o">.</span><span class="n">Image</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    <span class="n">prompt</span><span class="p">:</span> <span class="nb">str</span>
 </span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
 </span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
 </span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="k">class</span> <span class="nc">Output</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">BaseIO</span><span class="p">):</span>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    <span class="n">score</span><span class="p">:</span> <span class="nb">float</span>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    <span class="n">label</span><span class="p">:</span> <span class="nb">str</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    <span class="n">image</span><span class="p">:</span> <span class="n">io</span><span class="o">.</span><span class="n">Image</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>
 </span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="nd">@model</span><span class="o">.</span><span class="n">config</span><span class="p">(</span>
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>    <span class="n">gpu</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>    <span class="n">python_packages</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;torch&quot;</span><span class="p">,</span> <span class="s2">&quot;torchvision&quot;</span><span class="p">],</span>
-</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>    <span class="n">batch_size</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span>
-</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Image classification model&quot;</span>
-</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="p">)</span>
-</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="k">class</span> <span class="nc">Model</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">TungstenModel</span><span class="p">[</span><span class="n">Input</span><span class="p">,</span> <span class="n">Output</span><span class="p">]):</span>
-</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;./weights.pth&quot;</span><span class="p">)</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="nd">@model</span><span class="o">.</span><span class="n">config</span><span class="p">(</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>    <span class="n">gpu</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>    <span class="n">python_packages</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;torch&quot;</span><span class="p">,</span> <span class="s2">&quot;torchvision&quot;</span><span class="p">],</span>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>    <span class="n">batch_size</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Text to image&quot;</span>
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="p">)</span>
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="k">class</span> <span class="nc">Model</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">TungstenModel</span><span class="p">[</span><span class="n">Input</span><span class="p">,</span> <span class="n">Output</span><span class="p">]):</span>
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>        <span class="n">weights</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;./weights.pth&quot;</span><span class="p">)</span>
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">load_torch_model</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
 </span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>
 </span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Input</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Output</span><span class="p">]:</span>
 </span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>        <span class="n">input_tensor</span> <span class="o">=</span> <span class="n">preprocess</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>
@@ -671,86 +734,126 @@ Without any model-specific setup, it can be run as a RESTful API server, a GUI a
 </span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>        <span class="n">outputs</span> <span class="o">=</span> <span class="n">postprocess</span><span class="p">(</span><span class="n">output_tensor</span><span class="p">)</span>
 </span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>        <span class="k">return</span> <span class="n">outputs</span>
 </span></code></pre></div></p>
+<p>Then, you can start building a Tungsten model:
+<div class="language-console highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="gp">$ </span>tungsten<span class="w"> </span>build
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="go">✅ Successfully built tungsten model: &#39;text-to-image:latest&#39;</span>
+</span></code></pre></div></p>
 <h4 id="run-it-as-a-restful-api-server">Run it as a RESTful API server</h4>
 <p>A Tungsten model includes a standardized RESTful API.</p>
 <p>Run the container:</p>
-<div class="language-console highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="gp">$ </span>docker<span class="w"> </span>run<span class="w"> </span>-p<span class="w"> </span><span class="m">3000</span>:3000<span class="w"> </span>--gpus<span class="w"> </span>all<span class="w"> </span>tungsten-example:latest
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="go">INFO:     Setting up the model</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="go">INFO:     Getting inputs from the input queue</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="go">INFO:     Starting the prediction service</span>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="go">INFO:     Started server process [1]</span>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="go">INFO:     Waiting for application startup.</span>
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="go">INFO:     Application startup complete.</span>
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="go">INFO:     Uvicorn running on http://0.0.0.0:3000 (Press CTRL+C to quit)</span>
+<div class="language-console highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="gp">$ </span>docker<span class="w"> </span>run<span class="w"> </span>-p<span class="w"> </span><span class="m">3000</span>:3000<span class="w"> </span>--gpus<span class="w"> </span>all<span class="w"> </span>text-to-image:latest
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="go">INFO:     Setting up the model</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="go">INFO:     Getting inputs from the input queue</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="go">INFO:     Starting the prediction service</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="go">INFO:     Started server process [1]</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="go">INFO:     Waiting for application startup.</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="go">INFO:     Application startup complete.</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="go">INFO:     Uvicorn running on http://0.0.0.0:3000 (Press CTRL+C to quit)</span>
 </span></code></pre></div>
 <p>Then, you can send a prediction request with a JSON payload. For example,
-<div class="language-console highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="gp">$ </span>curl<span class="w"> </span>-X<span class="w"> </span><span class="s1">&#39;POST&#39;</span><span class="w"> </span><span class="s1">&#39;http://localhost:3000/predict&#39;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span>-H<span class="w"> </span><span class="s1">&#39;accept: application/json&#39;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;[{&quot;image&quot;: &quot;https://picsum.photos/200.jpg&quot;}]&#39;</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="go">{</span>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="go">    &quot;status&quot;: &quot;success&quot;,</span>
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="go">    &quot;outputs&quot;: [{&quot;score&quot;: 0.5, &quot;label&quot;: &quot;dog&quot;}],</span>
-</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="go">    &quot;error_message&quot;: null</span>
-</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="go">}</span>
+<div class="language-console highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="gp">$ </span>curl<span class="w"> </span>-X<span class="w"> </span><span class="s1">&#39;POST&#39;</span><span class="w"> </span><span class="s1">&#39;http://localhost:3000/predict&#39;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span>-H<span class="w"> </span><span class="s1">&#39;accept: application/json&#39;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;[{&quot;prompt&quot;: &quot;a professional photograph of an astronaut riding a horse&quot;}]&#39;</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="go">{</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="go">    &quot;status&quot;: &quot;success&quot;,</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="go">    &quot;outputs&quot;: [{&quot;image&quot;: &quot;data:image/png;base64,...&quot;}],</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="go">    &quot;error_message&quot;: null</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="go">}</span>
 </span></code></pre></div></p>
-<p>Also, a Swagger documentation is automatically generated. You can find it in <code>/docs</code> endpoint:</p>
-<p><img alt="tungsten-model-api" src="images/model-api.png" title="Tungsten Model API" /></p>
 <h4 id="run-it-as-a-gui-application">Run it as a GUI application</h4>
-<p>You can run a Tungsten model as a GUI app in a single command:
-<div class="language-console highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="gp">$ </span>tungsten<span class="w"> </span>demo<span class="w"> </span>tungsten-example:latest<span class="w"> </span>-p<span class="w"> </span><span class="m">8080</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="go">INFO:     Uvicorn running on http://localhost:8080 (Press CTRL+C to quit)</span>
-</span></code></pre></div></p>
+<p>You can run a Tungsten model as a GUI app in a single command:</p>
+<div class="language-console highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="gp">$ </span>tungsten<span class="w"> </span>demo<span class="w"> </span>text-to-image:latest<span class="w"> </span>-p<span class="w"> </span><span class="m">8080</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="go">INFO:     Uvicorn running on http://localhost:8080 (Press CTRL+C to quit)</span>
+</span></code></pre></div>
 <p>You can run it in a browser:</p>
 <p><img alt="tungsten-dashboard" src="images/main-page-local-demo.gif" title="Tungsten Dashboard" /></p>
 <h4 id="run-it-as-a-serverless-function">Run it as a serverless function</h4>
-<p>Push a model to <a href="#tungsten-platform">a Tungsten platform</a>:
-<div class="language-console highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="gp">$ </span>tungsten<span class="w"> </span>push<span class="w"> </span>exampleuser/exampleproject<span class="w"> </span>-n<span class="w"> </span>tungsten-example:latest
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="go">✅ Successfully pushed to &#39;https://server.tungsten-ai.com&#39;</span>
-</span></code></pre></div></p>
+<p>Push a model to <a href="#tungsten-platform">a Tungsten platform</a>:</p>
+<div class="language-console highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="gp">$ </span>tungsten<span class="w"> </span>push<span class="w"> </span>exampleuser/exampleproject<span class="w"> </span>-n<span class="w"> </span>text-to-image:latest
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="go">✅ Successfully pushed to &#39;https://server.tungsten-ai.com&#39;</span>
+</span></code></pre></div>
 <p>Then you can run it in the Tungsten platform:</p>
-<p><img alt="tungsten-dashboard" src="images/demo.gif" title="Tungsten Dashboard" /></p>
+<p><img alt="tungsten-platform-model-demo" src="images/main-page-platform-model-demo.gif" title="Tungsten Platform Model Demo" /></p>
 <hr />
 <h2 id="tungsten-platform">Tungsten Platform</h2>
 <p>The Tungsten platform is where you store, run, test, and compare ML models.</p>
 <h3 id="key-features_1">Key Features</h3>
 <ul>
-<li><a href="#hassle-free-model-deployment">Hassle-free model deployment</a></li>
-<li><a href="#allow-your-own-machines-to-be-used-to-run-models">Allow your own machines to be used to run models</a></li>
-<li>Model, test data, and test spec versioning (comming soon)</li>
+<li><a href="#function-as-a-service-faas-with-micro-batching">Function-as-a-Service (FaaS) with micro-batching</a></li>
+<li><a href="#scale-with-your-own-gpucpu-devices">Scale with your own GPU/CPU devices</a></li>
+<li><a href="#organize-ml-models-by-project">Organize ML models by project</a></li>
+<li>ML Model, test data, and test spec versioning (comming soon)</li>
 <li>Automatically keep evaluation scores up-to-date (comming soon)</li>
 </ul>
 <hr />
 <h3 id="take-the-tour_1">Take the tour</h3>
-<h4 id="hassle-free-model-deployment">Hassle-free model deployment</h4>
-<p>The Tungsten platform supports automatic serverless deployment of models.
+<h4 id="function-as-a-service-faas-with-micro-batching">Function-as-a-Service (FaaS) with micro-batching</h4>
+<p>The Tungsten platform supports automatic <a href="https://en.wikipedia.org/wiki/Function_as_a_service">serverless deployment</a> of ML models.
 So, you don't need to spend time managing infrastructure for serving them.</p>
-<p>You can run all uploaded models through Tungsten platform's API or web UI.</p>
-<h4 id="allow-your-own-machines-to-be-used-to-run-models">Allow your own machines to be used to run models</h4>
-<p>You can register Tungsten runners to a Tungsten server and make the server use your own machines for running models.</p>
+<p>You can run all uploaded models in a browser:</p>
+<p><img alt="tungsten-platform-model-demo" src="images/main-page-platform-model-demo.gif" title="Tungsten Platform Model Demo" /></p>
+<p>Also, it is possible to run through the Tungsten platform's RESTful API.</p>
+<div class="language-console highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="gp">$ </span>curl<span class="w"> </span>-X<span class="w"> </span><span class="s1">&#39;POST&#39;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="s1">&#39;https://server.tungsten-ai.com/api/v1/projects/tungsten/text-to-image/models/2910c07e/predict&#39;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">  </span>-H<span class="w"> </span><span class="s1">&#39;Authorization: ************&#39;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">  </span>-H<span class="w"> </span><span class="s1">&#39;accept: application/json&#39;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">  </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;input&quot;: {&quot;prompt&quot;: &quot;a professional photograph of an astronaut riding a horse&quot;}}&#39;</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="go">{</span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="go">  &quot;id&quot;: &quot;c88e7de9&quot;,</span>
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="go">  &quot;status&quot;: &quot;running&quot;,</span>
+</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="go">}</span>
+</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>
+</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="gp">$ </span>curl<span class="w"> </span>-X<span class="w"> </span><span class="s1">&#39;GET&#39;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="w">  </span><span class="s1">&#39;https://server.tungsten-ai.com/api/v1/predictions/c88e7de9&#39;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="w">  </span>-H<span class="w"> </span><span class="s1">&#39;Authorization: ************&#39;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-6-16"><a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="w">  </span>-H<span class="w"> </span><span class="s1">&#39;accept: application/json&#39;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-6-17"><a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="o">{</span>
+</span><span id="__span-6-18"><a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a><span class="go">  &quot;output&quot;: {</span>
+</span><span id="__span-6-19"><a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a><span class="go">    &quot;image&quot;: &quot;https://server.tungsten-ai.com/api/v1/files/1/93fd2ac4/output.png&quot;</span>
+</span><span id="__span-6-20"><a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a><span class="go">  },</span>
+</span><span id="__span-6-21"><a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a><span class="go">  &quot;status&quot;: &quot;success&quot;</span>
+</span><span id="__span-6-22"><a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a><span class="go">}</span>
+</span></code></pre></div>
+<h4 id="scale-with-your-own-gpucpu-devices">Scale with your own GPU/CPU devices</h4>
+<p>You can register Tungsten runners to the platform and make it use your own machines for running models.</p>
 <p>Register a runner:</p>
-<div class="language-console highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="gp">$ </span>tungsten-runner<span class="w"> </span>register
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="go">Enter runner mode (pipeline, prediction) [prediction]: prediction</span>
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="go">Enter URL of the tungsten server: https://server.tungsten-ai.com</span>
-</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="go">Enter registration token: C6r5rp2PhfdXbJtFbBMhifgLDhagAc</span>
-</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="go">Enter runner name [mydesktop]: myrunner </span>
-</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="go">Enter tags (comma separated) []: myrunnergroup</span>
-</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="go">Enter GPU index to use []: 0</span>
-</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="go">Runner &#39;mjpyeon-desktop&#39; is registered - id: 245</span>
-</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="go">Updated runner config</span>
+<div class="language-console highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="gp">$ </span>tungsten-runner<span class="w"> </span>register
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="go">Enter runner mode (pipeline, prediction) [prediction]: prediction</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="go">Enter URL of the tungsten server: https://server.tungsten-ai.com</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="go">Enter registration token: C6r5rp2PhfdXbJtFbBMhifgLDhagAc</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="go">Enter runner name [mydesktop]: myrunner </span>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="go">Enter tags (comma separated) []: NVIDIA-A100</span>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="go">Enter GPU index to use []: 0</span>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="go">Runner &#39;myrunner&#39; is registered - id: 245</span>
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="go">Updated runner config</span>
 </span></code></pre></div>
 <p>Run all registered runners:</p>
-<div class="language-console highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="gp">$ </span>tungsten-runner<span class="w"> </span>run
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="go">Runner 0   | running  2023-04-21 16:59:14.490 | INFO     | Fetching a prediction job</span>
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="go">                      2023-04-21 16:59:49.184 | INFO     | Job 0f7c50867417456ebd1389cfb74e489f assigned</span>
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="go">Runner 1   | running  2023-04-21 16:59:14.490 | INFO     | Fetching a prediction job</span>
+<div class="language-console highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="gp">$ </span>tungsten-runner<span class="w"> </span>run
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="go">Runner 0   | running  2023-04-21 16:59:14.490 | INFO     | Fetching a prediction job</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="go">                      2023-04-21 16:59:49.184 | INFO     | Job 0f7c50867417456ebd1389cfb74e489f assigned</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="go">Runner 1   | running  2023-04-21 16:59:14.490 | INFO     | Fetching a prediction job</span>
 </span></code></pre></div>
+<h4 id="organize-ml-models-by-project">Organize ML models by project</h4>
+<p>The Tungsten platform manages models by project to faciliate collaboration. </p>
+<p>If every model is managed separately, the situation easily becomes chaotic. First, input/output formats are all different. Then, it is hard to use and directly compare them. Also, each model has its own impelementation for evaluation. So, you cannot trust the evaluation score.</p>
+<p>In the Tungsten Platform, multiple settings are unified across all models in a project:</p>
+<ul>
+<li>Input/output schemas</li>
+<li>Evaluation metrics</li>
+<li>Test cases</li>
+<li>Test data</li>
+</ul>
+<p>So, it becomes clear and easy to compare models. </p>
 <h2 id="license">License</h2>
 <p>This project is licensed under the terms of the Apache License 2.0.</p>
 
