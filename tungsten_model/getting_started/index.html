@@ -432,34 +432,6 @@
 
             
           
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../inputs_and_outputs/" class="md-nav__link">
-        Input/Output
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../advanced_containerization.md" class="md-nav__link">
-        Advanced Containerization
-      </a>
-    </li>
-  
-
-            
-          
         </ul>
       </nav>
     </li>
@@ -765,8 +737,9 @@ Visit <a href="http://localhost:8080">http://localhost:8080</a> to check.</p>
 <h4 id="option-2-a-restful-api">Option 2: a RESTful API</h4>
 <p><div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>tungsten serve tungsten-example -p 3000
 </span></code></pre></div>
-A Swagger documentation is automatically generated. You can find it in <a href="http://localhost:3000/docs">http://localhost:3000/docs</a>:</p>
-<p><img alt="tungsten-model-api" src="../../images/model-api.png" title="Tungsten Model API" /></p>
+A Swagger documentation is automatically generated. You can find it in <a href="http://localhost:3000/docs">http://localhost:3000/docs</a>.</p>
+<!-- ![tungsten-model-api](../images/model-api.png "Tungsten Model API") -->
+
 <h3 id="run-remotely">Run remotely</h3>
 <p>To do this, you should have an account and an entered project in a Tungsten server running at <a href="https://tungsten-ai.com">https://tungsten-ai.com</a>.  </p>
 <p>If you have them, let's login first.
@@ -782,7 +755,7 @@ A Swagger documentation is automatically generated. You can find it in <a href="
 </span></code></pre></div></p>
 <h2 id="update-the-example">Update the example</h2>
 <h3 id="use-gpus">Use GPUs</h3>
-<p>Setting <code>gpu=True</code> in <code>model.config</code> decorator is enough to use GPUs. </p>
+<p>All you have to do is just setting<code>gpu=True</code> in <code>model.config</code> decorator:</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
 </span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
 </span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="kn">import</span> <span class="nn">torch</span>
@@ -840,7 +813,7 @@ A Swagger documentation is automatically generated. You can find it in <a href="
 </span><span id="__span-11-55"><a id="__codelineno-11-55" name="__codelineno-11-55" href="#__codelineno-11-55"></a><span class="hll">        <span class="n">input_tensor</span> <span class="o">=</span> <span class="n">input_tensor</span><span class="o">.</span><span class="n">cuda</span><span class="p">()</span>
 </span></span><span id="__span-11-56"><a id="__codelineno-11-56" name="__codelineno-11-56" href="#__codelineno-11-56"></a>        <span class="k">return</span> <span class="n">input_tensor</span>
 </span></code></pre></div>
-<p>Tungstenkit automatically selects a compatible CUDA version and installs it in the container.
+<p>Then, Tungstenkit automatically selects a compatible CUDA version and installs it in the container.
 The cuda version inference is currently supported on <code>torch</code>, <code>torchvision</code>, <code>torchaudio</code>, and <code>tensorflow</code>.</p>
 <p>If you want to manually set the CUDA version, modify <code>model.config</code> decorator as follows:</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nd">@model</span><span class="o">.</span><span class="n">config</span><span class="p">(</span>

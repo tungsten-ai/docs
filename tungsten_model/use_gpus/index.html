@@ -16,7 +16,7 @@
         <link rel="prev" href="../getting_started/">
       
       
-        <link rel="next" href="../inputs_and_outputs/">
+        <link rel="next" href="../../tungsten_server/getting_started/">
       
       <link rel="icon" href="../../images/favicon.ico">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.8">
@@ -351,34 +351,6 @@
 
             
           
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../inputs_and_outputs/" class="md-nav__link">
-        Input/Output
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../advanced_containerization.md" class="md-nav__link">
-        Advanced Containerization
-      </a>
-    </li>
-  
-
-            
-          
         </ul>
       </nav>
     </li>
@@ -500,8 +472,8 @@
   <h1>Use GPUs</h1>
 
 <h2 id="prerequisite">Prerequisite</h2>
-<p>However, for running GPU models locally, <a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker">nvidia-docker</a> should be installed. It enables to use NVIDIA GPUs in a Docker container.</p>
-<p>You can still build and push a GPU model without it</p>
+<p>You should install <a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker">nvidia-docker</a> if you want to run GPU models locally.</p>
+<p>But you can still build, push, and pull GPU models without it.</p>
 <h2 id="declare-as-a-gpu-model">Declare as a GPU model</h2>
 <p>You can set <code>gpu=True</code> in <code>model.config</code> decorator. </p>
 <p><div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
@@ -562,7 +534,7 @@
 </span><span id="__span-0-56"><a id="__codelineno-0-56" name="__codelineno-0-56" href="#__codelineno-0-56"></a>        <span class="k">return</span> <span class="n">input_tensor</span>
 </span></code></pre></div>
 Then, Tungstenkit automatically selects a compatible CUDA version and installs it in the container.
-The CUDA version inference is supported on <code>torch</code>, <code>torchvision</code>, <code>torchaudio</code>, and <code>tensorflow</code>.</p>
+The CUDA version inference is currently supported on <code>torch</code>, <code>torchvision</code>, <code>torchaudio</code>, and <code>tensorflow</code>.</p>
 <h2 id="manually-set-the-cuda-version">Manually set the CUDA version</h2>
 <p>You can also pass <code>cuda_version</code> as an argument of <code>model.config</code>:</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
@@ -584,8 +556,8 @@ The CUDA version inference is supported on <code>torch</code>, <code>torchvision
 </span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>
 </span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>
 </span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="nd">@model</span><span class="o">.</span><span class="n">config</span><span class="p">(</span>
-</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>    <span class="n">gpu</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="hll">    <span class="n">cuda_version</span><span class="o">=</span><span class="s2">&quot;11.6&quot;</span>
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="hll">    <span class="n">gpu</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span></span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="hll">    <span class="n">cuda_version</span><span class="o">=</span><span class="s2">&quot;11.6&quot;</span>
 </span></span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Image classification model&quot;</span><span class="p">,</span>
 </span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>    <span class="n">python_packages</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;torch&quot;</span><span class="p">,</span> <span class="s2">&quot;torchvision&quot;</span><span class="p">],</span>
 </span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>    <span class="n">batch_size</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span>
