@@ -16,10 +16,10 @@
         <link rel="prev" href="../getting_started/">
       
       
-        <link rel="next" href="../../tungsten_server/getting_started/">
+        <link rel="next" href="../input_and_output/">
       
       <link rel="icon" href="../../images/favicon.ico">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.8">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.6">
     
     
       
@@ -67,7 +67,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="tungsten" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="tungsten" data-md-color-primary="" data-md-color-accent="">
   
     
     
@@ -91,9 +91,7 @@
     
       
 
-  
-
-<header class="md-header md-header--shadow" data-md-component="header">
+<header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="../.." title="Tungsten Docs" class="md-header__button md-logo" aria-label="Tungsten Docs" data-md-component="logo">
       
@@ -120,17 +118,13 @@
       </div>
     </div>
     
-      
-        <form class="md-header__option" data-md-component="palette">
+      <form class="md-header__option" data-md-component="palette">
+        
           
-            
-            
-            
-            <input class="md-option" data-md-color-media="" data-md-color-scheme="tungsten" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_1">
-            
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="tungsten" data-md-color-primary="" data-md-color-accent=""  aria-hidden="true"  type="radio" name="__palette" id="__palette_1">
           
-        </form>
-      
+        
+      </form>
     
     
     
@@ -189,6 +183,61 @@
       
         
           
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../.." class="md-tabs__link">
+      Overview
+    </a>
+  </li>
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../getting_started/" class="md-tabs__link md-tabs__link--active">
+        Tungsten Model
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../tungsten_server/getting_started/" class="md-tabs__link">
+        Tungsten Server
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
         
       
       <main class="md-main" data-md-component="main">
@@ -201,8 +250,10 @@
                   <div class="md-sidebar__inner">
                     
 
+  
 
-<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
     <a href="../.." title="Tungsten Docs" class="md-nav__button md-logo" aria-label="Tungsten Docs" data-md-component="logo">
       
@@ -235,7 +286,7 @@
   
     <li class="md-nav__item">
       <a href="../.." class="md-nav__link">
-        Tungsten
+        Overview
       </a>
     </li>
   
@@ -346,6 +397,34 @@
   
 </nav>
       
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../input_and_output/" class="md-nav__link">
+        Input/Output
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../the_tungsten_model_class/" class="md-nav__link">
+        The TungstenModel Class
+      </a>
     </li>
   
 
@@ -475,7 +554,7 @@
 <p>You should install <a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker">nvidia-docker</a> if you want to run GPU models locally.</p>
 <p>But you can still build, push, and pull GPU models without it.</p>
 <h2 id="declare-as-a-gpu-model">Declare as a GPU model</h2>
-<p>You can set <code>gpu=True</code> in <code>model.config</code> decorator. </p>
+<p>You can set <code>gpu=True</code> in the <code>tungstenkit.model.config</code> decorator:</p>
 <p><div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kn">import</span> <span class="nn">torch</span>
@@ -536,7 +615,7 @@
 Then, Tungstenkit automatically selects a compatible CUDA version and installs it in the container.
 The CUDA version inference is currently supported on <code>torch</code>, <code>torchvision</code>, <code>torchaudio</code>, and <code>tensorflow</code>.</p>
 <h2 id="manually-set-the-cuda-version">Manually set the CUDA version</h2>
-<p>You can also pass <code>cuda_version</code> as an argument of <code>model.config</code>:</p>
+<p>You can also pass <code>cuda_version</code> as an argument of the <code>tungstenkit.model.config</code> decorator:</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="kn">import</span> <span class="nn">torch</span>
@@ -632,7 +711,7 @@ The CUDA version inference is currently supported on <code>torch</code>, <code>t
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs"], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.51198bba.min.js"></script>
