@@ -68,10 +68,12 @@ class Output(io.BaseIO):
 )
 class Model(model.TungstenModel[Input, Output]):
     def setup(self):
+        """Load model weights"""
         weights = torch.load("./weights.pth")
         self.model = load_torch_model(weights)
 
     def predict(self, inputs: List[Input]) -> List[Output]:
+        """Run a batch prediction"""
         input_tensor = preprocess(inputs)
         output_tensor = self.model(input_tensor)
         outputs = postprocess(output_tensor)
@@ -234,6 +236,7 @@ Multiple settings are unified in a project:
 - Test cases
 - Test data
 
+---
 
 ## License
 This project is licensed under the terms of the Apache License 2.0.

@@ -5,7 +5,7 @@ But you can still build, push, and pull GPU models without it.
 
 ## Declare as a GPU model
 
-You can set ``gpu=True`` in ``model.config`` decorator:
+You can set ``gpu=True`` in the ``tungstenkit.model.config`` decorator:
 
 ```python hl_lines="20"
 from typing import List
@@ -69,7 +69,7 @@ Then, Tungstenkit automatically selects a compatible CUDA version and installs i
 The CUDA version inference is currently supported on ``torch``, ``torchvision``, ``torchaudio``, and ``tensorflow``.
 
 ## Manually set the CUDA version
-You can also pass ``cuda_version`` as an argument of ``model.config``:
+You can also pass ``cuda_version`` as an argument of the ``tungstenkit.model.config`` decorator:
 
 ```python hl_lines="20-21"
 from typing import List
