@@ -1,8 +1,18 @@
 The ``TungstenModel`` class is the base class for all Tungsten model classes. A Tungsten model class looks something like this:
 ```python
 from typing import List
+
 import torch
-from tungstenkit import model
+from tungstenkit import io, model
+
+
+class Input(io.BaseIO):
+    ...
+
+
+class Output(io.BaseIO):
+    ...
+
 
 @model.config(
     gpu=True,  # Whether to use a GPU or not
@@ -31,10 +41,16 @@ class Model(model.TungstenModel[Input, Output]):
 ### Declare input/output types
 Input/output types are declared by passing them as type arguments to ``TungstenModel`` class:
 
-```python hl_lines="11"
+```python hl_lines="17"
 from typing import List
 import torch
-from tungstenkit import model
+from tungstenkit import io, model
+
+class Input(io.BaseIO):
+    ...
+
+class Output(io.BaseIO):
+    ...
 
 @model.config(
     gpu=True,  # Whether to use a GPU or not
@@ -64,10 +80,20 @@ See [Tungsten Model - Input/Output](https://tungsten-ai.github.io/docs/tungsten_
 ### Define how to load a model
 You can override the ``setup()`` method to define how to load a model:
 
-```python hl_lines="15-18"
+```python hl_lines="25-28"
 from typing import List
+
 import torch
-from tungstenkit import model
+from tungstenkit import io, model
+
+
+class Input(io.BaseIO):
+    ...
+
+
+class Output(io.BaseIO):
+    ...
+
 
 @model.config(
     gpu=True,  # Whether to use a GPU or not
@@ -102,10 +128,19 @@ It takes a non-empty list of ``Input`` objects as an argument, and should return
 
 It should be overridden by all subclasses:
 
-```python hl_lines="20-25"
+```python hl_lines="29-35"
 from typing import List
+
 import torch
-from tungstenkit import model
+from tungstenkit import io, model
+
+
+class Input(io.BaseIO):
+    ...
+
+
+class Output(io.BaseIO):
+    ...
 
 @model.config(
     gpu=True,  # Whether to use a GPU or not
@@ -163,10 +198,20 @@ class Model(model.TungstenModel[Input, Output]):
 
 ### Add dependencies and explanations
 You can add dependencies and explanations via the ``config`` decorator:
-```python hl_lines="5-10"
+```python hl_lines="15-20"
 from typing import List
+
 import torch
-from tungstenkit import model
+from tungstenkit import io, model
+
+
+class Input(io.BaseIO):
+    ...
+
+
+class Output(io.BaseIO):
+    ...
+
 
 @model.config(
     gpu=True,  # Whether to use a GPU or not
@@ -233,11 +278,11 @@ class Output(io.BaseIO):
     detections: List[Detection]
 
 class Model(model.TungstenModel[Input, Output]):
+    def setup(self):
+        ...
+
     def predict(self, inputs: List[Input]) -> List[Output]:
-        inputs = preprocess(inputs)
-        outputs = self.model(inputs)
-        outputs = postprocess(outputs)
-        return outputs
+        ...
 ```
 
 It looks fine at first glance, but there is a problem in the demo page.
@@ -267,11 +312,11 @@ class Output(io.BaseIO):
     visualized: io.Image
 
 class Model(model.TungstenModel[Input, Output]):
+    def setup(self):
+        ...
+
     def predict(self, inputs: List[Input]) -> List[Output]:
-        inputs = preprocess(inputs)
-        outputs = self.model(inputs)
-        outputs = postprocess(outputs)
-        return outputs
+        ...
 ```
 
 This may satisfy demo users, but API users will suffer performance degradation due to visualization overhead.
@@ -302,11 +347,11 @@ class Visualization(io.BaseIO):
     result: io.Image
 
 class Model(model.TungstenModel[Input, Output]):
+    def setup(self):
+        ...
+
     def predict(self, inputs: List[Input]) -> List[Output]:
-        inputs = preprocess(inputs)
-        outputs = self.model(inputs)
-        outputs = postprocess(outputs)
-        return outputs
+        ...
     
     def predict_demo(
         self, 

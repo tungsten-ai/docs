@@ -22,7 +22,7 @@ cd tungsten-getting-started
 ```
 
 ### Write ``tungsten_model.py``
-You can write the ``tungsten_model.py`` file for an image classification model like this:
+You can write the ``tungsten_model.py`` file for an image classification model as follows:
 ```python
 from typing import List
 

@@ -66,7 +66,7 @@ The ``Image`` object has more methods:
 ## Input field descriptors
 The ``tungstenkit.io`` module has two input field descriptors: ``Field`` and ``Option`` functions:
 
-- ``Field``: For describing properties of a *required* field.
+- ``Field``: For setting properties of a *required* field.
 - ``Option``: For declaring a field as *optional* and setting its properties. Optional fields will be same in an input batch and hidden in the model demo page by default.
 
 Using them, you can:
