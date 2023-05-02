@@ -15,6 +15,13 @@ theme:
 repo_name: tungsten-ai/tungsten
 repo_url: https://github.com/tungsten-ai/docs
 
+extra:
+  social:
+    - icon: fontawesome/brands/slack
+      link: https://tungsten-ai-community.slack.com/
+    - icon: fontawesome/brands/github
+      link: https://github.com/tungsten-ai
+
 extra_css:
   - css/scheme.css
   - css/termynal.css

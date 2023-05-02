@@ -1,4 +1,5 @@
 The ``TungstenModel`` class is the base class for all Tungsten model classes. A Tungsten model class looks something like this:
+
 ```python
 from typing import List
 

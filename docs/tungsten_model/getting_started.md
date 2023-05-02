@@ -83,7 +83,6 @@ class Model(model.TungstenModel[Input, Output]):
         input_tensor = torch.stack(tensors, dim=0)
         return input_tensor
 ```
-Copy that to a file ``tungsten_model.py``.
 
 ### Download weights
 Before building, you should prepare files used in ``setup`` function of the class. 

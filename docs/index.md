@@ -1,7 +1,20 @@
 <p align="center">
   <a href="https://tungsten-ai.github.io/docs"><img src="images/logo.svg" alt="Tungsten" width="50%" height="50%"></a>
 </p>
-
+<p align="center">
+<a href="https://pypi.org/project/tungstenkit" target="_blank">
+    <img src="https://img.shields.io/pypi/v/tungstenkit?color=%2334D058&label=pypi%20package" alt="Tungstenkit version">
+</a>
+<a href="https://pypi.org/project/tungstenkit" target="_blank">
+    <img src="https://static.pepy.tech/badge/tungstenkit?style=flat-square" alt="Downloads">
+</a>
+<a href="https://pypi.org/project/tungstenkit" target="_blank">
+    <img src="https://img.shields.io/pypi/pyversions/tungstenkit.svg?color=%2334D058" alt="Supported Python versions">
+</a>
+<a href="https://tungsten-ai-community.slack.com/" target="_blank">
+    <img src="https://img.shields.io/badge/slack-join_chat-white.svg?logo=slack&style=social" alt="Slack">
+</a>
+</p>
 
 ---
 ## What is Tungsten?
