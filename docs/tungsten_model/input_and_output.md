@@ -44,7 +44,7 @@ Tungstenkit currently supports the following input/output field types:
 For ``dict``, ``list``, ``tuple``, ``typing.Dict``, ``typing.List`` and ``typing.Tuple``, type arguments are required. For example, you should use ``dict[str, str]`` instead of ``dict``.
 
 ## Files
-The ``tungstenkit.io`` module has four classes for files: ``Image``, ``Video``, ``Audio``, and ``Binary``.
+The ``tungstenkit.io`` module provides four primitives for files: ``Image``, ``Video``, ``Audio``, and ``Binary``.
 They possess the following property and method:
 
 - ``path`` : a string of the file path.
@@ -64,7 +64,7 @@ The ``Image`` object has more methods:
 
 
 ## Input field descriptors
-The ``tungstenkit.io`` module has two input field descriptors: ``Field`` and ``Option`` functions:
+The ``tungstenkit.io`` module contains two input field descriptors: ``Field`` and ``Option`` functions:
 
 - ``Field``: For setting properties of a *required* field.
 - ``Option``: For declaring a field as *optional* and setting its properties. Optional fields will be same in an input batch and hidden in the model demo page by default.

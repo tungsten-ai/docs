@@ -79,7 +79,7 @@ class Model(model.TungstenModel[Input, Output]):
 See [Tungsten Model - Input/Output](https://tungsten-ai.github.io/docs/tungsten_model/input_and_output) to learn how to define input/output.
 
 ### Define how to load a model
-You can override the ``setup()`` method to define how to load a model:
+You can override the ``setup`` method to define how to load a model:
 
 ```python hl_lines="25-28"
 from typing import List
@@ -123,7 +123,7 @@ As you can see, the ``weights.pth`` file is required to setup.
 Before building, you should make sure that the file exists in the build directory.
 
 ### Define how a prediction works
-The ``predict()`` method defines the computation performed at every prediction request.
+The ``predict`` method defines the computation performed at every prediction request.
 
 It takes a non-empty list of ``Input`` objects as an argument, and should return a list of the same number of ``Output`` objects.
 
@@ -286,8 +286,7 @@ class Model(model.TungstenModel[Input, Output]):
         ...
 ```
 
-It looks fine at first glance, but there is a problem in the demo page.
-All that users can get is just a raw JSON.
+But it doesn't contain any visualization, so you'll only get raw JSONs on the demo page.
 
 Then, you could add the visualization result to the output:
 
@@ -320,7 +319,7 @@ class Model(model.TungstenModel[Input, Output]):
         ...
 ```
 
-This may satisfy demo users, but API users will suffer performance degradation due to visualization overhead.
+This can improve the demo page, but introduces the visualization overhead of the API.
 
 In such a case, you can separate the method for demo predictions:
 
@@ -364,6 +363,4 @@ class Model(model.TungstenModel[Input, Output]):
         visualizations = [Visualization(result=image) for image in images]
         return outputs, visualizations
 ```
-
-Then, the ``predict`` method is executed when a prediction is requested through the API. 
-On the other hand, for a demo request, the ``predict_demo`` method is executed, and the visualization result is shown on the demo page.
+Then, the ``predict`` method is executed when a prediction is requested through the API, and the ``predict_demo`` method is called for a demo request.

@@ -87,7 +87,7 @@ class Model(model.TungstenModel[Input, Output]):
 ### Download weights
 Before building, you should prepare files used in ``setup`` function of the class. 
 
-As you can see above, ``mobilenetv2_weights.pth`` is required. Let's download it:
+As you can see above, the ``mobilenetv2_weights.pth`` file is required. Let's download it:
 ```
 curl -o mobilenetv2_weights.pth https://download.pytorch.org/models/mobilenet_v2-7ebf99e0.pth
 ```
@@ -101,10 +101,6 @@ $ tungsten build -n tungsten-example
 
 ✅ Successfully built tungsten model: 'tungsten-example:e3a5de5616a743fe9021e2dcfe1cd19a' (also tagged as 'tungsten-example:latest')
 ```
-### Show stored models
-Tungstenkit saves built and pulled models in a local store.
-
-You can check if the model is stored:
 
 ```console
 $ tungsten models
@@ -117,9 +113,7 @@ tungsten-example  e3a5de5616a743fe9021e2dcfe1cd19a  Image classification model  
 
 
 ### Run locally
-Now, you can run the model in your local machine.
-
-Tungstenkit provides multiple options for that.
+Now, you can run the model in your local machine in multiple ways.
 
 #### Option 1: an interactive web demo
 ```
@@ -157,12 +151,12 @@ $ curl -X 'POST' 'http://localhost:3000/predict' \
 ```
 
 
-Also, you can find a Swagger documentation in [http://localhost:3000/docs](http://localhost:3000/docs).
+Also, you can find a Swagger documentation at [http://localhost:3000/docs](http://localhost:3000/docs).
 
 <!-- ![tungsten-model-api](../images/model-api.png "Tungsten Model API") -->
 
 ### Run remotely
-To do this, you should have an account and an entered project in a Tungsten server running at [https://server.tungsten-ai.com](https://server.tungsten-ai.com).  
+To do this, you should have an account and a project on a Tungsten server running at [https://server.tungsten-ai.com](https://server.tungsten-ai.com).  
 
 If you don't have them, visit [https://webapp.tungsten-ai.com](https://webapp.tungsten-ai.com) in a browser and create them.
 
@@ -184,6 +178,6 @@ $ tungsten push exampleuser/exampleproject -n tungsten-example
   - version: 98acfab3
 ```
 
-Now you can find and run it in the Tungsten server.
+Now you can find and run it on the Tungsten server.
 
 Visit [https://webapp.tungsten-ai.com](https://webapp.tungsten-ai.com) in a browser to check it.
