@@ -363,4 +363,4 @@ class Model(model.TungstenModel[Input, Output]):
         visualizations = [Visualization(result=image) for image in images]
         return outputs, visualizations
 ```
-Then, the ``predict`` method is executed when a prediction is requested through the API, and the ``predict_demo`` method is called for a demo request.
+Then, the ``predict`` method is executed when a prediction is requested through the API, but the ``predict_demo`` method is called for a demo request.

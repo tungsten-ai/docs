@@ -75,7 +75,7 @@ Using them, you can:
 - Restrict input field values.
 - Set input field descriptions shown in the model demo page.
 
-For example, you can define an input class for text-to-image generators as follows:
+For example, you can define an input class for text-to-image generation as follows:
 ```python
 from tungstenkit import io
 
