@@ -19,7 +19,7 @@
         <link rel="next" href="../../tungsten_server/getting_started/">
       
       <link rel="icon" href="../../images/favicon.ico">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.8">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.6">
     
     
       
@@ -67,7 +67,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="tungsten" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="tungsten" data-md-color-primary="" data-md-color-accent="">
   
     
     
@@ -118,17 +118,13 @@
       </div>
     </div>
     
-      
-        <form class="md-header__option" data-md-component="palette">
+      <form class="md-header__option" data-md-component="palette">
+        
           
-            
-            
-            
-            <input class="md-option" data-md-color-media="" data-md-color-scheme="tungsten" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_1">
-            
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="tungsten" data-md-color-primary="" data-md-color-accent=""  aria-hidden="true"  type="radio" name="__palette" id="__palette_1">
           
-        </form>
-      
+        
+      </form>
     
     
     
@@ -708,7 +704,7 @@
 </span></code></pre></div>
 <p>See <a href="https://tungsten-ai.github.io/docs/tungsten_model/input_and_output">Tungsten Model - Input/Output</a> to learn how to define input/output.</p>
 <h3 id="define-how-to-load-a-model">Define how to load a model</h3>
-<p>You can override the <code>setup()</code> method to define how to load a model:</p>
+<p>You can override the <code>setup</code> method to define how to load a model:</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="kn">import</span> <span class="nn">torch</span>
@@ -748,7 +744,7 @@
 <p>As you can see, the <code>weights.pth</code> file is required to setup.
 Before building, you should make sure that the file exists in the build directory.</p>
 <h3 id="define-how-a-prediction-works">Define how a prediction works</h3>
-<p>The <code>predict()</code> method defines the computation performed at every prediction request.</p>
+<p>The <code>predict</code> method defines the computation performed at every prediction request.</p>
 <p>It takes a non-empty list of <code>Input</code> objects as an argument, and should return a list of the same number of <code>Output</code> objects.</p>
 <p>It should be overridden by all subclasses:</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
@@ -898,8 +894,7 @@ So, you can define the <code>predict</code> method of a text-to-image generaton 
 </span><span id="__span-6-24"><a id="__codelineno-6-24" name="__codelineno-6-24" href="#__codelineno-6-24"></a>    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Input</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Output</span><span class="p">]:</span>
 </span><span id="__span-6-25"><a id="__codelineno-6-25" name="__codelineno-6-25" href="#__codelineno-6-25"></a>        <span class="o">...</span>
 </span></code></pre></div>
-<p>It looks fine at first glance, but there is a problem in the demo page.
-All that users can get is just a raw JSON.</p>
+<p>But it doesn't contain any visualization, so you'll only get raw JSONs on the demo page.</p>
 <p>Then, you could add the visualization result to the output:</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="kn">from</span> <span class="nn">tungstenkit</span> <span class="kn">import</span> <span class="n">io</span>
@@ -928,9 +923,9 @@ All that users can get is just a raw JSON.</p>
 </span><span id="__span-7-25"><a id="__codelineno-7-25" name="__codelineno-7-25" href="#__codelineno-7-25"></a>    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Input</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Output</span><span class="p">]:</span>
 </span><span id="__span-7-26"><a id="__codelineno-7-26" name="__codelineno-7-26" href="#__codelineno-7-26"></a>        <span class="o">...</span>
 </span></code></pre></div>
-<p>This may satisfy demo users, but API users will suffer performance degradation due to visualization overhead.</p>
+<p>This can improve the demo page, but introduces the visualization overhead of the API.</p>
 <p>In such a case, you can separate the method for demo predictions:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Dict</span>
+<p><div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Dict</span>
 </span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="kn">from</span> <span class="nn">tungstenkit</span> <span class="kn">import</span> <span class="n">io</span>
 </span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
 </span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="k">class</span> <span class="nc">BoundingBox</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">BaseIO</span><span class="p">):</span>
@@ -969,8 +964,7 @@ All that users can get is just a raw JSON.</p>
 </span></span><span id="__span-8-37"><a id="__codelineno-8-37" name="__codelineno-8-37" href="#__codelineno-8-37"></a><span class="hll">        <span class="n">visualizations</span> <span class="o">=</span> <span class="p">[</span><span class="n">Visualization</span><span class="p">(</span><span class="n">result</span><span class="o">=</span><span class="n">image</span><span class="p">)</span> <span class="k">for</span> <span class="n">image</span> <span class="ow">in</span> <span class="n">images</span><span class="p">]</span>
 </span></span><span id="__span-8-38"><a id="__codelineno-8-38" name="__codelineno-8-38" href="#__codelineno-8-38"></a><span class="hll">        <span class="k">return</span> <span class="n">outputs</span><span class="p">,</span> <span class="n">visualizations</span>
 </span></span></code></pre></div>
-<p>Then, the <code>predict</code> method is executed when a prediction is requested through the API. 
-On the other hand, for a demo request, the <code>predict_demo</code> method is executed, and the visualization result is shown on the demo page.</p>
+Then, the <code>predict</code> method is executed when a prediction is requested through the API, and the <code>predict_demo</code> method is called for a demo request.</p>
 
 
 

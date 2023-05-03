@@ -19,7 +19,7 @@
         <link rel="next" href="../the_tungsten_model_class/">
       
       <link rel="icon" href="../../images/favicon.ico">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.8">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.6">
     
     
       
@@ -67,7 +67,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="tungsten" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="tungsten" data-md-color-primary="" data-md-color-accent="">
   
     
     
@@ -118,17 +118,13 @@
       </div>
     </div>
     
-      
-        <form class="md-header__option" data-md-component="palette">
+      <form class="md-header__option" data-md-component="palette">
+        
           
-            
-            
-            
-            <input class="md-option" data-md-color-media="" data-md-color-scheme="tungsten" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_1">
-            
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="tungsten" data-md-color-primary="" data-md-color-accent=""  aria-hidden="true"  type="radio" name="__palette" id="__palette_1">
           
-        </form>
-      
+        
+      </form>
     
     
     
@@ -662,7 +658,7 @@
 </table>
 <p>For <code>dict</code>, <code>list</code>, <code>tuple</code>, <code>typing.Dict</code>, <code>typing.List</code> and <code>typing.Tuple</code>, type arguments are required. For example, you should use <code>dict[str, str]</code> instead of <code>dict</code>.</p>
 <h2 id="files">Files</h2>
-<p>The <code>tungstenkit.io</code> module has four classes for files: <code>Image</code>, <code>Video</code>, <code>Audio</code>, and <code>Binary</code>.
+<p>The <code>tungstenkit.io</code> module provides four primitives for files: <code>Image</code>, <code>Video</code>, <code>Audio</code>, and <code>Binary</code>.
 They possess the following property and method:</p>
 <ul>
 <li><code>path</code> : a string of the file path.</li>
@@ -680,7 +676,7 @@ They possess the following property and method:</p>
 <li><code>to_pil_image(mode: str = "RGB")</code>: returns a <a href="https://pillow.readthedocs.io/en/stable/reference/Image.html#the-image-class"><code>PIL.Image.Image</code></a> object.</li>
 </ul>
 <h2 id="input-field-descriptors">Input field descriptors</h2>
-<p>The <code>tungstenkit.io</code> module has two input field descriptors: <code>Field</code> and <code>Option</code> functions:</p>
+<p>The <code>tungstenkit.io</code> module contains two input field descriptors: <code>Field</code> and <code>Option</code> functions:</p>
 <ul>
 <li><code>Field</code>: For setting properties of a <em>required</em> field.</li>
 <li><code>Option</code>: For declaring a field as <em>optional</em> and setting its properties. Optional fields will be same in an input batch and hidden in the model demo page by default.</li>

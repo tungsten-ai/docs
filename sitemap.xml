@@ -2,57 +2,57 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://tungsten-ai.github.io/docs/</loc>
-         <lastmod>2023-05-02</lastmod>
+         <lastmod>2023-05-03</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://tungsten-ai.github.io/docs/model_server_api/</loc>
-         <lastmod>2023-05-02</lastmod>
+         <lastmod>2023-05-03</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://tungsten-ai.github.io/docs/runners/</loc>
-         <lastmod>2023-05-02</lastmod>
+         <lastmod>2023-05-03</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://tungsten-ai.github.io/docs/self-hosting/</loc>
-         <lastmod>2023-05-02</lastmod>
+         <lastmod>2023-05-03</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://tungsten-ai.github.io/docs/tungsten_model/getting_started/</loc>
-         <lastmod>2023-05-02</lastmod>
+         <lastmod>2023-05-03</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://tungsten-ai.github.io/docs/tungsten_model/input_and_output/</loc>
-         <lastmod>2023-05-02</lastmod>
+         <lastmod>2023-05-03</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://tungsten-ai.github.io/docs/tungsten_model/install_tungstenkit/</loc>
-         <lastmod>2023-05-02</lastmod>
+         <lastmod>2023-05-03</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://tungsten-ai.github.io/docs/tungsten_model/the_tungsten_model_class/</loc>
-         <lastmod>2023-05-02</lastmod>
+         <lastmod>2023-05-03</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://tungsten-ai.github.io/docs/tungsten_model/tungsten_cli/</loc>
-         <lastmod>2023-05-02</lastmod>
+         <lastmod>2023-05-03</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://tungsten-ai.github.io/docs/tungsten_model/use_gpus/</loc>
-         <lastmod>2023-05-02</lastmod>
+         <lastmod>2023-05-03</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://tungsten-ai.github.io/docs/tungsten_server/getting_started/</loc>
-         <lastmod>2023-05-02</lastmod>
+         <lastmod>2023-05-03</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>

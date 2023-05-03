@@ -19,7 +19,7 @@
         <link rel="next" href="../use_gpus/">
       
       <link rel="icon" href="../../images/favicon.ico">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.8">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.6">
     
     
       
@@ -67,7 +67,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="tungsten" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="tungsten" data-md-color-primary="" data-md-color-accent="">
   
     
     
@@ -118,17 +118,13 @@
       </div>
     </div>
     
-      
-        <form class="md-header__option" data-md-component="palette">
+      <form class="md-header__option" data-md-component="palette">
+        
           
-            
-            
-            
-            <input class="md-option" data-md-color-media="" data-md-color-scheme="tungsten" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_1">
-            
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="tungsten" data-md-color-primary="" data-md-color-accent=""  aria-hidden="true"  type="radio" name="__palette" id="__palette_1">
           
-        </form>
-      
+        
+      </form>
     
     
     
@@ -406,13 +402,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#show-stored-models" class="md-nav__link">
-    Show stored models
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#run-locally" class="md-nav__link">
     Run locally
   </a>
@@ -625,13 +614,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#show-stored-models" class="md-nav__link">
-    Show stored models
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#run-locally" class="md-nav__link">
     Run locally
   </a>
@@ -769,7 +751,7 @@
 </span></code></pre></div></p>
 <h3 id="download-weights">Download weights</h3>
 <p>Before building, you should prepare files used in <code>setup</code> function of the class. </p>
-<p>As you can see above, <code>mobilenetv2_weights.pth</code> is required. Let's download it:
+<p>As you can see above, the <code>mobilenetv2_weights.pth</code> file is required. Let's download it:
 <div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>curl -o mobilenetv2_weights.pth https://download.pytorch.org/models/mobilenet_v2-7ebf99e0.pth
 </span></code></pre></div></p>
 <h3 id="build-a-tungsten-model">Build a Tungsten model</h3>
@@ -778,9 +760,6 @@
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="go">✅ Successfully built tungsten model: &#39;tungsten-example:e3a5de5616a743fe9021e2dcfe1cd19a&#39; (also tagged as &#39;tungsten-example:latest&#39;)</span>
 </span></code></pre></div></p>
-<h3 id="show-stored-models">Show stored models</h3>
-<p>Tungstenkit saves built and pulled models in a local store.</p>
-<p>You can check if the model is stored:</p>
 <div class="language-console highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="gp">$ </span>tungsten<span class="w"> </span>models
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="go">Repository        Tag                               Description                 Model Class           Created              Docker Image ID</span>
@@ -789,8 +768,7 @@
 </span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="go">tungsten-example  e3a5de5616a743fe9021e2dcfe1cd19a  Image classification model  tungsten_model:Model  2023-04-26 05:23:58  830eb82f0fcd</span>
 </span></code></pre></div>
 <h3 id="run-locally">Run locally</h3>
-<p>Now, you can run the model in your local machine.</p>
-<p>Tungstenkit provides multiple options for that.</p>
+<p>Now, you can run the model in your local machine in multiple ways.</p>
 <h4 id="option-1-an-interactive-web-demo">Option 1: an interactive web demo</h4>
 <p><div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>tungsten demo tungsten-example -p 8080
 </span></code></pre></div>
@@ -818,11 +796,11 @@ Visit <a href="http://localhost:8080">http://localhost:8080</a> to check:</p>
 </span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="go">    &quot;outputs&quot;: [{&quot;scale&quot;: 0.12483298, &quot;label&quot;: &quot;web site&quot;}],</span>
 </span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="go">}</span>
 </span></code></pre></div></p>
-<p>Also, you can find a Swagger documentation in <a href="http://localhost:3000/docs">http://localhost:3000/docs</a>.</p>
+<p>Also, you can find a Swagger documentation at <a href="http://localhost:3000/docs">http://localhost:3000/docs</a>.</p>
 <!-- ![tungsten-model-api](../images/model-api.png "Tungsten Model API") -->
 
 <h3 id="run-remotely">Run remotely</h3>
-<p>To do this, you should have an account and an entered project in a Tungsten server running at <a href="https://server.tungsten-ai.com">https://server.tungsten-ai.com</a>.  </p>
+<p>To do this, you should have an account and a project on a Tungsten server running at <a href="https://server.tungsten-ai.com">https://server.tungsten-ai.com</a>.  </p>
 <p>If you don't have them, visit <a href="https://webapp.tungsten-ai.com">https://webapp.tungsten-ai.com</a> in a browser and create them.</p>
 <p>First, log in:
 <div class="language-console highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="gp">$ </span>tungsten<span class="w"> </span>login
@@ -837,7 +815,7 @@ Visit <a href="http://localhost:8080">http://localhost:8080</a> to check:</p>
 </span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="go">  - project: exampleuser/exampleproject</span>
 </span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="go">  - version: 98acfab3</span>
 </span></code></pre></div></p>
-<p>Now you can find and run it in the Tungsten server.</p>
+<p>Now you can find and run it on the Tungsten server.</p>
 <p>Visit <a href="https://webapp.tungsten-ai.com">https://webapp.tungsten-ai.com</a> in a browser to check it.</p>
 
 
