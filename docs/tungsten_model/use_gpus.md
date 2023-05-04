@@ -7,14 +7,17 @@ But you can still build, push, and pull GPU models without it.
 
 You can set ``gpu=True`` in the ``tungstenkit.model.config`` decorator:
 
-```python hl_lines="20"
+```python hl_lines="23"
+import json
+from pathlib import Path
 from typing import List
 
 import torch
-from torchvision import transforms
 from torchvision.models.mobilenetv2 import MobileNet_V2_Weights, MobileNetV2
 
 from tungstenkit import io, model
+
+LABELS = json.loads(Path("imagenet_labels.json").read_text())
 
 
 class Input(io.BaseIO):
@@ -23,47 +26,42 @@ class Input(io.BaseIO):
 
 class Output(io.BaseIO):
     score: float
-    label: str
+    label: str = io.Field(choices=LABELS)
 
 
 @model.config(
     gpu=True,
     description="Image classification model",
     python_packages=["torch", "torchvision"],
-    batch_size=64,
+    batch_size=16,
 )
 class Model(model.TungstenModel[Input, Output]):
     def setup(self):
+        """Load a model into the memory"""
+
         self.model = MobileNetV2()
-        self.model.load_state_dict(torch.load("mobilenetv2_weights.pth"))
-        self.model.cuda()
+        weights = torch.load("mobilenetv2_weights.pth")
+        self.model.load_state_dict(weights)
         self.model.eval()
 
-        self.labels = MobileNet_V2_Weights.IMAGENET1K_V2.meta["categories"]
-        self.transforms = transforms.Compose(
-            [
-                transforms.Resize((224, 224)),
-                transforms.PILToTensor(),
-                transforms.ConvertImageDtype(torch.float),
-                transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]),
-            ]
-        )
-
     def predict(self, inputs: List[Input]) -> List[Output]:
-        input_tensor = self._preprocess(inputs)
+        """Run a batch prediction"""
+
+        print("Preprocessing")
+        transform = MobileNet_V2_Weights.IMAGENET1K_V2.transforms()
+        pil_images = [inp.image.to_pil_image() for inp in inputs]
+        tensors = [transform(img) for img in pil_images]
+        input_tensor = torch.stack(tensors, dim=0)
+
+        print("Inferencing")
         softmax = self.model(input_tensor).softmax(1)
+
+        print("Postprocessing")
         scores, class_indices = torch.max(softmax, 1)
-        pred_labels = [self.labels[idx.item()] for idx in class_indices]
+        pred_labels = [LABELS[idx.item()] for idx in class_indices]
         return [
             Output(score=score.item(), label=label) for score, label in zip(scores, pred_labels)
         ]
-
-    def _preprocess(self, inputs: List[Input]):
-        pil_images = [inp.image.to_pil_image() for inp in inputs]
-        tensors = [self.transforms(img) for img in pil_images]
-        input_tensor = torch.stack(tensors, dim=0)
-        input_tensor = input_tensor.cuda()
-        return input_tensor
 ```
 Then, Tungstenkit automatically selects a compatible CUDA version and installs it in the container.
 The CUDA version inference is currently supported on ``torch``, ``torchvision``, ``torchaudio``, and ``tensorflow``.
@@ -71,14 +69,17 @@ The CUDA version inference is currently supported on ``torch``, ``torchvision``,
 ## Manually set the CUDA version
 You can also pass ``cuda_version`` as an argument of the ``tungstenkit.model.config`` decorator:
 
-```python hl_lines="20-21"
+```python hl_lines="23-24"
+import json
+from pathlib import Path
 from typing import List
 
 import torch
-from torchvision import transforms
 from torchvision.models.mobilenetv2 import MobileNet_V2_Weights, MobileNetV2
 
 from tungstenkit import io, model
+
+LABELS = json.loads(Path("imagenet_labels.json").read_text())
 
 
 class Input(io.BaseIO):
@@ -87,47 +88,42 @@ class Input(io.BaseIO):
 
 class Output(io.BaseIO):
     score: float
-    label: str
+    label: str = io.Field(choices=LABELS)
 
 
 @model.config(
     gpu=True,
-    cuda_version="11.6"
+    cuda_version="11.6",
     description="Image classification model",
     python_packages=["torch", "torchvision"],
-    batch_size=64,
+    batch_size=16,
 )
 class Model(model.TungstenModel[Input, Output]):
     def setup(self):
+        """Load a model into the memory"""
+
         self.model = MobileNetV2()
-        self.model.load_state_dict(torch.load("mobilenetv2_weights.pth"))
-        self.model.cuda()
+        weights = torch.load("mobilenetv2_weights.pth")
+        self.model.load_state_dict(weights)
         self.model.eval()
 
-        self.labels = MobileNet_V2_Weights.IMAGENET1K_V2.meta["categories"]
-        self.transforms = transforms.Compose(
-            [
-                transforms.Resize((224, 224)),
-                transforms.PILToTensor(),
-                transforms.ConvertImageDtype(torch.float),
-                transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]),
-            ]
-        )
-
     def predict(self, inputs: List[Input]) -> List[Output]:
-        input_tensor = self._preprocess(inputs)
+        """Run a batch prediction"""
+
+        print("Preprocessing")
+        transform = MobileNet_V2_Weights.IMAGENET1K_V2.transforms()
+        pil_images = [inp.image.to_pil_image() for inp in inputs]
+        tensors = [transform(img) for img in pil_images]
+        input_tensor = torch.stack(tensors, dim=0)
+
+        print("Inferencing")
         softmax = self.model(input_tensor).softmax(1)
+
+        print("Postprocessing")
         scores, class_indices = torch.max(softmax, 1)
-        pred_labels = [self.labels[idx.item()] for idx in class_indices]
+        pred_labels = [LABELS[idx.item()] for idx in class_indices]
         return [
             Output(score=score.item(), label=label) for score, label in zip(scores, pred_labels)
         ]
-
-    def _preprocess(self, inputs: List[Input]):
-        pil_images = [inp.image.to_pil_image() for inp in inputs]
-        tensors = [self.transforms(img) for img in pil_images]
-        input_tensor = torch.stack(tensors, dim=0)
-        input_tensor = input_tensor.cuda()
-        return input_tensor
 ```
 
