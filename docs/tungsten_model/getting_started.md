@@ -24,12 +24,16 @@ cd tungsten-getting-started
 ### Write ``tungsten_model.py``
 You can write the ``tungsten_model.py`` file for an image classification model as follows:
 ```python
+import json
+from pathlib import Path
 from typing import List
 
 import torch
-from torchvision import transforms
 from torchvision.models.mobilenetv2 import MobileNet_V2_Weights, MobileNetV2
+
 from tungstenkit import io, model
+
+LABELS = json.loads(Path("imagenet_labels.json").read_text())
 
 
 class Input(io.BaseIO):
@@ -38,7 +42,7 @@ class Input(io.BaseIO):
 
 class Output(io.BaseIO):
     score: float
-    label: str
+    label: str = io.Field(choices=LABELS)
 
 
 @model.config(
@@ -49,46 +53,41 @@ class Output(io.BaseIO):
 )
 class Model(model.TungstenModel[Input, Output]):
     def setup(self):
-        """Load model weights"""
-        self.model = MobileNetV2()
-        self.model.load_state_dict(torch.load("mobilenetv2_weights.pth"))
-        self.model.eval()
+        """Load a model into the memory"""
 
-        self.labels = MobileNet_V2_Weights.IMAGENET1K_V2.meta["categories"]
-        self.transforms = transforms.Compose(
-            [
-                transforms.Resize((224, 224)),
-                transforms.PILToTensor(),
-                transforms.ConvertImageDtype(torch.float),
-                transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]),
-            ]
-        )
+        self.model = MobileNetV2()
+        weights = torch.load("mobilenetv2_weights.pth")
+        self.model.load_state_dict(weights)
+        self.model.eval()
 
     def predict(self, inputs: List[Input]) -> List[Output]:
         """Run a batch prediction"""
+
         print("Preprocessing")
-        input_tensor = self._preprocess(inputs)
+        transform = MobileNet_V2_Weights.IMAGENET1K_V2.transforms()
+        pil_images = [inp.image.to_pil_image() for inp in inputs]
+        tensors = [transform(img) for img in pil_images]
+        input_tensor = torch.stack(tensors, dim=0)
+
         print("Inferencing")
         softmax = self.model(input_tensor).softmax(1)
+
         print("Postprocessing")
         scores, class_indices = torch.max(softmax, 1)
-        pred_labels = [self.labels[idx.item()] for idx in class_indices]
+        pred_labels = [LABELS[idx.item()] for idx in class_indices]
         return [
             Output(score=score.item(), label=label) for score, label in zip(scores, pred_labels)
         ]
 
-    def _preprocess(self, inputs: List[Input]):
-        pil_images = [inp.image.to_pil_image() for inp in inputs]
-        tensors = [self.transforms(img) for img in pil_images]
-        input_tensor = torch.stack(tensors, dim=0)
-        return input_tensor
 ```
 
 ### Download weights
-Before building, you should prepare files used in ``setup`` function of the class. 
+Before building, you should prepare the required files.
 
-As you can see above, the ``mobilenetv2_weights.pth`` file is required. Let's download it:
-```
+As you can see above, two files are needed: ``imagenet_labels.json`` and ``mobilenetv2_weights.pth``.
+Download these files via the script below:
+```shell
+curl -o imagenet_labels.json -X GET https://raw.githubusercontent.com/anishathalye/imagenet-simple-labels/master/imagenet-simple-labels.json && \  
 curl -o mobilenetv2_weights.pth https://download.pytorch.org/models/mobilenet_v2-7ebf99e0.pth
 ```
 
