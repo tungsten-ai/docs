@@ -19,7 +19,7 @@
         <link rel="next" href="../../tungsten_server/getting_started/">
       
       <link rel="icon" href="../../images/favicon.ico">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.6">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.8">
     
     
       
@@ -67,7 +67,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="tungsten" data-md-color-primary="" data-md-color-accent="">
+    <body dir="ltr" data-md-color-scheme="tungsten" data-md-color-primary="indigo" data-md-color-accent="indigo">
   
     
     
@@ -118,13 +118,17 @@
       </div>
     </div>
     
-      <form class="md-header__option" data-md-component="palette">
-        
+      
+        <form class="md-header__option" data-md-component="palette">
           
-          <input class="md-option" data-md-color-media="" data-md-color-scheme="tungsten" data-md-color-primary="" data-md-color-accent=""  aria-hidden="true"  type="radio" name="__palette" id="__palette_1">
+            
+            
+            
+            <input class="md-option" data-md-color-media="" data-md-color-scheme="tungsten" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_1">
+            
           
-        
-      </form>
+        </form>
+      
     
     
     
@@ -964,7 +968,7 @@ So, you can define the <code>predict</code> method of a text-to-image generaton 
 </span></span><span id="__span-8-37"><a id="__codelineno-8-37" name="__codelineno-8-37" href="#__codelineno-8-37"></a><span class="hll">        <span class="n">visualizations</span> <span class="o">=</span> <span class="p">[</span><span class="n">Visualization</span><span class="p">(</span><span class="n">result</span><span class="o">=</span><span class="n">image</span><span class="p">)</span> <span class="k">for</span> <span class="n">image</span> <span class="ow">in</span> <span class="n">images</span><span class="p">]</span>
 </span></span><span id="__span-8-38"><a id="__codelineno-8-38" name="__codelineno-8-38" href="#__codelineno-8-38"></a><span class="hll">        <span class="k">return</span> <span class="n">outputs</span><span class="p">,</span> <span class="n">visualizations</span>
 </span></span></code></pre></div>
-Then, the <code>predict</code> method is executed when a prediction is requested through the API, and the <code>predict_demo</code> method is called for a demo request.</p>
+Then, the <code>predict</code> method is executed when a prediction is requested through the API, but the <code>predict_demo</code> method is called for a demo request.</p>
 
 
 
