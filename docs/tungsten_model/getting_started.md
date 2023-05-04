@@ -81,7 +81,7 @@ class Model(model.TungstenModel[Input, Output]):
 
 ```
 
-### Download weights
+### Download the required files
 Before building, you should prepare the required files.
 
 As you can see above, two files are needed: ``imagenet_labels.json`` and ``mobilenetv2_weights.pth``.
