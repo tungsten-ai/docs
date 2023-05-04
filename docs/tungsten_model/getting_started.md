@@ -53,7 +53,7 @@ class Output(io.BaseIO):
 )
 class Model(model.TungstenModel[Input, Output]):
     def setup(self):
-        """Load a model into the memory"""
+        """Load the model into memory"""
 
         self.model = MobileNetV2()
         weights = torch.load("mobilenetv2_weights.pth")
