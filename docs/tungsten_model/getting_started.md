@@ -123,7 +123,7 @@ Visit [http://localhost:8080](http://localhost:8080) to check:
 ![local-demo](../images/getting-started-local-model-demo.gif)
 
 
-#### Option 2: a RESTful API
+#### Option 2: a REST API
 Start the server:
 ```console
 $ tungsten serve tungsten-example -p 3000

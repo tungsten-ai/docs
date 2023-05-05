@@ -41,13 +41,13 @@ The Tungsten model packages up everything required to run your model, and expose
 ### Key Features
 - **Easy**: [Requires only a few lines of Python code.](#build-a-tungsten-model)
 - **Versatile**: Supports multiple usages:
-    - [RESTful API server](#run-it-as-a-restful-api-server)
+    - [REST API server](#run-it-as-a-REST-api-server)
     - [GUI application](#run-it-as-a-gui-application)
     - [Serverless function](#run-it-as-a-serverless-function)
     - CLI application (coming soon)
     - Python function (coming soon)
-- **Abstracted**: [User-defined JSON input/output.](#run-it-as-a-restful-api-server)
-- **Standardized**: [Supports advanced workflows.](#run-it-as-a-restful-api-server)
+- **Abstracted**: [User-defined JSON input/output.](#run-it-as-a-REST-api-server)
+- **Standardized**: [Supports advanced workflows.](#run-it-as-a-REST-api-server)
 - **Scalable**: Supports adaptive batching and clustering (coming soon).
 
 See [Tungsten Model - Getting Started](https://tungsten-ai.github.io/docs/tungsten_model/getting_started/) to learn more.
@@ -101,7 +101,7 @@ $ tungsten build
 ```
 
 
-#### Run it as a RESTful API server
+#### Run it as a REST API server
 
 You can start a prediction with a REST API call.
 
