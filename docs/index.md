@@ -1,13 +1,10 @@
 # Tungstenkit: ML container made simple
-
-
-
 [![Version](https://img.shields.io/pypi/v/tungstenkit?color=%2334D058&label=pypi%20package)](https://pypi.org/project/tungstenkit/)
 [![License](https://img.shields.io/github/license/tungsten-ai/tungstenkit)](https://raw.githubusercontent.com/tungsten-ai/tungstenkit/main/LICENSE)
 [![Downloads](https://static.pepy.tech/badge/tungstenkit?style=flat-square)](https://pypi.org/project/tungstenkit/)
 [![Supported Python versions](https://img.shields.io/pypi/pyversions/tungstenkit.svg?color=%2334D058)](https://pypi.org/project/tungstenkit/)
 
-[Installation](#prerequisites) | [Features](#features) | [Usage](#usage) | [Getting Started](https://tungsten-ai.github.io/docs/tungsten_model/getting_started) | [Documentation](https://tungsten-ai.github.io/docs) 
+[Installation](#prerequisites) | [Features](#features) | [Getting Started](https://tungsten-ai.github.io/docs/tungsten_model/getting_started)
 
 **Tungstenkit** is ML conterization tool with a focus on developer productivity and versatility. 
 
@@ -35,13 +32,13 @@ pip install tungstenkit
 ## Features
 - [Requires only a few lines of Python code](#requires-only-a-few-lines-of-python-code)
 - [Build once, use everywhere](#build-once-use-everywhere):
-    - [REST API server](#run-as-a-rest-api-server)
-    - [GUI application](#run-as-a-gui-application)
-    - [CLI application](#run-as-a-cli-application)
-    - [Python function](#run-in-a-python-script)
+    - [REST API server](#rest-api-server)
+    - [GUI application](#gui-application)
+    - [CLI application](#cli-application)
+    - [Python function](#python-function)
 - [Framework-agnostic and lightweight](#framework-agnostic-and-lightweight)
 - [Can run anywhere Docker is installed](#can-run-anywhere-docker-is-installed)
-- [Pydantic input/output definitions with built-in file handling](#pydantic-inputoutput-definitions-with-built-in-file-handling)
+- [Pydantic input/output definitions with convenient file handling](#pydantic-inputoutput-definitions-with-convenient-file-handling)
 - [Supports batched prediction](#supports-batched-prediction)
 - Supports clustering with distributed machines (coming soon)
 
@@ -175,7 +172,7 @@ $ docker run -p 3000:3000 --gpus all text-to-image:latest
 INFO:     Uvicorn running on http://0.0.0.0:3000 (Press CTRL+C to quit)
 ```
 
-### Pydantic input/output definitions with built-in file handling
+### Pydantic input/output definitions with convenient file handling
 Let's look the example below:
 ```python
 from tungstenkit import BaseIO, Image, TungstenModel
@@ -194,7 +191,7 @@ class StyleTransferModel(TungstenModel[Input, Output]):
 ```
 As you see, input/output types are defined as subclasses of the ``BaseIO`` class. The ``BaseIO`` class is a simple wrapper of the [``BaseModel``](https://docs.pydantic.dev/latest/usage/models/) class of [Pydantic](https://docs.pydantic.dev/latest/), and Tungstenkit validates JSON requests utilizing functionalities Pydantic provides.
 
-Also, you can see that the ``Image`` class is used. Tungstenkit provides four file classes for easing file handling - ``Image``, ``Audio``, ``Video``, and ``Binary``. They have methods useful for writing a model's ``predict`` method:
+Also, you can see that the ``Image`` class is used. Tungstenkit provides four file classes for easing file handling - ``Image``, ``Audio``, ``Video``, and ``Binary``. They have methods useful to write a model's ``predict`` method:
 
 ```python
 class StyleTransferModel(TungstenModel[Input, Output]):
@@ -210,7 +207,7 @@ class StyleTransferModel(TungstenModel[Input, Output]):
 ```
 
 ### Supports batched prediction
-Batching is crucial for performance of an ML model using GPUs. With Tungstenkit, you can utilize both server-side and client-side batching.
+Tungstenkit supports both server-side and client-side batching.
 
 - **Server-side batching**  
     A server groups inputs across multiple requests and processes them together.
@@ -241,6 +238,3 @@ Batching is crucial for performance of an ML model using GPUs. With Tungstenkit,
       ]
     }
     ```
-
-## Documentation
-- [Getting Started](https://tungsten-ai.github.io/docs/tungsten_model/getting_started)
