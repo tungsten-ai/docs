@@ -357,8 +357,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#pydantic-inputoutput-definitions-with-built-in-file-handling" class="md-nav__link">
-    Pydantic input/output definitions with built-in file handling
+  <a href="#pydantic-inputoutput-definitions-with-convenient-file-handling" class="md-nav__link">
+    Pydantic input/output definitions with convenient file handling
   </a>
   
 </li>
@@ -372,13 +372,6 @@
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#documentation" class="md-nav__link">
-    Documentation
-  </a>
   
 </li>
       
@@ -600,8 +593,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#pydantic-inputoutput-definitions-with-built-in-file-handling" class="md-nav__link">
-    Pydantic input/output definitions with built-in file handling
+  <a href="#pydantic-inputoutput-definitions-with-convenient-file-handling" class="md-nav__link">
+    Pydantic input/output definitions with convenient file handling
   </a>
   
 </li>
@@ -615,13 +608,6 @@
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#documentation" class="md-nav__link">
-    Documentation
-  </a>
   
 </li>
       
@@ -648,7 +634,7 @@
 <a href="https://raw.githubusercontent.com/tungsten-ai/tungstenkit/main/LICENSE"><img alt="License" src="https://img.shields.io/github/license/tungsten-ai/tungstenkit" /></a>
 <a href="https://pypi.org/project/tungstenkit/"><img alt="Downloads" src="https://static.pepy.tech/badge/tungstenkit?style=flat-square" /></a>
 <a href="https://pypi.org/project/tungstenkit/"><img alt="Supported Python versions" src="https://img.shields.io/pypi/pyversions/tungstenkit.svg?color=%2334D058" /></a></p>
-<p><a href="#prerequisites">Installation</a> | <a href="#features">Features</a> | <a href="#usage">Usage</a> | <a href="https://tungsten-ai.github.io/docs/tungsten_model/getting_started">Getting Started</a> | <a href="https://tungsten-ai.github.io/docs">Documentation</a> </p>
+<p><a href="#prerequisites">Installation</a> | <a href="#features">Features</a> | <a href="https://tungsten-ai.github.io/docs/tungsten_model/getting_started">Getting Started</a></p>
 <p><strong>Tungstenkit</strong> is ML conterization tool with a focus on developer productivity and versatility. </p>
 <p>Have you ever struggled to use models from github?
 You may have repeated tedious steps like: cuda/dependency problems, file handling, and scripting for testing.</p>
@@ -671,15 +657,15 @@ You may have repeated tedious steps like: cuda/dependency problems, file handlin
 <ul>
 <li><a href="#requires-only-a-few-lines-of-python-code">Requires only a few lines of Python code</a></li>
 <li><a href="#build-once-use-everywhere">Build once, use everywhere</a>:<ul>
-<li><a href="#run-as-a-rest-api-server">REST API server</a></li>
-<li><a href="#run-as-a-gui-application">GUI application</a></li>
-<li><a href="#run-as-a-cli-application">CLI application</a></li>
-<li><a href="#run-in-a-python-script">Python function</a></li>
+<li><a href="#rest-api-server">REST API server</a></li>
+<li><a href="#gui-application">GUI application</a></li>
+<li><a href="#cli-application">CLI application</a></li>
+<li><a href="#python-function">Python function</a></li>
 </ul>
 </li>
 <li><a href="#framework-agnostic-and-lightweight">Framework-agnostic and lightweight</a></li>
 <li><a href="#can-run-anywhere-docker-is-installed">Can run anywhere Docker is installed</a></li>
-<li><a href="#pydantic-inputoutput-definitions-with-built-in-file-handling">Pydantic input/output definitions with built-in file handling</a></li>
+<li><a href="#pydantic-inputoutput-definitions-with-convenient-file-handling">Pydantic input/output definitions with convenient file handling</a></li>
 <li><a href="#supports-batched-prediction">Supports batched prediction</a></li>
 <li>Supports clustering with distributed machines (coming soon)</li>
 </ul>
@@ -784,7 +770,7 @@ You may have repeated tedious steps like: cuda/dependency problems, file handlin
 </span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
 </span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>INFO:     Uvicorn running on http://0.0.0.0:3000 (Press CTRL+C to quit)
 </span></code></pre></div>
-<h3 id="pydantic-inputoutput-definitions-with-built-in-file-handling">Pydantic input/output definitions with built-in file handling</h3>
+<h3 id="pydantic-inputoutput-definitions-with-convenient-file-handling">Pydantic input/output definitions with convenient file handling</h3>
 <p>Let's look the example below:
 <div class="language-python highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="kn">from</span> <span class="nn">tungstenkit</span> <span class="kn">import</span> <span class="n">BaseIO</span><span class="p">,</span> <span class="n">Image</span><span class="p">,</span> <span class="n">TungstenModel</span>
 </span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
@@ -801,7 +787,7 @@ You may have repeated tedious steps like: cuda/dependency problems, file handlin
 </span><span id="__span-11-13"><a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>    <span class="o">...</span>
 </span></code></pre></div>
 As you see, input/output types are defined as subclasses of the <code>BaseIO</code> class. The <code>BaseIO</code> class is a simple wrapper of the <a href="https://docs.pydantic.dev/latest/usage/models/"><code>BaseModel</code></a> class of <a href="https://docs.pydantic.dev/latest/">Pydantic</a>, and Tungstenkit validates JSON requests utilizing functionalities Pydantic provides.</p>
-<p>Also, you can see that the <code>Image</code> class is used. Tungstenkit provides four file classes for easing file handling - <code>Image</code>, <code>Audio</code>, <code>Video</code>, and <code>Binary</code>. They have methods useful for writing a model's <code>predict</code> method:</p>
+<p>Also, you can see that the <code>Image</code> class is used. Tungstenkit provides four file classes for easing file handling - <code>Image</code>, <code>Audio</code>, <code>Video</code>, and <code>Binary</code>. They have methods useful to write a model's <code>predict</code> method:</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">class</span> <span class="nc">StyleTransferModel</span><span class="p">(</span><span class="n">TungstenModel</span><span class="p">[</span><span class="n">Input</span><span class="p">,</span> <span class="n">Output</span><span class="p">]):</span>
 </span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Input</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Output</span><span class="p">]:</span>
 </span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>        <span class="c1"># Preprocessing</span>
@@ -814,7 +800,7 @@ As you see, input/output types are defined as subclasses of the <code>BaseIO</co
 </span><span id="__span-12-10"><a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>        <span class="k">return</span> <span class="n">outputs</span>
 </span></code></pre></div>
 <h3 id="supports-batched-prediction">Supports batched prediction</h3>
-<p>Batching is crucial for performance of an ML model using GPUs. With Tungstenkit, you can utilize both server-side and client-side batching.</p>
+<p>Tungstenkit supports both server-side and client-side batching.</p>
 <ul>
 <li>
 <p><strong>Server-side batching</strong><br />
@@ -845,10 +831,6 @@ As you see, input/output types are defined as subclasses of the <code>BaseIO</co
 </span><span id="__span-15-12"><a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a><span class="go">}</span>
 </span></code></pre></div></p>
 </li>
-</ul>
-<h2 id="documentation">Documentation</h2>
-<ul>
-<li><a href="https://tungsten-ai.github.io/docs/tungsten_model/getting_started">Getting Started</a></li>
 </ul>
 
 
