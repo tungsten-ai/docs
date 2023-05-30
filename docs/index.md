@@ -4,8 +4,7 @@
 [![Downloads](https://static.pepy.tech/badge/tungstenkit?style=flat-square)](https://pypi.org/project/tungstenkit/)
 [![Supported Python versions](https://img.shields.io/pypi/pyversions/tungstenkit.svg?color=%2334D058)](https://pypi.org/project/tungstenkit/)
 
-[Installation](#prerequisites) | [Features](#features) | [Getting Started](https://tungsten-ai.github.io/docs/tungsten_model/getting_started)
-
+[Installation](#prerequisites) | [Features](#features) | [Getting Started](https://tungsten-ai.github.io/docs/getting_started)
 **Tungstenkit** is ML conterization tool with a focus on developer productivity and versatility. 
 
 Have you ever struggled to use models from github?
