@@ -9,11 +9,9 @@ theme:
     - scheme: tungsten
   icon:
     repo: fontawesome/brands/github
-  features:
-    - navigation.tabs
 
-repo_name: tungsten-ai/tungsten
-repo_url: https://github.com/tungsten-ai/docs
+repo_name: tungsten-ai/tungstenkit
+repo_url: https://github.com/tungsten-ai/tungstenkit
 
 extra:
   social:
@@ -30,18 +28,11 @@ extra_javascript:
 
 nav:
   - Overview: index.md
-  - Tungsten Model:
-      - Getting Started: tungsten_model/getting_started.md
-      - Use GPUs: tungsten_model/use_gpus.md
-      - Input/Output: tungsten_model/input_and_output.md
-      - The TungstenModel Class: tungsten_model/the_tungsten_model_class.md
-      # - Tungstenkit CLI: tungsten_model/tungstenkit_cli.md
-      # - Advanced Containerization: tungsten_model/advanced_containerization.md
-  - Tungsten Server:
-      - Getting Started: tungsten_server/getting_started.md
-  # - Runners: runners.md
-  # - Self-hosting: self-hosting.md
-  # - Model Server API: model_server_api.md
+  - Getting Started: getting_started.md
+  - Usage:
+      - Use GPUs: usage/use_gpus.md
+      - Input/Output: usage/input_and_output.md
+      - The TungstenModel Class: usage/the_tungsten_model_class.md
 
 markdown_extensions:
   - admonition

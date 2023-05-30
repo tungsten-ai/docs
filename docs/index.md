@@ -1,121 +1,109 @@
-<p align="center">
-  <a href="https://tungsten-ai.github.io/docs"><img src="images/logo.svg" alt="Tungsten" width="50%" height="50%"></a>
-</p>
-<p align="center">
-<a href="https://pypi.org/project/tungstenkit" target="_blank">
-    <img src="https://img.shields.io/pypi/v/tungstenkit?color=%2334D058&label=pypi%20package" alt="Tungstenkit version">
-</a>
-<a href="https://pypi.org/project/tungstenkit" target="_blank">
-    <img src="https://static.pepy.tech/badge/tungstenkit?style=flat-square" alt="Downloads">
-</a>
-<a href="https://pypi.org/project/tungstenkit" target="_blank">
-    <img src="https://img.shields.io/pypi/pyversions/tungstenkit.svg?color=%2334D058" alt="Supported Python versions">
-</a>
-<a href="https://tungsten-ai-community.slack.com/" target="_blank">
-    <img src="https://img.shields.io/badge/slack-join_chat-white.svg?logo=slack&style=social" alt="Slack">
-</a>
-</p>
-
----
-## What is Tungsten?
-Tungsten is an open-source ML containerization tool/platform with a focus on developer productivity and collaboration.
-
-Tungsten builds [a versatile and standardized container for your model](#tungsten-model).
-Once built, it can run as a REST API server, GUI application, CLI application, serverless function, or scriptable Python function.
-
-We also provide [a server application for managing and sharing your ML models](#tungsten-server).
-It currently supports remote execution, test automation as well as basic versioning feature.
+# Tungstenkit: ML container made simple
 
 
-<p align="center">
-  <img src="images/platform-model-demo.gif" alt="Tungsten Dashboard">
-</p>
+
+[![Version](https://img.shields.io/pypi/v/tungstenkit?color=%2334D058&label=pypi%20package)](https://pypi.org/project/tungstenkit/)
+[![License](https://img.shields.io/github/license/tungsten-ai/tungstenkit)](https://raw.githubusercontent.com/tungsten-ai/tungstenkit/main/LICENSE)
+[![Downloads](https://static.pepy.tech/badge/tungstenkit?style=flat-square)](https://pypi.org/project/tungstenkit/)
+[![Supported Python versions](https://img.shields.io/pypi/pyversions/tungstenkit.svg?color=%2334D058)](https://pypi.org/project/tungstenkit/)
+
+[Installation](#prerequisites) | [Features](#features) | [Usage](#usage) | [Getting Started](https://tungsten-ai.github.io/docs/tungsten_model/getting_started) | [Documentation](https://tungsten-ai.github.io/docs) 
+
+**Tungstenkit** is ML conterization tool with a focus on developer productivity and versatility. 
+
+Have you ever struggled to use models from github?
+You may have repeated tedious steps like: cuda/dependency problems, file handling, and scripting for testing.
+
+Standing on the shoulder of Docker, this project aims to make using ML models less painful by adding functionalities for typical use cases - REST API server, GUI, CLI, and Python script.
+
+With Tungstenkit, sharing and consuming ML models can be quick and enjoyable.
 
 
----
+## Prerequisites
+- Python 3.7+
+- [Docker](https://docs.docker.com/get-docker/)
+- (Optional) For using GPUs,
+    - Linux: [nvidia-container-runtime](https://docs.docker.com/config/containers/resource_constraints/#access-an-nvidia-gpu)
+    - Windows: [Docker Desktop WSL 2 backend](https://docs.docker.com/desktop/windows/wsl/#turn-on-docker-desktop-wsl-2)
 
-## Tungsten Model
-The Tungsten model packages up everything required to run your model, and exposes a standardized API to support convenient features.
 
+## Installation
+```shell
+pip install tungstenkit
+```
 
-### Key Features
-- **Easy**: [Requires only a few lines of Python code.](#build-a-tungsten-model)
-- **Versatile**: Supports multiple usages:
-    - [REST API server](#run-it-as-a-REST-api-server)
-    - [GUI application](#run-it-as-a-gui-application)
-    - [Serverless function](#run-it-as-a-serverless-function)
-    - CLI application (coming soon)
-    - Python function (coming soon)
-- **Abstracted**: [User-defined JSON input/output.](#run-it-as-a-REST-api-server)
-- **Standardized**: [Supports advanced workflows.](#run-it-as-a-REST-api-server)
-- **Scalable**: Supports adaptive batching and clustering (coming soon).
+## Features
+- [Requires only a few lines of Python code](#requires-only-a-few-lines-of-python-code)
+- [Build once, use everywhere](#build-once-use-everywhere):
+    - [REST API server](#run-as-a-rest-api-server)
+    - [GUI application](#run-as-a-gui-application)
+    - [CLI application](#run-as-a-cli-application)
+    - [Python function](#run-in-a-python-script)
+- [Framework-agnostic and lightweight](#framework-agnostic-and-lightweight)
+- [Can run anywhere Docker is installed](#can-run-anywhere-docker-is-installed)
+- [Pydantic input/output definitions with built-in file handling](#pydantic-inputoutput-definitions-with-built-in-file-handling)
+- [Supports batched prediction](#supports-batched-prediction)
+- Supports clustering with distributed machines (coming soon)
 
-See [Tungsten Model - Getting Started](https://tungsten-ai.github.io/docs/tungsten_model/getting_started/) to learn more.
-
----
-
-### Take the tour
-#### Build a Tungsten model
+## Take the tour
+### Requires only a few lines of python code
 Building a Tungsten model is easy. All you have to do is write a simple ``tungsten_model.py`` like below:
 
 ```python
 from typing import List
 
 import torch
-from tungstenkit import io, model
+
+from tungstenkit import BaseIO, Image, TungstenModel, model_config
 
 
-class Input(io.BaseIO):
+class Input(BaseIO):
     prompt: str
 
 
-class Output(io.BaseIO):
-    image: io.Image
+class Output(BaseIO):
+    image: Image
 
 
-@model.config(
-    gpu=True,
-    python_packages=["torch", "torchvision"],
-    batch_size=4,
-    description="Text to image"
-)
-class Model(model.TungstenModel[Input, Output]):
+@model_config(gpu=True, python_packages=["torch", "torchvision"], batch_size=4)
+class TextToImageModel(TungstenModel[Input, Output]):
     def setup(self):
-        """Load model weights"""
         weights = torch.load("./weights.pth")
         self.model = load_torch_model(weights)
 
     def predict(self, inputs: List[Input]) -> List[Output]:
-        """Run a batch prediction"""
         input_tensor = preprocess(inputs)
         output_tensor = self.model(input_tensor)
         outputs = postprocess(output_tensor)
         return outputs
 ```
 
-Now, you can start a build process with the following command:
-```console
-$ tungsten build
+### Build once, use everywhere
+If ``tungsten_model.py`` is ready, you can start a build process:
 
-✅ Successfully built tungsten model: 'text-to-image:latest'
+```console
+$ tungsten build . -n text-to-image
+
+✅ Successfully built tungsten model: 'text-to-image:e3a5de56' (also tagged as 'text-to-image:latest')
 ```
 
+Check the built image:
+```
+$ tungsten models
 
-#### Run it as a REST API server
+Repository        Tag       Create Time          Docker Image ID
+----------------  --------  -------------------  ---------------
+text-to-image     latest    2023-04-26 05:23:58  830eb82f0fcd
+text-to-image     e3a5de56  2023-04-26 05:23:58  830eb82f0fcd
+```
 
-You can start a prediction with a REST API call.
+#### REST API server
 
 Start a server:
 
 ```console
-$ docker run -p 3000:3000 --gpus all text-to-image:latest
+$ tungsten serve text-to-image -p 3000
 
-INFO:     Setting up the model
-INFO:     Getting inputs from the input queue
-INFO:     Starting the prediction service
-INFO:     Started server process [1]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
 INFO:     Uvicorn running on http://0.0.0.0:3000 (Press CTRL+C to quit)
 ```
 
@@ -128,128 +116,131 @@ $ curl -X 'POST' 'http://localhost:3000/predict' \
   -d '[{"prompt": "a professional photograph of an astronaut riding a horse"}]'
 
 {
-    "outputs": [{"image": "data:image/png;base64,..."}],
+    "outputs": [{"image": "data:image/png;base64,..."}]
 }
 ```
 
-#### Run it as a GUI application
+#### GUI application
 If you need a more user-friendly way to make predictions, start a GUI app with the following command:
 
 ```console
-$ tungsten demo text-to-image:latest -p 8080
+$ tungsten demo text-to-image -p 8080
 
 INFO:     Uvicorn running on http://localhost:8080 (Press CTRL+C to quit)
 ```
 
-![tungsten-dashboard](images/local-model-demo.gif "Tungsten Dashboard")
+![tungsten-dashboard](https://github.com/tungsten-ai/assets/blob/main/common/local-model-demo.gif?raw=true "Demo GIF")
 
-#### Run it as a serverless function
-We support remote, serverless executions via a [Tungsten server](#tungsten-server).
-
-Push a model:
-
+#### CLI application
+Run a prediction in a terminal:
 ```console
-$ tungsten push exampleuser/exampleproject -n text-to-image:latest
-
-✅ Successfully pushed to 'https://server.tungsten-ai.com'
-```
-
-Now, you can start a remote prediction in the Tungsten server:
-
-![tungsten-platform-model-demo](images/platform-model-demo.gif "Tungsten Platform Model Demo")
-
-
----
-
-## Tungsten Server
-The Tungsten server provides a platform where you can store, run, and test models.
-
-### Key Features
-- [Function-as-a-Service (FaaS)](#function-as-a-service-faas)
-- [Scale with your own GPU/CPU devices](#scale-with-your-own-gpucpu-devices)
-- [Project management](#project-management)
-- Automated testing for CI/CD (coming soon)
- 
- See [Tungsten Server - Getting Started](https://tungsten-ai.github.io/docs/tungsten_server/getting_started/) to learn more.
-
----
-
-### Take the tour
-
-#### Function-as-a-Service (FaaS)
-The Tungsten server supports executing models as serverless functions.
-
-In a browser, you can test any uploaded model:
-
-![tungsten-platform-model-demo](images/platform-model-demo.gif "Tungsten Platform Model Demo")
-
-Also, it is possible to make a prediction through the Tungsten server's REST API:
-
-```console
-$ curl -X 'POST' \
-  'https://server.tungsten-ai.com/api/v1/projects/tungsten/text-to-image/models/2910c07e/predict' \
-  -H 'Authorization: ************' \
-  -H 'accept: application/json' \
-  -H 'Content-Type: application/json' \
-  -d '{"input": {"prompt": "a professional photograph of an astronaut riding a horse"}}'
+$ tungsten predict text-to-image \
+   -i prompt="a professional photograph of an astronaut riding a horse"
 
 {
-  "id": "c88e7de9",
-  "status": "running",
-}
-
-$ curl -X 'GET' \
-  'https://server.tungsten-ai.com/api/v1/predictions/c88e7de9' \
-  -H 'Authorization: ************' \
-  -H 'accept: application/json' \
-{
-  "output": {
-    "image": "https://server.tungsten-ai.com/api/v1/files/1/93fd2ac4/output.png"
-  },
-  "status": "success"
+  "image": "./output.png"
 }
 ```
 
-
-#### Scale with your own GPU/CPU devices
-You can easily scale serverless infrastructure with your Tungsten runners.
-
-Register one or more runners with the following command:
-
-```console
-$ tungsten-runner register
-
-Enter runner mode (pipeline, prediction) [prediction]: prediction
-Enter URL of the tungsten server: https://server.tungsten-ai.com
-Enter registration token: C6r5rp2PhfdXbJtFbBMhifgLDhagAc
-Enter runner name [mydesktop]: myrunner 
-Enter tags (comma separated) []: NVIDIA-A100
-Enter GPU index to use []: 0
-Runner 'myrunner' is registered - id: 245
-Updated runner config
+#### Python function
+If you want to run a model in your Python application, use the Python API:
+```python
+>>> from tungstenkit import models
+>>> model = models.get("text-to-image")
+>>> model.predict(
+    {"prompt": "a professional photograph of an astronaut riding a horse"}
+)
+{"image": PosixPath("./output.png")}
 ```
 
-Then, start the runners to fetch jobs:
+### Framework-agnostic and lightweight
+Tungstenkit doesn't restrict you to use specific ML libraries. Just use any library you want, and declare dependencies:
 
-```console
-$ tungsten-runner run
-
-Runner 0   | running  2023-04-21 16:59:14.490 | INFO     | Fetching a prediction job
-                      2023-04-21 16:59:49.184 | INFO     | Job 0f7c50867417456ebd1389cfb74e489f assigned
-Runner 1   | running  2023-04-21 16:59:14.490 | INFO     | Fetching a prediction job
+```python
+# The latest cpu-only build of Tensorflow will be included
+@model_config(gpu=False, python_packages=["tensorflow"])
+class Model(TungstenModel[Input, Output]):
+    def predict(self, inputs):
+        """Run a batch prediction"""
+        # ...ops using tensorflow...
+        return outputs
 ```
 
-#### Project management
-In a Tungsten server, you can organize models by grouping them into projects. 
+### Can run anywhere Docker is installed
+A model container includes a REST API, so it can run anywhere Docker is installed:
 
-Multiple settings are unified in a project:
+```
+$ docker run -p 3000:3000 --gpus all text-to-image:latest
 
-- Input/output schemas
-- Evaluation metrics
-- Test cases
-- Test data
+INFO:     Uvicorn running on http://0.0.0.0:3000 (Press CTRL+C to quit)
+```
 
----
+### Pydantic input/output definitions with built-in file handling
+Let's look the example below:
+```python
+from tungstenkit import BaseIO, Image, TungstenModel
 
-## License
-This project is licensed under the terms of the Apache License 2.0.
+
+class Input(BaseIO):
+    image: Image
+
+
+class Output(BaseIO):
+    image: Image
+
+
+class StyleTransferModel(TungstenModel[Input, Output]):
+    ...
+```
+As you see, input/output types are defined as subclasses of the ``BaseIO`` class. The ``BaseIO`` class is a simple wrapper of the [``BaseModel``](https://docs.pydantic.dev/latest/usage/models/) class of [Pydantic](https://docs.pydantic.dev/latest/), and Tungstenkit validates JSON requests utilizing functionalities Pydantic provides.
+
+Also, you can see that the ``Image`` class is used. Tungstenkit provides four file classes for easing file handling - ``Image``, ``Audio``, ``Video``, and ``Binary``. They have methods useful for writing a model's ``predict`` method:
+
+```python
+class StyleTransferModel(TungstenModel[Input, Output]):
+    def predict(self, inputs: List[Input]) -> List[Output]:
+        # Preprocessing
+        input_pil_images = [inp.image.to_pil_image() for inp in inputs]
+        # Inference
+        output_pil_images = do_inference(input_pil_images)
+        # Postprocessing
+        output_images = [Image.from_pil_image(pil_image) for pil_image in output_pil_images]
+        outputs = [Output(image=image) for image in output_images]
+        return outputs
+```
+
+### Supports batched prediction
+Batching is crucial for performance of an ML model using GPUs. With Tungstenkit, you can utilize both server-side and client-side batching.
+
+- **Server-side batching**  
+    A server groups inputs across multiple requests and processes them together.
+    You can configurate the max batch size:
+    ```python
+    @model_config(gpu=True, batch_size=32)
+    class Model(TungstenModel[Input, Output]):
+        ...
+    ```
+    The max batch size can be changed when running a server:
+    ```console
+    $ docker run -p 3000:3000 --gpus all model:latest --batch-size 64 
+    ```
+
+- **Client-side batching**  
+    Also, you can reduce traffic volume by putting multiple inputs in a single prediction request:
+    ```console
+    $ curl -X 'POST' 'http://localhost:3000/predict' \
+      -H 'accept: application/json' \
+      -H 'Content-Type: application/json' \
+      -d '[{"field": "input1"}, {"field": "input2"}, {"field": "input3"}]'
+
+    {
+      "outputs": [
+        {"field": "output1"},
+        {"field": "output2"},
+        {"field": "output3"}
+      ]
+    }
+    ```
+
+## Documentation
+- [Getting Started](https://tungsten-ai.github.io/docs/tungsten_model/getting_started)
