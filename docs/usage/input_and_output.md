@@ -1,7 +1,7 @@
 You can define input and output for image classification like this:
 
 ```python
-from tungstenkit import BaseIO
+from tungstenkit import BaseIO, Image
 
 class Input(BaseIO):
     image: Image
@@ -77,7 +77,7 @@ Using them, you can:
 
 For example, you can define an input class for text-to-image generation as follows:
 ```python
-from tungstenkit import Field, Option
+from tungstenkit import BaseIO, Field, Option
 
 class Input(BaseIO):
     prompt: str = Field(

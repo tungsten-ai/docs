@@ -260,7 +260,8 @@ You can define an object detection model like this:
 
 ```python
 from typing import List
-from tungstenkit import BaseIO, Image, TungstenModel, model_config
+from tungstenkit import BaseIO, Image, TungstenModel
+
 
 class BoundingBox(BaseIO):
     xmin: int
@@ -268,15 +269,19 @@ class BoundingBox(BaseIO):
     ymin: int
     ymax: int
 
+
 class Detection(BaseIO):
     label: str
     bbox: BoundingBox
 
+
 class Input(BaseIO):
     image: Image
 
+
 class Output(BaseIO):
     detections: List[Detection]
+
 
 class Model(TungstenModel[Input, Output]):
     def setup(self):
@@ -292,7 +297,8 @@ Then, you could add the visualization result to the output:
 
 ```python hl_lines="19"
 from typing import List
-from tungstenkit import io
+from tungstenkit import BaseIO, Image, TungstenModel
+
 
 class BoundingBox(BaseIO):
     xmin: int
@@ -300,12 +306,15 @@ class BoundingBox(BaseIO):
     ymin: int
     ymax: int
 
+
 class Detection(BaseIO):
     label: str
     bbox: BoundingBox
 
+
 class Input(BaseIO):
     image: Image
+
 
 class Output(BaseIO):
     detections: List[Detection]
@@ -325,7 +334,8 @@ In such a case, you can separate the method for demo predictions:
 
 ```python hl_lines="20-21 30-38"
 from typing import List, Tuple, Dict
-from tungstenkit import io
+from tungstenkit import BaseIO, Image, TungstenModel
+
 
 class BoundingBox(BaseIO):
     xmin: int
@@ -333,18 +343,23 @@ class BoundingBox(BaseIO):
     ymin: int
     ymax: int
 
+
 class Detection(BaseIO):
     label: str
     bbox: BoundingBox
 
+
 class Input(BaseIO):
     image: Image
+
 
 class Output(BaseIO):
     detections: List[Detection]
 
+
 class Visualization(BaseIO):
     result: Image
+
 
 class Model(TungstenModel[Input, Output]):
     def setup(self):
