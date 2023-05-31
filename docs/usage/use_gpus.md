@@ -1,11 +1,13 @@
 ## Prerequisite
-You should install [nvidia-docker](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker) if you want to run GPU models locally.
+For running GPU models, Docker should be able to access GPUs. For that, you need to install:
+    - Linux: [nvidia-container-runtime](https://docs.docker.com/config/containers/resource_constraints/#access-an-nvidia-gpu)
+    - Windows: [Docker Desktop WSL 2 backend](https://docs.docker.com/desktop/windows/wsl/#turn-on-docker-desktop-wsl-2)
 
 But you can still build, push, and pull GPU models without it.
 
 ## Declare as a GPU model
 
-You can set ``gpu=True`` in the ``tungstenkit.model.config`` decorator:
+You can set ``gpu=True`` in the ``tungstenkit.model_config`` decorator:
 
 ```python hl_lines="23"
 import json
@@ -15,27 +17,27 @@ from typing import List
 import torch
 from torchvision.models.mobilenetv2 import MobileNet_V2_Weights, MobileNetV2
 
-from tungstenkit import io, model
+from tungstenkit import BaseIO, Field, Image, TungstenModel, model_config
 
 LABELS = json.loads(Path("imagenet_labels.json").read_text())
 
 
-class Input(io.BaseIO):
-    image: io.Image
+class Input(BaseIO):
+    image: Image
 
 
-class Output(io.BaseIO):
+class Output(BaseIO):
     score: float
-    label: str = io.Field(choices=LABELS)
+    label: str = Field(choices=LABELS)
 
 
-@model.config(
+@model_config(
     gpu=True,
     description="Image classification model",
     python_packages=["torch", "torchvision"],
     batch_size=16,
 )
-class Model(model.TungstenModel[Input, Output]):
+class Model(TungstenModel[Input, Output]):
     def setup(self):
         """Load the model into memory"""
 
@@ -67,7 +69,7 @@ Then, Tungstenkit automatically selects a compatible CUDA version and installs i
 The CUDA version inference is currently supported on ``torch``, ``torchvision``, ``torchaudio``, and ``tensorflow``.
 
 ## Manually set the CUDA version
-You can also pass ``cuda_version`` as an argument of the ``tungstenkit.model.config`` decorator:
+You can also pass ``cuda_version`` as an argument of the ``tungstenkit.model_config`` decorator:
 
 ```python hl_lines="23-24"
 import json
@@ -77,28 +79,28 @@ from typing import List
 import torch
 from torchvision.models.mobilenetv2 import MobileNet_V2_Weights, MobileNetV2
 
-from tungstenkit import io, model
+from tungstenkit import BaseIO, Field, Image, TungstenModel, model_config
 
 LABELS = json.loads(Path("imagenet_labels.json").read_text())
 
 
-class Input(io.BaseIO):
-    image: io.Image
+class Input(BaseIO):
+    image: Image
 
 
-class Output(io.BaseIO):
+class Output(BaseIO):
     score: float
-    label: str = io.Field(choices=LABELS)
+    label: str = Field(choices=LABELS)
 
 
-@model.config(
+@model_config(
     gpu=True,
     cuda_version="11.6",
     description="Image classification model",
     python_packages=["torch", "torchvision"],
     batch_size=16,
 )
-class Model(model.TungstenModel[Input, Output]):
+class Model(TungstenModel[Input, Output]):
     def setup(self):
         """Load the model into memory"""
 

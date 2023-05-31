@@ -1,20 +1,20 @@
 You can define input and output for image classification like this:
 
 ```python
-from tungstenkit import io
+from tungstenkit import BaseIO
 
-class Input(io.BaseIO):
-    image: io.Image
+class Input(BaseIO):
+    image: Image
 
-class Output(io.BaseIO):
+class Output(BaseIO):
     score: float
     label: str
 ```
 
 Here you see:
 
-- Input and output classes are inherited from [``tungstenkit.io.BaseIO``](#the-baseio-class).
-- Input has a field named 'image', and its type is [``tungstenkit.io.Image``](#files).
+- Input and output classes are inherited from [``tungstenkit.BaseIO``](#the-baseio-class).
+- Input has a field named 'image', and its type is [``tungstenkit.Image``](#files).
 - Output has two fields named 'score' and 'label', and their types are ``float`` and ``str``.
 
 ## The ``BaseIO`` class
@@ -28,10 +28,10 @@ Tungstenkit currently supports the following input/output field types:
 
 | Type                                       | Input   | Output  |
 | ------------------------------------------ | ------- | ------- |
-| ``tungstenkit.io.Image``                   |    ✅   |    ✅    |
-| ``tungstenkit.io.Video``                   |    ✅   |    ✅    |
-| ``tungstenkit.io.Audio``                   |    ✅   |    ✅    |
-| ``tungstenkit.io.Binary``                  |    ✅   |    ✅    |
+| ``tungstenkit.Image``                   |    ✅   |    ✅    |
+| ``tungstenkit.Video``                   |    ✅   |    ✅    |
+| ``tungstenkit.Audio``                   |    ✅   |    ✅    |
+| ``tungstenkit.Binary``                  |    ✅   |    ✅    |
 | ``str``                                    |    ✅   |    ✅    |
 | ``float``                                  |    ✅   |    ✅    |
 | ``int``                                    |    ✅   |    ✅    |
@@ -39,20 +39,20 @@ Tungstenkit currently supports the following input/output field types:
 | ``dict`` or ``typing.Dict``                |    ❌   |    ✅    |
 | ``list`` or ``typing.List``                |    ❌   |    ✅    |
 | ``tuple`` or ``typing.Tuple``              |    ❌   |    ✅    |
-| A subclass of ``tungstenkit.io.BaseIO``    |    ❌   |    ✅    |
+| A subclass of ``tungstenkit.BaseIO``    |    ❌   |    ✅    |
 
 For ``dict``, ``list``, ``tuple``, ``typing.Dict``, ``typing.List`` and ``typing.Tuple``, type arguments are required. For example, you should use ``dict[str, str]`` instead of ``dict``.
 
 ## Files
-The ``tungstenkit.io`` module provides four primitives for files: ``Image``, ``Video``, ``Audio``, and ``Binary``.
+Tungstenkit provides four primitives for files: ``Image``, ``Video``, ``Audio``, and ``Binary``.
 They possess the following property and method:
 
 - ``path`` : a string of the file path.
 - ``from_path(path: StrPath)``: a class method for creating file objects from a filepath.  
 ```python
->>> from tungstenkit import io
+>>> from tungstenkit import Video
 >>> video_path = "video.mp4"
->>> video = io.Video.from_path(video_path)
+>>> video = Video.from_path(video_path)
 >>> video.path
 '/home/tungsten/working_dir/video.mp4'
 ```
@@ -64,7 +64,7 @@ The ``Image`` object has more methods:
 
 
 ## Input field descriptors
-The ``tungstenkit.io`` module contains two input field descriptors: ``Field`` and ``Option`` functions:
+Tungstenkit contains two input field descriptors: ``Field`` and ``Option`` functions:
 
 - ``Field``: For setting properties of a *required* field.
 - ``Option``: For declaring a field as *optional* and setting its properties. Optional fields will be same in an input batch and hidden in the model demo page by default.
@@ -77,20 +77,20 @@ Using them, you can:
 
 For example, you can define an input class for text-to-image generation as follows:
 ```python
-from tungstenkit import io
+from tungstenkit import Field, Option
 
-class Input(io.BaseIO):
-    prompt: str = io.Field(
+class Input(BaseIO):
+    prompt: str = Field(
         description="Input prompt", 
         min_length=1, 
         max_length=200
     )
-    width: int = io.Option(
+    width: int = Option(
         description="Width of output image",
         choices=[128, 256, 512],
         default=512,
     )
-    height: int = io.Option(
+    height: int = Option(
         description="Height of output image",
         choices=[128, 256, 512],
         default=512,

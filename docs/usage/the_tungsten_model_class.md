@@ -4,24 +4,24 @@ The ``TungstenModel`` class is the base class for all Tungsten model classes. A 
 from typing import List
 
 import torch
-from tungstenkit import io, model
+from tungstenkit import BaseIO, TungstenModel, model_config
 
 
-class Input(io.BaseIO):
+class Input(BaseIO):
     ...
 
 
-class Output(io.BaseIO):
+class Output(BaseIO):
     ...
 
 
-@model.config(
+@model_config(
     gpu=True,  # Whether to use a GPU or not
     batch_size=4,  # Max batch size for adaptive batching
     python_packages=["torch", "torchvision"],  # Required Python packages
     description="An example model"  # Model description
 )
-class Model(model.TungstenModel[Input, Output]):
+class Model(TungstenModel[Input, Output]):
     """
     A Tungsten model whose input/output types are 'Input' and 'Output', respectively.
     """
@@ -45,21 +45,21 @@ Input/output types are declared by passing them as type arguments to ``TungstenM
 ```python hl_lines="17"
 from typing import List
 import torch
-from tungstenkit import io, model
+from tungstenkit import BaseIO, TungstenModel, model_config
 
-class Input(io.BaseIO):
+class Input(BaseIO):
     ...
 
-class Output(io.BaseIO):
+class Output(BaseIO):
     ...
 
-@model.config(
+@model_config(
     gpu=True,  # Whether to use a GPU or not
     batch_size=4,  # Max batch size for adaptive batching
     python_packages=["torch", "torchvision"],  # Required Python packages
     description="An example model"  # Model description
 )
-class Model(model.TungstenModel[Input, Output]):
+class Model(TungstenModel[Input, Output]):
     """
     A Tungsten model whose input/output types are 'Input' and 'Output', respectively.
     """
@@ -85,24 +85,24 @@ You can override the ``setup`` method to define how to load a model:
 from typing import List
 
 import torch
-from tungstenkit import io, model
+from tungstenkit import BaseIO, TungstenModel, model_config
 
 
-class Input(io.BaseIO):
+class Input(BaseIO):
     ...
 
 
-class Output(io.BaseIO):
+class Output(BaseIO):
     ...
 
 
-@model.config(
+@model_config(
     gpu=True,  # Whether to use a GPU or not
     batch_size=4,  # Max batch size for adaptive batching
     python_packages=["torch", "torchvision"],  # Required Python packages
     description="An example model"  # Model description
 )
-class Model(model.TungstenModel[Input, Output]):
+class Model(TungstenModel[Input, Output]):
     """
     A Tungsten model whose input/output types are 'Input' and 'Output', respectively.
     """
@@ -133,23 +133,23 @@ It should be overridden by all subclasses:
 from typing import List
 
 import torch
-from tungstenkit import io, model
+from tungstenkit import BaseIO, TungstenModel, model_config
 
 
-class Input(io.BaseIO):
+class Input(BaseIO):
     ...
 
 
-class Output(io.BaseIO):
+class Output(BaseIO):
     ...
 
-@model.config(
+@model_config(
     gpu=True,  # Whether to use a GPU or not
     batch_size=4,  # Max batch size for adaptive batching
     python_packages=["torch", "torchvision"],  # Required Python packages
     description="An example model"  # Model description
 )
-class Model(model.TungstenModel[Input, Output]):
+class Model(TungstenModel[Input, Output]):
     """
     A Tungsten model whose input/output types are 'Input' and 'Output', respectively.
     """
@@ -171,28 +171,28 @@ So, you can define the ``predict`` method of a text-to-image generaton model lik
 
 ```python hl_lines="6-13 20 22"
 from typing import List
-from tungstenkit import io
+from tungstenkit import BaseIO, Image, TungstenModel, model_config, Option
 
-class Input(io.BaseIO):
+class Input(BaseIO):
     prompt: str
-    width: int = io.Option(
+    width: int = Option(
         choices=[128, 256],
         default=256,
     )
-    height: int = io.Option(
+    height: int = Option(
         choices=[128, 256],
         default=256,
     )
 
-class Output(io.BaseIO):
-    image: io.Image
+class Output(BaseIO):
+    image: Image
 
-class Model(model.TungstenModel[Input, Output]):
+class Model(TungstenModel[Input, Output]):
     def predict(self, inputs: List[Input]) -> List[Output]:
         options = inputs[0]
         prompts = [inp.prompt for inp in inputs]
         pil_images = self.model(prompts, width=options.width, height=options.height)
-        images = [io.Image.from_pil_image(pil_image) for pil_image in pil_images]
+        images = [Image.from_pil_image(pil_image) for pil_image in pil_images]
         outputs = [Output(image=image) for image in images]
         return outputs
 ```
@@ -203,24 +203,24 @@ You can add dependencies and explanations via the ``config`` decorator:
 from typing import List
 
 import torch
-from tungstenkit import io, model
+from tungstenkit import BaseIO, TungstenModel, model_config
 
 
-class Input(io.BaseIO):
+class Input(BaseIO):
     ...
 
 
-class Output(io.BaseIO):
+class Output(BaseIO):
     ...
 
 
-@model.config(
+@model_config(
     gpu=True,  # Whether to use a GPU or not
     batch_size=4,  # Max batch size for adaptive batching
     python_packages=["torch", "torchvision"],  # Required Python packages
     description="An example model"  # Model description
 )
-class Model(model.TungstenModel[Input, Output]):
+class Model(TungstenModel[Input, Output]):
     """
     A Tungsten model whose input/output types are 'Input' and 'Output', respectively.
     """
@@ -260,25 +260,25 @@ You can define an object detection model like this:
 
 ```python
 from typing import List
-from tungstenkit import io
+from tungstenkit import BaseIO, Image, TungstenModel, model_config
 
-class BoundingBox(io.BaseIO):
+class BoundingBox(BaseIO):
     xmin: int
     xmax: int
     ymin: int
     ymax: int
 
-class Detection(io.BaseIO):
+class Detection(BaseIO):
     label: str
     bbox: BoundingBox
 
-class Input(io.BaseIO):
-    image: io.Image
+class Input(BaseIO):
+    image: Image
 
-class Output(io.BaseIO):
+class Output(BaseIO):
     detections: List[Detection]
 
-class Model(model.TungstenModel[Input, Output]):
+class Model(TungstenModel[Input, Output]):
     def setup(self):
         ...
 
@@ -294,24 +294,24 @@ Then, you could add the visualization result to the output:
 from typing import List
 from tungstenkit import io
 
-class BoundingBox(io.BaseIO):
+class BoundingBox(BaseIO):
     xmin: int
     xmax: int
     ymin: int
     ymax: int
 
-class Detection(io.BaseIO):
+class Detection(BaseIO):
     label: str
     bbox: BoundingBox
 
-class Input(io.BaseIO):
-    image: io.Image
+class Input(BaseIO):
+    image: Image
 
-class Output(io.BaseIO):
+class Output(BaseIO):
     detections: List[Detection]
-    visualized: io.Image
+    visualized: Image
 
-class Model(model.TungstenModel[Input, Output]):
+class Model(TungstenModel[Input, Output]):
     def setup(self):
         ...
 
@@ -327,26 +327,26 @@ In such a case, you can separate the method for demo predictions:
 from typing import List, Tuple, Dict
 from tungstenkit import io
 
-class BoundingBox(io.BaseIO):
+class BoundingBox(BaseIO):
     xmin: int
     xmax: int
     ymin: int
     ymax: int
 
-class Detection(io.BaseIO):
+class Detection(BaseIO):
     label: str
     bbox: BoundingBox
 
-class Input(io.BaseIO):
-    image: io.Image
+class Input(BaseIO):
+    image: Image
 
-class Output(io.BaseIO):
+class Output(BaseIO):
     detections: List[Detection]
 
-class Visualization(io.BaseIO):
-    result: io.Image
+class Visualization(BaseIO):
+    result: Image
 
-class Model(model.TungstenModel[Input, Output]):
+class Model(TungstenModel[Input, Output]):
     def setup(self):
         ...
 
@@ -359,7 +359,7 @@ class Model(model.TungstenModel[Input, Output]):
     ) -> Tuple[List[Output], List[Visualization]]:
         outputs = self.predict(inputs)
         pil_images = visualize(inputs, outputs)
-        images = [io.Image.from_pil_image(pil_image) for pil_image in pil_images]
+        images = [Image.from_pil_image(pil_image) for pil_image in pil_images]
         visualizations = [Visualization(result=image) for image in images]
         return outputs, visualizations
 ```
