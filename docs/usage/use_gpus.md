@@ -1,13 +1,14 @@
 ## Prerequisite
-For running GPU models, Docker should be able to access GPUs. For that, you need to install:
-    - Linux: [nvidia-container-runtime](https://docs.docker.com/config/containers/resource_constraints/#access-an-nvidia-gpu)
-    - Windows: [Docker Desktop WSL 2 backend](https://docs.docker.com/desktop/windows/wsl/#turn-on-docker-desktop-wsl-2)
+For running GPU models, Docker should be able to access GPUs. For that, you need to install one of the following:
 
-But you can still build, push, and pull GPU models without it.
+- Linux: [nvidia-container-runtime](https://docs.docker.com/config/containers/resource_constraints/#access-an-nvidia-gpu)
+- Windows: [Docker Desktop WSL 2 backend](https://docs.docker.com/desktop/windows/wsl/#turn-on-docker-desktop-wsl-2)
+
+But you can still build GPU models without it.
 
 ## Declare as a GPU model
 
-You can set ``gpu=True`` in the ``tungstenkit.model_config`` decorator:
+You can set ``gpu=True`` in the ``@tungstenkit.define_model`` decorator:
 
 ```python hl_lines="23"
 import json
@@ -17,7 +18,7 @@ from typing import List
 import torch
 from torchvision.models.mobilenetv2 import MobileNet_V2_Weights, MobileNetV2
 
-from tungstenkit import BaseIO, Field, Image, TungstenModel, model_config
+from tungstenkit import BaseIO, Field, Image, define_model
 
 LABELS = json.loads(Path("imagenet_labels.json").read_text())
 
@@ -31,13 +32,14 @@ class Output(BaseIO):
     label: str = Field(choices=LABELS)
 
 
-@model_config(
+@define_model(
+    input=Input,
+    output=Output,
     gpu=True,
-    description="Image classification model",
     python_packages=["torch", "torchvision"],
     batch_size=16,
 )
-class Model(TungstenModel[Input, Output]):
+class ImageClassifier:
     def setup(self):
         """Load the model into memory"""
 
@@ -64,6 +66,7 @@ class Model(TungstenModel[Input, Output]):
         return [
             Output(score=score.item(), label=label) for score, label in zip(scores, pred_labels)
         ]
+
 ```
 Then, Tungstenkit automatically selects a compatible CUDA version and installs it in the container.
 The CUDA version inference is currently supported on ``torch``, ``torchvision``, ``torchaudio``, and ``tensorflow``.

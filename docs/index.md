@@ -4,8 +4,9 @@
 [![Downloads](https://static.pepy.tech/badge/tungstenkit?style=flat-square)](https://pypi.org/project/tungstenkit/)
 [![Supported Python versions](https://img.shields.io/pypi/pyversions/tungstenkit.svg?color=%2334D058)](https://pypi.org/project/tungstenkit/)
 
-[Installation](#prerequisites) | [Features](#features) | [Getting Started](https://tungsten-ai.github.io/docs/getting_started)
-**Tungstenkit** is ML conterization tool with a focus on developer productivity and versatility. 
+[Installation](#prerequisites) | [Features](#features) | [Getting Started](https://tungsten-ai.github.io/docs/getting_started) | [Documentation](https://tungsten-ai.github.io/docs) 
+
+**Tungstenkit** is ML containerization tool with a focus on developer productivity and versatility. 
 
 Have you ever struggled to use models from github?
 You may have repeated tedious steps like: cuda/dependency problems, file handling, and scripting for testing.
@@ -36,21 +37,18 @@ pip install tungstenkit
     - [CLI application](#cli-application)
     - [Python function](#python-function)
 - [Framework-agnostic and lightweight](#framework-agnostic-and-lightweight)
-- [Can run anywhere Docker is installed](#can-run-anywhere-docker-is-installed)
 - [Pydantic input/output definitions with convenient file handling](#pydantic-inputoutput-definitions-with-convenient-file-handling)
 - [Supports batched prediction](#supports-batched-prediction)
 - Supports clustering with distributed machines (coming soon)
 
 ## Take the tour
 ### Requires only a few lines of python code
-Building a Tungsten model is easy. All you have to do is write a simple ``tungsten_model.py`` like below:
+Building a Tungsten model is easy. All you have to do is write a simple ``tungsten_model.py`` like:
 
 ```python
 from typing import List
-
 import torch
-
-from tungstenkit import BaseIO, Image, TungstenModel, model_config
+from tungstenkit import BaseIO, Image, define_model
 
 
 class Input(BaseIO):
@@ -61,8 +59,15 @@ class Output(BaseIO):
     image: Image
 
 
-@model_config(gpu=True, python_packages=["torch", "torchvision"], batch_size=4)
-class TextToImageModel(TungstenModel[Input, Output]):
+@define_model(
+    input=Input,
+    output=Output,
+    gpu=True,
+    python_packages=["torch", "torchvision"],
+    batch_size=4,
+    gpu_mem_gb=16,
+)
+class TextToImageModel:
     def setup(self):
         weights = torch.load("./weights.pth")
         self.model = load_torch_model(weights)
@@ -72,10 +77,10 @@ class TextToImageModel(TungstenModel[Input, Output]):
         output_tensor = self.model(input_tensor)
         outputs = postprocess(output_tensor)
         return outputs
+
 ```
 
-### Build once, use everywhere
-If ``tungsten_model.py`` is ready, you can start a build process:
+Start a build process:
 
 ```console
 $ tungsten build . -n text-to-image
@@ -92,6 +97,8 @@ Repository        Tag       Create Time          Docker Image ID
 text-to-image     latest    2023-04-26 05:23:58  830eb82f0fcd
 text-to-image     e3a5de56  2023-04-26 05:23:58  830eb82f0fcd
 ```
+
+### Build once, use everywhere
 
 #### REST API server
 
@@ -162,19 +169,10 @@ class Model(TungstenModel[Input, Output]):
         return outputs
 ```
 
-### Can run anywhere Docker is installed
-A model container includes a REST API, so it can run anywhere Docker is installed:
-
-```
-$ docker run -p 3000:3000 --gpus all text-to-image:latest
-
-INFO:     Uvicorn running on http://0.0.0.0:3000 (Press CTRL+C to quit)
-```
-
 ### Pydantic input/output definitions with convenient file handling
-Let's look the example below:
+Let's look at the example below:
 ```python
-from tungstenkit import BaseIO, Image, TungstenModel
+from tungstenkit import BaseIO, Image, define_model
 
 
 class Input(BaseIO):
@@ -185,15 +183,16 @@ class Output(BaseIO):
     image: Image
 
 
-class StyleTransferModel(TungstenModel[Input, Output]):
+@define_model(input=Input, output=Output)
+class StyleTransferModel:
     ...
 ```
 As you see, input/output types are defined as subclasses of the ``BaseIO`` class. The ``BaseIO`` class is a simple wrapper of the [``BaseModel``](https://docs.pydantic.dev/latest/usage/models/) class of [Pydantic](https://docs.pydantic.dev/latest/), and Tungstenkit validates JSON requests utilizing functionalities Pydantic provides.
 
-Also, you can see that the ``Image`` class is used. Tungstenkit provides four file classes for easing file handling - ``Image``, ``Audio``, ``Video``, and ``Binary``. They have methods useful to write a model's ``predict`` method:
+Also, you can see that the ``Image`` class is used. Tungstenkit provides four file classes for easing file handling - ``Image``, ``Audio``, ``Video``, and ``Binary``. They have useful methods for writing a model's ``predict`` method:
 
 ```python
-class StyleTransferModel(TungstenModel[Input, Output]):
+class StyleTransferModel:
     def predict(self, inputs: List[Input]) -> List[Output]:
         # Preprocessing
         input_pil_images = [inp.image.to_pil_image() for inp in inputs]
@@ -209,12 +208,11 @@ class StyleTransferModel(TungstenModel[Input, Output]):
 Tungstenkit supports both server-side and client-side batching.
 
 - **Server-side batching**  
+    <!-- Explain more? Mention hashing? -->
     A server groups inputs across multiple requests and processes them together.
-    You can configurate the max batch size:
+    You can configure the max batch size:
     ```python
-    @model_config(gpu=True, batch_size=32)
-    class Model(TungstenModel[Input, Output]):
-        ...
+    @define_model(input=Input, output=Output, gpu=True, batch_size=32)
     ```
     The max batch size can be changed when running a server:
     ```console
@@ -237,3 +235,7 @@ Tungstenkit supports both server-side and client-side batching.
       ]
     }
     ```
+
+## Documentation
+- [Getting Started](https://tungsten-ai.github.io/docs/getting_started)
+- [Usage](https://tungsten-ai.github.io/docs/usage/use_gpus)

@@ -31,27 +31,28 @@ from typing import List
 import torch
 from torchvision.models.mobilenetv2 import MobileNet_V2_Weights, MobileNetV2
 
-from tungstenkit import io, model
+from tungstenkit import BaseIO, Field, Image, define_model
 
 LABELS = json.loads(Path("imagenet_labels.json").read_text())
 
 
-class Input(io.BaseIO):
-    image: io.Image
+class Input(BaseIO):
+    image: Image
 
 
-class Output(io.BaseIO):
+class Output(BaseIO):
     score: float
-    label: str = io.Field(choices=LABELS)
+    label: str = Field(choices=LABELS)
 
 
-@model.config(
+@define_model(
+    input=Input,
+    output=Output,
     gpu=False,
-    description="Image classification model",
     python_packages=["torch", "torchvision"],
     batch_size=16,
 )
-class Model(model.TungstenModel[Input, Output]):
+class Model:
     def setup(self):
         """Load the model into memory"""
 
@@ -78,7 +79,6 @@ class Model(model.TungstenModel[Input, Output]):
         return [
             Output(score=score.item(), label=label) for score, label in zip(scores, pred_labels)
         ]
-
 ```
 
 ### Download the required files
@@ -111,10 +111,10 @@ tungsten-example  e3a5de5616a743fe9021e2dcfe1cd19a  Image classification model  
 ```
 
 
-### Run locally
+### Run it
 Now, you can run the model in your local machine in multiple ways.
 
-#### Option 1: an interactive web demo
+#### Option 1: Interactive web demo
 ```
 tungsten demo tungsten-example -p 8080
 ```
@@ -123,7 +123,7 @@ Visit [http://localhost:8080](http://localhost:8080) to check:
 ![local-demo](../images/getting-started-local-model-demo.gif)
 
 
-#### Option 2: a REST API
+#### Option 2: REST API
 Start the server:
 ```console
 $ tungsten serve tungsten-example -p 3000
@@ -154,7 +154,7 @@ Also, you can find a Swagger documentation at [http://localhost:3000/docs](http:
 
 <!-- ![tungsten-model-api](../images/model-api.png "Tungsten Model API") -->
 
-### Run remotely
+<!-- ### Run remotely
 To do this, you should have an account and a project on a Tungsten server running at [https://server.tungsten-ai.com](https://server.tungsten-ai.com).  
 
 If you don't have them, visit [https://webapp.tungsten-ai.com](https://webapp.tungsten-ai.com) in a browser and create them.
@@ -179,4 +179,4 @@ $ tungsten push exampleuser/exampleproject -n tungsten-example
 
 Now you can find and run it on the Tungsten server.
 
-Visit [https://webapp.tungsten-ai.com](https://webapp.tungsten-ai.com) in a browser to check it.
+Visit [https://webapp.tungsten-ai.com](https://webapp.tungsten-ai.com) in a browser to check it. -->
