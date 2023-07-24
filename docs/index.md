@@ -212,7 +212,7 @@ class StyleTransferModel:
 Tungstenkit supports both manual and automatic batching.
 
 - **Automatic batching**
-     Automatic or "dynamic" batching allows a model server to group multiple prediction requests in a short timespan for higher throughput. You can delcare the max batch size limit in `tungsten_model.py`:
+     Automatic or "dynamic" batching allows a model server to group multiple prediction requests in a short timespan for higher throughput. You can delcare the max batch size limit inside `tungsten_model.py`:
     ```python
     @define_model(input=Input, output=Output, gpu=True, batch_size=32)
     ```
