@@ -239,5 +239,5 @@ If you like Tungstenkit, consider visiting ```tungsten.run```: a platform for sh
 
 
 ## Read next
-- [Examples](https://tungsten-ai.github.io/docs/getting_started)
-- [Advanced User Guide](https://tungsten-ai.github.io/docs/usage/use_gpus)
+- [Real-world examples](https://tungsten-ai.github.io/docs/getting_started)
+- [Advanced user guide](https://tungsten-ai.github.io/docs/usage/use_gpus)
