@@ -31,7 +31,7 @@ pip install tungstenkit
   - [Installation](#installation)
   - [Features](#features)
   - [Take the tour](#take-the-tour)
-    - [Just a few lines of python code](#just-a-few-lines-of-python-code)
+    - [Just a few lines of Python code](#just-a-few-lines-of-python-code)
     - [Build once, use everywhere](#build-once-use-everywhere)
       - [REST API server](#rest-api-server)
       - [GUI application](#gui-application)
@@ -44,7 +44,7 @@ pip install tungstenkit
   - [Read next](#read-next)
 
 ## Take the tour
-### Just a few lines of python code
+### Just a few lines of Python code
 Building a Tungsten model is easy. You just have to write a ``tungsten_model.py`` like below:
 
 ```python
