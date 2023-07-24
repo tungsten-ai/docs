@@ -1,3 +1,5 @@
+
+
 ## Installation
 
 The first step is to install Tungstenkit.
@@ -87,7 +89,7 @@ Before building, you should prepare the required files.
 As you can see above, two files are needed: ``imagenet_labels.json`` and ``mobilenetv2_weights.pth``.
 Download these files via the script below:
 ```shell
-curl -o imagenet_labels.json -X GET https://raw.githubusercontent.com/anishathalye/imagenet-simple-labels/master/imagenet-simple-labels.json && \  
+curl -o imagenet_labels.json -X GET https://raw.githubusercontent.com/anishathalye/imagenet-simple-labels/master/imagenet-simple-labels.json && \
 curl -o mobilenetv2_weights.pth https://download.pytorch.org/models/mobilenet_v2-7ebf99e0.pth
 ```
 
@@ -155,7 +157,7 @@ Also, you can find a Swagger documentation at [http://localhost:3000/docs](http:
 <!-- ![tungsten-model-api](../images/model-api.png "Tungsten Model API") -->
 
 <!-- ### Run remotely
-To do this, you should have an account and a project on a Tungsten server running at [https://server.tungsten-ai.com](https://server.tungsten-ai.com).  
+To do this, you should have an account and a project on a Tungsten server running at [https://server.tungsten-ai.com](https://server.tungsten-ai.com).
 
 If you don't have them, visit [https://webapp.tungsten-ai.com](https://webapp.tungsten-ai.com) in a browser and create them.
 
@@ -165,7 +167,7 @@ First, log in:
 $ tungsten login
 
 User (username or email): exampleuser
-Password: 
+Password:
 ```
 
 Then, push the model:

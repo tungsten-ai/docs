@@ -4,25 +4,21 @@
 [![Downloads](https://static.pepy.tech/badge/tungstenkit?style=flat-square)](https://pypi.org/project/tungstenkit/)
 [![Supported Python versions](https://img.shields.io/pypi/pyversions/tungstenkit.svg?color=%2334D058)](https://pypi.org/project/tungstenkit/)
 
-[Installation](#prerequisites) | [Features](#features) | [Getting Started](https://tungsten-ai.github.io/docs/getting_started) | [Documentation](https://tungsten-ai.github.io/docs) 
+[Installation](#prerequisites) | [Features](#features) | [Examples](https://tungsten-ai.github.io/docs/getting_started) | [Documentation](https://tungsten-ai.github.io/docs)
 
-**Tungstenkit** is ML containerization tool with a focus on developer productivity and versatility. 
+**Tungstenkit** is ML containerization tool with a focus on developer productivity and versatility.
 
-Have you ever struggled to use models from github?
-You may have repeated tedious steps like: cuda/dependency problems, file handling, and scripting for testing.
+Running other people's models isn't an easy task. Most often, you have to go through tedious steps like resolving CUDA/Python dependencies, conforming to input/output requirements, and reading a great amount of text on how to run the model. Going through all these steps to only find out that the model isn't up to your standard, is a painful experience. 😭
 
-Standing on the shoulder of Docker, this project aims to make using ML models less painful by adding functionalities for typical use cases - REST API server, GUI, CLI, and Python script.
+Standing on the shoulder of Docker, this project aims to make sharing/using ML models less painful.
+We propose a standardized way to package ML models with built-in utilities for typical use cases. For starters, a model built with Tungstenkit can automatically work as a REST API server, a GUI app, and a CLI app without mode-specific code.
 
 With Tungstenkit, sharing and consuming ML models can be quick and enjoyable.
-
 
 ## Prerequisites
 - Python 3.7+
 - [Docker](https://docs.docker.com/get-docker/)
-- (Optional) For using GPUs,
-    - Linux: [nvidia-container-runtime](https://docs.docker.com/config/containers/resource_constraints/#access-an-nvidia-gpu)
-    - Windows: [Docker Desktop WSL 2 backend](https://docs.docker.com/desktop/windows/wsl/#turn-on-docker-desktop-wsl-2)
-
+- (Optional) To use GPUs, install [nvidia-container-runtime](https://docs.docker.com/config/containers/resource_constraints/#access-an-nvidia-gpu).
 
 ## Installation
 ```shell
@@ -30,20 +26,25 @@ pip install tungstenkit
 ```
 
 ## Features
-- [Requires only a few lines of Python code](#requires-only-a-few-lines-of-python-code)
-- [Build once, use everywhere](#build-once-use-everywhere):
-    - [REST API server](#rest-api-server)
-    - [GUI application](#gui-application)
-    - [CLI application](#cli-application)
-    - [Python function](#python-function)
-- [Framework-agnostic and lightweight](#framework-agnostic-and-lightweight)
-- [Pydantic input/output definitions with convenient file handling](#pydantic-inputoutput-definitions-with-convenient-file-handling)
-- [Supports batched prediction](#supports-batched-prediction)
-- Supports clustering with distributed machines (coming soon)
+- [Tungstenkit: ML container made simple](#tungstenkit-ml-container-made-simple)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Features](#features)
+  - [Take the tour](#take-the-tour)
+    - [Just a few lines of python code](#just-a-few-lines-of-python-code)
+    - [Build once, use everywhere](#build-once-use-everywhere)
+      - [REST API server](#rest-api-server)
+      - [GUI application](#gui-application)
+      - [CLI application](#cli-application)
+      - [Python API](#python-api)
+    - [Framework-agnostic and lightweight](#framework-agnostic-and-lightweight)
+    - [Pydantic input/output models and automatic file handling](#pydantic-inputoutput-models-and-automatic-file-handling)
+    - [Batch prediction](#batch-prediction)
+  - [Read next](#read-next)
 
 ## Take the tour
-### Requires only a few lines of python code
-Building a Tungsten model is easy. All you have to do is write a simple ``tungsten_model.py`` like:
+### Just a few lines of python code
+Building a Tungsten model is easy. You just have to write a ``tungsten_model.py`` like below:
 
 ```python
 from typing import List
@@ -80,14 +81,14 @@ class TextToImageModel:
 
 ```
 
-Start a build process:
+Now, you can start a build process from the command line:
 
 ```console
 $ tungsten build . -n text-to-image
 
 ✅ Successfully built tungsten model: 'text-to-image:e3a5de56' (also tagged as 'text-to-image:latest')
 ```
-
+<!--
 Check the built image:
 ```
 $ tungsten models
@@ -96,13 +97,13 @@ Repository        Tag       Create Time          Docker Image ID
 ----------------  --------  -------------------  ---------------
 text-to-image     latest    2023-04-26 05:23:58  830eb82f0fcd
 text-to-image     e3a5de56  2023-04-26 05:23:58  830eb82f0fcd
-```
+``` -->
 
 ### Build once, use everywhere
 
 #### REST API server
 
-Start a server:
+First, a Tungsten model can act as a REST API server.
 
 ```console
 $ tungsten serve text-to-image -p 3000
@@ -110,7 +111,7 @@ $ tungsten serve text-to-image -p 3000
 INFO:     Uvicorn running on http://0.0.0.0:3000 (Press CTRL+C to quit)
 ```
 
-Send a prediction request with a JSON payload:
+You can send a prediction request with a JSON payload with the schema you defined earlier.
 
 ```console
 $ curl -X 'POST' 'http://localhost:3000/predict' \
@@ -124,18 +125,19 @@ $ curl -X 'POST' 'http://localhost:3000/predict' \
 ```
 
 #### GUI application
-If you need a more user-friendly way to make predictions, start a GUI app with the following command:
+If you need a more intuitive way to make predictions, start a GUI app with the following command.
 
 ```console
 $ tungsten demo text-to-image -p 8080
 
 INFO:     Uvicorn running on http://localhost:8080 (Press CTRL+C to quit)
 ```
-
 ![tungsten-dashboard](https://github.com/tungsten-ai/assets/blob/main/common/local-model-demo.gif?raw=true "Demo GIF")
 
+Open a browser, and visit ```http://localhost:8080``` to see the generated UI for this model.
+
 #### CLI application
-Run a prediction in a terminal:
+It's also possible to create a prediction from the terminal:
 ```console
 $ tungsten predict text-to-image \
    -i prompt="a professional photograph of an astronaut riding a horse"
@@ -145,8 +147,8 @@ $ tungsten predict text-to-image \
 }
 ```
 
-#### Python function
-If you want to run a model in your Python application, use the Python API:
+#### Python API
+If you want to run the model inside your Python script, use the Python API:
 ```python
 >>> from tungstenkit import models
 >>> model = models.get("text-to-image")
@@ -157,7 +159,8 @@ If you want to run a model in your Python application, use the Python API:
 ```
 
 ### Framework-agnostic and lightweight
-Tungstenkit doesn't restrict you to use specific ML libraries. Just use any library you want, and declare dependencies:
+Tungstenkit does not have any dependencies on ML libraries.
+Import any packages you want, but don't forget to declare the dependencies explicitly.
 
 ```python
 # The latest cpu-only build of Tensorflow will be included
@@ -169,8 +172,10 @@ class Model(TungstenModel[Input, Output]):
         return outputs
 ```
 
-### Pydantic input/output definitions with convenient file handling
-Let's look at the example below:
+### Pydantic input/output models and automatic file handling
+
+We support the powerful Pydantic package for modeling and validating the input/output bodies. So you can use standard Python type hints to declare io requirements. In addition, we provide utility classes for a better file-handling experience.
+
 ```python
 from tungstenkit import BaseIO, Image, define_model
 
@@ -187,9 +192,7 @@ class Output(BaseIO):
 class StyleTransferModel:
     ...
 ```
-As you see, input/output types are defined as subclasses of the ``BaseIO`` class. The ``BaseIO`` class is a simple wrapper of the [``BaseModel``](https://docs.pydantic.dev/latest/usage/models/) class of [Pydantic](https://docs.pydantic.dev/latest/), and Tungstenkit validates JSON requests utilizing functionalities Pydantic provides.
-
-Also, you can see that the ``Image`` class is used. Tungstenkit provides four file classes for easing file handling - ``Image``, ``Audio``, ``Video``, and ``Binary``. They have useful methods for writing a model's ``predict`` method:
+Here, the `Image` type is used to declare the image field in both the request and response body. If a client sends invalid image bytes, it will return a nice and clear error, indicating that the prediction cannot be created. The mapped objects will include helper methods to be used inside the `predict` method (see below). Tungstenkit currently provides four classes for file handling - ``Image``, ``Audio``, ``Video``, and ``Binary``.
 
 ```python
 class StyleTransferModel:
@@ -204,23 +207,17 @@ class StyleTransferModel:
         return outputs
 ```
 
-### Supports batched prediction
-Tungstenkit supports both server-side and client-side batching.
+### Batch prediction
+Tungstenkit supports both manual and automatic batching.
 
-- **Server-side batching**  
-    <!-- Explain more? Mention hashing? -->
-    A server groups inputs across multiple requests and processes them together.
-    You can configure the max batch size:
+- **Automatic batching**
+     Automatic or "dynamic" batching allows a model server to group multiple prediction requests in a short timespan for higher throughput. You can configure the allowed batch size limit in `tungsten_model.py`:
     ```python
     @define_model(input=Input, output=Output, gpu=True, batch_size=32)
     ```
-    The max batch size can be changed when running a server:
-    ```console
-    $ docker run -p 3000:3000 --gpus all model:latest --batch-size 64 
-    ```
 
-- **Client-side batching**  
-    Also, you can reduce traffic volume by putting multiple inputs in a single prediction request:
+- **Manual batching**
+    If batching is enabled, you can also manually create a batch by sending input bodies in a list.
     ```console
     $ curl -X 'POST' 'http://localhost:3000/predict' \
       -H 'accept: application/json' \
@@ -236,6 +233,6 @@ Tungstenkit supports both server-side and client-side batching.
     }
     ```
 
-## Documentation
-- [Getting Started](https://tungsten-ai.github.io/docs/getting_started)
-- [Usage](https://tungsten-ai.github.io/docs/usage/use_gpus)
+## Read next
+- [Examples](https://tungsten-ai.github.io/docs/getting_started)
+- [Advanced User Guide](https://tungsten-ai.github.io/docs/usage/use_gpus)
