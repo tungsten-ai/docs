@@ -31,7 +31,7 @@ pip install tungstenkit
   - [Installation](#installation)
   - [Features](#features)
   - [Take the tour](#take-the-tour)
-    - [Just a few lines of Python code](#just-a-few-lines-of-python-code)
+    - [Just a few lines of Python](#just-a-few-lines-of-python)
     - [Build once, use everywhere](#build-once-use-everywhere)
       - [REST API server](#rest-api-server)
       - [GUI application](#gui-application)
@@ -44,7 +44,7 @@ pip install tungstenkit
   - [Read next](#read-next)
 
 ## Take the tour
-### Just a few lines of Python code
+### Just a few lines of Python
 Building a Tungsten model is easy. You just have to write a ``tungsten_model.py`` like below:
 
 ```python
@@ -241,3 +241,18 @@ If you like Tungstenkit, consider visiting ```tungsten.run```: a platform for sh
 ## Read next
 - [Real-world examples](https://tungsten-ai.github.io/docs/getting_started)
 - [Advanced user guide](https://tungsten-ai.github.io/docs/usage/use_gpus)
+
+<!-- TODO 1. optional fields --!>
+<!-- TODO 2. how file handling works --!>
+<!-- TODO 3. rest api + async api --!>
+<!-- TODO 4. file storage / redis integration --!>
+<!-- TODO 5. scaling features multi-gpu / distributed --!>
+<!-- TODO 6. tungsten.run pushing, pulling --!>
+<!-- TODO 7. real world examples -> Stable diffusion (include repo) --!>
+<!-- TODO 8. real world examples -> some LLM (include repo) --!>
+<!-- TODO 9. declaring gpu requirements  --!>
+<!-- TODO 10. CLI overview https://www.pulumi.com/docs/cli/  --!>
+<!-- TODO 11. garbage collect options --!>
+<!-- TODO 12. REST API spec (error codes) --!>
+<!-- TODO 13. @definemodel, predict, demo_predict.. --!>
+<!-- TODO 14. custom docker base image? + extra docker guide -->
