@@ -40,6 +40,7 @@ pip install tungstenkit
     - [Framework-agnostic and lightweight](#framework-agnostic-and-lightweight)
     - [Pydantic input/output models and automatic file handling](#pydantic-inputoutput-models-and-automatic-file-handling)
     - [Batch prediction](#batch-prediction)
+    - [Share with the community](#share-with-the-community)
   - [Read next](#read-next)
 
 ## Take the tour
@@ -232,6 +233,10 @@ Tungstenkit supports both manual and automatic batching.
       ]
     }
     ```
+
+### Share with the community
+If you like Tungstenkit, consider visiting ```tungsten.run```: a platform for sharing, running, and discussing open-source AI.
+
 
 ## Read next
 - [Examples](https://tungsten-ai.github.io/docs/getting_started)
