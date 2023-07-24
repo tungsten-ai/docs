@@ -193,7 +193,7 @@ class Output(BaseIO):
 class StyleTransferModel:
     ...
 ```
-Here, the `Image` type is used to declare the image field in both the request and response body. If a client sends invalid image bytes, it will return a nice and clear error, indicating that the prediction cannot be created. The mapped objects will include helper methods to be used inside the `predict` method (see below). Tungstenkit currently provides four classes for file handling - ``Image``, ``Audio``, ``Video``, and ``Binary``.
+Here, the `Image` type is used to declare the image field in both the request and response body. If a client sends invalid image bytes, it will return a nice and clear error, indicating that the prediction cannot be created. The mapped objects will include helper methods to be used inside the `predict` method (see below). Tungstenkit currently provides four file classes - ``Image``, ``Audio``, ``Video``, and ``Binary``.
 
 ```python
 class StyleTransferModel:
