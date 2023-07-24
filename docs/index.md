@@ -135,7 +135,7 @@ INFO:     Uvicorn running on http://localhost:8080 (Press CTRL+C to quit)
 ```
 ![tungsten-dashboard](https://github.com/tungsten-ai/assets/blob/main/common/local-model-demo.gif?raw=true "Demo GIF")
 
-Open a browser, and visit ```http://localhost:8080``` to see the generated UI for this model.
+Open a browser, and visit ```http://localhost:8080``` to see the generated UI for the model.
 
 #### CLI application
 It's also possible to create a prediction from the terminal:
