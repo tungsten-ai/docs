@@ -1,27 +1,11 @@
-## Installation
-
-The first step is to install Tungstenkit.
-
-The prerequisites are:
-
-- Python 3.7+
-- [Docker](https://docs.docker.com/engine/install/)
-
-If they are ready, you can install Tungstenkit as follows:
-
-```shell
-pip install tungstenkit
-```
-
-## Run an example model
-### Create a directory
+## Create a directory
 Let's start by creating a working directory:
 ```shell
 mkdir tungsten-getting-started
 cd tungsten-getting-started
 ```
 
-### Write ``tungsten_model.py``
+## Write ``tungsten_model.py``
 You can write the ``tungsten_model.py`` file for an image classification model as follows:
 ```python
 import json
@@ -81,7 +65,7 @@ class Model:
         ]
 ```
 
-### Download the required files
+## Download the required files
 Before building, you should prepare the required files.
 
 As you can see above, two files are needed: ``imagenet_labels.json`` and ``mobilenetv2_weights.pth``.
@@ -93,7 +77,7 @@ curl -o mobilenetv2_weights.pth https://download.pytorch.org/models/mobilenet_v2
 
 
 
-### Build a Tungsten model
+## Build a Tungsten model
 Now everything is ready. Let's start building a Tungsten model:
 ```console
 $ tungsten build -n tungsten-example
@@ -111,10 +95,10 @@ tungsten-example  e3a5de5616a743fe9021e2dcfe1cd19a  Image classification model  
 ```
 
 
-### Run it
+## Run it
 Now, you can run the model in your local machine in multiple ways.
 
-#### Option 1: Interactive web demo
+### Option 1: Interactive web demo
 ```
 tungsten demo tungsten-example -p 8080
 ```
@@ -123,7 +107,7 @@ Visit [http://localhost:8080](http://localhost:8080) to check:
 ![local-demo](../images/getting-started-local-model-demo.gif)
 
 
-#### Option 2: REST API
+### Option 2: REST API
 Start the server:
 ```console
 $ tungsten serve tungsten-example -p 3000
@@ -154,7 +138,7 @@ Also, you can find a Swagger documentation at [http://localhost:3000/docs](http:
 
 <!-- ![tungsten-model-api](../images/model-api.png "Tungsten Model API") -->
 
-<!-- ### Run remotely
+<!-- ## Run remotely
 To do this, you should have an account and a project on a Tungsten server running at [https://server.tungsten-ai.com](https://server.tungsten-ai.com).  
 
 If you don't have them, visit [https://webapp.tungsten-ai.com](https://webapp.tungsten-ai.com) in a browser and create them.

@@ -4,7 +4,7 @@
 [![Downloads](https://static.pepy.tech/badge/tungstenkit?style=flat-square)](https://pypi.org/project/tungstenkit/)
 [![Supported Python versions](https://img.shields.io/pypi/pyversions/tungstenkit.svg?color=%2334D058)](https://pypi.org/project/tungstenkit/)
 
-[Installation](#prerequisites) | [Features](#features) | [Getting Started](https://tungsten-ai.github.io/docs/getting_started) | [Documentation](https://tungsten-ai.github.io/docs) 
+[Installation](#prerequisites) | [Features](#features) | [Getting Started](https://tungsten-ai.github.io/docs/getting_started) 
 
 **Tungstenkit** is ML containerization tool with a focus on developer productivity and versatility. 
 
@@ -85,7 +85,7 @@ Start a build process:
 ```console
 $ tungsten build . -n text-to-image
 
-✅ Successfully built tungsten model: 'text-to-image:e3a5de56' (also tagged as 'text-to-image:latest')
+✅ Successfully built tungsten model: 'text-to-image:e3a5de56'
 ```
 
 Check the built image:
@@ -235,7 +235,3 @@ Tungstenkit supports both server-side and client-side batching.
       ]
     }
     ```
-
-## Documentation
-- [Getting Started](https://tungsten-ai.github.io/docs/getting_started)
-- [Usage](https://tungsten-ai.github.io/docs/usage/use_gpus)

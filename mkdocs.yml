@@ -28,11 +28,29 @@ extra_javascript:
 
 nav:
   - Overview: index.md
-  - Getting Started: getting_started.md
-  - Usage:
-      - Use GPUs: usage/use_gpus.md
-      - Input/Output: usage/input_and_output.md
-      - The TungstenModel Class: usage/the_tungsten_model_class.md
+  - Getting Started:
+    - Installation: getting_started/installation.md
+    - Project Structure: getting_started/project_structure.md
+    - Basic Example: getting_started/basic_example.md
+  - Building Your Model:
+      - Defining: 
+        - Input and Output: building_your_model/input_and_output.md
+        - Model Definition: building_your_model/define_model_decorator.md
+        - GPU models: building_your_model/gpu_models.md
+        - Using Custom Base Image: building_your_model/using_custom_base_image.md
+      - Containerizing: building_your_model/containerizing.md
+  - Running Models:
+    - Serving REST API: running_models/serving_rest_api.md
+    - Demo: running_models/demo.md
+    - Predicting: running_models/predicting.md
+  - Pushing and Pulling Models:
+    - Pushing: pushing_and_pulling_models/pushing.md
+    - Pulling: pushing_and_pulling_models/pulling.md
+  - CLI Reference: cli_reference.md
+  - REST API Reference: rest_api_reference.md
+  - Examples:
+    - Stable Diffusion: examples/stable_diffusion.md
+    
 
 markdown_extensions:
   - admonition
