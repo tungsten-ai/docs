@@ -15,8 +15,8 @@ repo_url: https://github.com/tungsten-ai/tungstenkit
 
 extra:
   social:
-    - icon: fontawesome/brands/slack
-      link: https://tungsten-ai-community.slack.com/
+    - icon: fontawesome/brands/discord
+      link: https://discord.com/invite/NESFeXzFuy
     - icon: fontawesome/brands/github
       link: https://github.com/tungsten-ai
 
@@ -27,28 +27,30 @@ extra_javascript:
   - js/termynal.js
 
 nav:
-  - Overview: index.md
+  - Introduction: index.md
   - Getting Started:
     - Installation: getting_started/installation.md
-    - Project Structure: getting_started/project_structure.md
     - Basic Example: getting_started/basic_example.md
   - Building Your Model:
       - Defining: 
+        - Model Definition: building_your_model/model_definition.md
         - Input and Output: building_your_model/input_and_output.md
-        - Model Definition: building_your_model/define_model_decorator.md
-        - GPU models: building_your_model/gpu_models.md
+        - GPU Models: building_your_model/gpu_models.md
         - Using Custom Base Image: building_your_model/using_custom_base_image.md
       - Containerizing: building_your_model/containerizing.md
   - Running Models:
+    - Using GPUs: running_models/using_gpus.md
     - Serving REST API: running_models/serving_rest_api.md
-    - Demo: running_models/demo.md
-    - Predicting: running_models/predicting.md
+    - Serving Web Demo: running_models/demo.md
+    - Making Single Prediction: running_models/making_a_single_prediction.md
   - Pushing and Pulling Models:
     - Pushing: pushing_and_pulling_models/pushing.md
     - Pulling: pushing_and_pulling_models/pulling.md
   - CLI Reference: cli_reference.md
   - REST API Reference: rest_api_reference.md
   - Examples:
+    - Image Blurring: examples/image_blurring.md
+    - Image Classification: examples/image_classification.md
     - Stable Diffusion: examples/stable_diffusion.md
     
 
