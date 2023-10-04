@@ -1,11 +1,3 @@
-## Prerequisite
-For running GPU models, Docker should be able to access GPUs. For that, you need to install one of the following:
-
-- Linux: [nvidia-container-runtime](https://docs.docker.com/config/containers/resource_constraints/#access-an-nvidia-gpu)
-- Windows: [Docker Desktop WSL 2 backend](https://docs.docker.com/desktop/windows/wsl/#turn-on-docker-desktop-wsl-2)
-
-But you can still build GPU models without it.
-
 ## Declare as a GPU model
 
 You can set ``gpu=True`` in the ``define_model`` decorator:

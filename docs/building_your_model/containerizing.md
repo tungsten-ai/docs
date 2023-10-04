@@ -6,7 +6,7 @@ $ tungsten build . -n mymodel
 ✅ Successfully built tungsten model: 'mymodel:e3a5de56'
 ```
 
-Then you will see that this model has been added to the model list:
+Then you can see that this model has been added to the model list:
 ```console
 $ tungsten models
 

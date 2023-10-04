@@ -1,0 +1,1 @@
+The fastest way to build a Stable diffusion model is using Tungsten Stable Diffusion Template. See [the repository](https://github.com/tungsten-ai/tungsten-sd/tree/master) for more details.

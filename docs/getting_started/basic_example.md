@@ -129,12 +129,31 @@ $ curl -X 'POST' 'http://localhost:3000/predict' \
   -d '[{"image": "https://picsum.photos/200.jpg"}]'
 
 {
-    "outputs": [{"scale": 0.12483298, "label": "web site"}],
+    "outputs": [{"scale": 0.12483298, "label": "dog"}],
 }
 ```
 
-
 Also, you can find a Swagger documentation at [http://localhost:3000/docs](http://localhost:3000/docs).
+
+
+### Option 3: Make a prediction (using CLI) 
+```console
+$ tungsten predict tungsten-example -i image="https://picsum.photos/200.jpg"
+
+{
+    "scale": 0.12483298, "label": "dog"
+}
+```
+
+### Option 4: Make a prediction (using Python)
+```python
+>>> from tungstenkit import models
+>>> model = models.get("tungsten-example")
+>>> model.predict(
+    {"image": "https://picsum.photos/200.jpg"}
+)
+{"scale": 0.12483298, "label": "dog"}
+```
 
 <!-- ![tungsten-model-api](../images/model-api.png "Tungsten Model API") -->
 

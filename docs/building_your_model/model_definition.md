@@ -82,7 +82,7 @@ class TextToImageModel:
         return outputs
 ```
 
-See [Tungsten Model - Input/Output](https://tungsten-ai.github.io/docs/tungsten_model/input_and_output) to learn how to define input/output.
+See [Building Your Model - Input/Output](https://tungsten-ai.github.io/docs/building_your_model/input_and_output) to learn how to define input/output.
 
 ### Define how to load a model
 You can define the ``setup`` method for loading a model:
@@ -122,7 +122,7 @@ class TextToImageModel:
 ```
 
 As you can see, the ``weights.pth`` file is required to setup.
-Before building, you should make sure that the file exists in the build directory.
+Before [containerizing](https://tungsten-ai.github.io/docs/building_your_model/containerizing), you should make sure that the file exists in the build directory.
 
 ### Define how a prediction works
 The ``predict`` method defines the computation performed at every prediction request.

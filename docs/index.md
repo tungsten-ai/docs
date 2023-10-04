@@ -4,8 +4,6 @@
 [![Downloads](https://static.pepy.tech/badge/tungstenkit?style=flat-square)](https://pypi.org/project/tungstenkit/)
 [![Supported Python versions](https://img.shields.io/pypi/pyversions/tungstenkit.svg?color=%2334D058)](https://pypi.org/project/tungstenkit/)
 
-[Installation](#prerequisites) | [Features](#features) | [Getting Started](https://tungsten-ai.github.io/docs/getting_started) 
-
 **Tungstenkit** is ML containerization tool with a focus on developer productivity and versatility. 
 
 Have you ever struggled to use models from github?
@@ -15,19 +13,6 @@ Standing on the shoulder of Docker, this project aims to make using ML models le
 
 With Tungstenkit, sharing and consuming ML models can be quick and enjoyable.
 
-
-## Prerequisites
-- Python 3.7+
-- [Docker](https://docs.docker.com/get-docker/)
-- (Optional) For using GPUs,
-    - Linux: [nvidia-container-runtime](https://docs.docker.com/config/containers/resource_constraints/#access-an-nvidia-gpu)
-    - Windows: [Docker Desktop WSL 2 backend](https://docs.docker.com/desktop/windows/wsl/#turn-on-docker-desktop-wsl-2)
-
-
-## Installation
-```shell
-pip install tungstenkit
-```
 
 ## Features
 - [Requires only a few lines of Python code](#requires-only-a-few-lines-of-python-code)
@@ -113,15 +98,27 @@ INFO:     Uvicorn running on http://0.0.0.0:3000 (Press CTRL+C to quit)
 Send a prediction request with a JSON payload:
 
 ```console
-$ curl -X 'POST' 'http://localhost:3000/predict' \
-  -H 'accept: application/json' \
+$ curl -X 'POST' 'http://localhost:3000/predictions' \
+  -H 'Accept: application/json' \
   -H 'Content-Type: application/json' \
   -d '[{"prompt": "a professional photograph of an astronaut riding a horse"}]'
 
 {
-    "outputs": [{"image": "data:image/png;base64,..."}]
+    "prediction_id": "39c9eb6b"
 }
 ```
+
+Get the result:
+```console
+$ curl -X 'GET' 'http://localhost:3000/predictions/39c9eb6b' \
+  -H 'Accept: application/json'
+
+{
+    "outputs": [{"image": "data:image/png;base64,..."}],
+    "status": "success"
+}
+```
+
 
 #### GUI application
 If you need a more user-friendly way to make predictions, start a GUI app with the following command:
@@ -161,8 +158,8 @@ Tungstenkit doesn't restrict you to use specific ML libraries. Just use any libr
 
 ```python
 # The latest cpu-only build of Tensorflow will be included
-@model_config(gpu=False, python_packages=["tensorflow"])
-class Model(TungstenModel[Input, Output]):
+@define_model(gpu=False, python_packages=["tensorflow"])
+class TensorflowModel:
     def predict(self, inputs):
         """Run a batch prediction"""
         # ...ops using tensorflow...
@@ -216,7 +213,7 @@ Tungstenkit supports both server-side and client-side batching.
     ```
     The max batch size can be changed when running a server:
     ```console
-    $ docker run -p 3000:3000 --gpus all model:latest --batch-size 64 
+    $ tungsten serve mymodel -p 3000 --batch-size 16
     ```
 
 - **Client-side batching**  
@@ -235,3 +232,6 @@ Tungstenkit supports both server-side and client-side batching.
       ]
     }
     ```
+
+## Join our community
+If you have questions about anything related to Next.js, you're always welcome to ask our community on [Discord](https://discord.com/invite/NESFeXzFuy).
