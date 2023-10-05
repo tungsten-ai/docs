@@ -2,127 +2,127 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://tungsten-ai.github.io/docs/</loc>
-         <lastmod>2023-10-04</lastmod>
+         <lastmod>2023-10-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://tungsten-ai.github.io/docs/cli_reference/</loc>
-         <lastmod>2023-10-04</lastmod>
+         <lastmod>2023-10-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://tungsten-ai.github.io/docs/rest_api_reference/</loc>
-         <lastmod>2023-10-04</lastmod>
+         <lastmod>2023-10-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://tungsten-ai.github.io/docs/runners/</loc>
-         <lastmod>2023-10-04</lastmod>
+         <lastmod>2023-10-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://tungsten-ai.github.io/docs/self-hosting/</loc>
-         <lastmod>2023-10-04</lastmod>
+         <lastmod>2023-10-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://tungsten-ai.github.io/docs/building_your_model/containerizing/</loc>
-         <lastmod>2023-10-04</lastmod>
+         <lastmod>2023-10-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://tungsten-ai.github.io/docs/building_your_model/custom_base_image/</loc>
-         <lastmod>2023-10-04</lastmod>
+         <lastmod>2023-10-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://tungsten-ai.github.io/docs/building_your_model/gpu_models/</loc>
-         <lastmod>2023-10-04</lastmod>
+         <lastmod>2023-10-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://tungsten-ai.github.io/docs/building_your_model/input_and_output/</loc>
-         <lastmod>2023-10-04</lastmod>
+         <lastmod>2023-10-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://tungsten-ai.github.io/docs/building_your_model/model_definition/</loc>
-         <lastmod>2023-10-04</lastmod>
+         <lastmod>2023-10-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://tungsten-ai.github.io/docs/building_your_model/predict_function/</loc>
-         <lastmod>2023-10-04</lastmod>
+         <lastmod>2023-10-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://tungsten-ai.github.io/docs/building_your_model/setup_function/</loc>
-         <lastmod>2023-10-04</lastmod>
+         <lastmod>2023-10-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://tungsten-ai.github.io/docs/building_your_model/using_custom_base_image/</loc>
-         <lastmod>2023-10-04</lastmod>
+         <lastmod>2023-10-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://tungsten-ai.github.io/docs/examples/image_blurring/</loc>
-         <lastmod>2023-10-04</lastmod>
+         <lastmod>2023-10-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://tungsten-ai.github.io/docs/examples/image_classification/</loc>
-         <lastmod>2023-10-04</lastmod>
+         <lastmod>2023-10-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://tungsten-ai.github.io/docs/examples/stable_diffusion/</loc>
-         <lastmod>2023-10-04</lastmod>
+         <lastmod>2023-10-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://tungsten-ai.github.io/docs/getting_started/basic_example/</loc>
-         <lastmod>2023-10-04</lastmod>
+         <lastmod>2023-10-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://tungsten-ai.github.io/docs/getting_started/installation/</loc>
-         <lastmod>2023-10-04</lastmod>
+         <lastmod>2023-10-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://tungsten-ai.github.io/docs/getting_started/project_structure/</loc>
-         <lastmod>2023-10-04</lastmod>
+         <lastmod>2023-10-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://tungsten-ai.github.io/docs/pushing_and_pulling_models/pulling/</loc>
-         <lastmod>2023-10-04</lastmod>
+         <lastmod>2023-10-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://tungsten-ai.github.io/docs/pushing_and_pulling_models/pushing/</loc>
-         <lastmod>2023-10-04</lastmod>
+         <lastmod>2023-10-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://tungsten-ai.github.io/docs/running_models/demo/</loc>
-         <lastmod>2023-10-04</lastmod>
+         <lastmod>2023-10-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://tungsten-ai.github.io/docs/running_models/making_a_single_prediction/</loc>
-         <lastmod>2023-10-04</lastmod>
+         <lastmod>2023-10-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://tungsten-ai.github.io/docs/running_models/serving_rest_api/</loc>
-         <lastmod>2023-10-04</lastmod>
+         <lastmod>2023-10-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://tungsten-ai.github.io/docs/running_models/using_gpus/</loc>
-         <lastmod>2023-10-04</lastmod>
+         <lastmod>2023-10-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
