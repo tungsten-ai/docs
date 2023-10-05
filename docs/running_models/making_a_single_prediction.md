@@ -43,3 +43,11 @@ $ tungsten predict \
 )
 {"image": PosixPath("./output.png")}
 ```
+
+You can also make a prediction with multiple inputs.
+```python
+>>> model.predict(
+    [{"prompt": "astronaut"}, {"prompt": "horse"}]
+)
+[{"image": PosixPath("./output-0.png")}, {"image": PosixPath("./output-1.png")}]
+```

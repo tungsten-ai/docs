@@ -219,19 +219,11 @@ Tungstenkit supports both server-side and client-side batching.
 - **Client-side batching**  
     Also, you can reduce traffic volume by putting multiple inputs in a single prediction request:
     ```console
-    $ curl -X 'POST' 'http://localhost:3000/predict' \
+    $ curl -X 'POST' 'http://localhost:3000/predictions' \
       -H 'accept: application/json' \
       -H 'Content-Type: application/json' \
       -d '[{"field": "input1"}, {"field": "input2"}, {"field": "input3"}]'
-
-    {
-      "outputs": [
-        {"field": "output1"},
-        {"field": "output2"},
-        {"field": "output3"}
-      ]
-    }
     ```
 
 ## Join our community
-If you have questions about anything related to Next.js, you're always welcome to ask our community on [Discord](https://discord.com/invite/NESFeXzFuy).
+[Tungsten](https://tungsten.run) is where you can run, share and discuss AI. Currently we are in beta - things can be slow or even break. If you like what we are building, join our [discord server](https://discord.com/invite/NESFeXzFuy)!

@@ -123,13 +123,24 @@ INFO:     Uvicorn running on http://0.0.0.0:3000 (Press CTRL+C to quit)
 
 Send a prediction request with a JSON payload:
 ```console
-$ curl -X 'POST' 'http://localhost:3000/predict' \
-  -H 'accept: application/json' \
+$ curl -X 'POST' 'http://localhost:3000/predictions' \
+  -H 'Accept: application/json' \
   -H 'Content-Type: application/json' \
   -d '[{"image": "https://picsum.photos/200.jpg"}]'
 
 {
+    "prediction_id": "39c9eb6b"
+}
+```
+
+Get the result:
+```console
+$ curl -X 'GET' 'http://localhost:3000/predictions/39c9eb6b' \
+  -H 'Accept: application/json'
+
+{
     "outputs": [{"scale": 0.12483298, "label": "dog"}],
+    "status": "success"
 }
 ```
 

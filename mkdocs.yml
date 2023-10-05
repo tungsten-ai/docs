@@ -1,5 +1,5 @@
-site_name: Tungsten Docs
-site_description: "Tungsten: The Best Home for Your ML Models"
+site_name: Tungstenkit Docs
+site_description: "Tungstenkit: ML container made simple"
 site_url: https://tungsten-ai.github.io/docs
 theme:
   name: material
