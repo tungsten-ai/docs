@@ -124,6 +124,9 @@ class TextToImageModel:
 As you can see, the ``weights.pth`` file is required to setup.
 Before [containerizing](https://tungsten-ai.github.io/docs/building_your_model/containerizing), you should make sure that the file exists in the build directory.
 
+!!! warning
+    **Avoid downloading model weights or building binaries within the ``setup`` method.** This slows down the model server launch time and prevents the model from running in an isolated network environment. In fact, *all models pushed to [tungsten.run](https://tungsten.run) are unable to access the internet while running* for security issues and mitigating speed degradation caused by cold starts. Instead, define [the ``post_build`` method](#define-post-build-commands) executed while containerizing.
+
 ### Define how a prediction works
 The ``predict`` method defines the computation performed at every prediction request.
 
@@ -195,7 +198,7 @@ class TextToImageModel:
         return outputs
 ```
 
-### Declaring dependencies and runtime configuration
+### Declare dependencies and runtime configuration
 You can declare dependencies and runtime configuration via ``define_model`` decorator:
 ```python hl_lines="17-20"
 from typing import List
@@ -251,6 +254,35 @@ method is defined (default: ``None``).
 - ``base_image (str | None)``: Base docker image in ``<repository>[:<tag>]`` format. If ``None`` (default), the base image is automatically selected with respect to pip packages, the device type, and the CUDA version. Otherwise, use it as the base image and ``system_packages`` will be ignored.
 
 ## Advanced Usage
+### Define post-build commands
+If you want to download weights or build binaries while containerizing, you can define ``post_build`` method:
+```python hl_lines="11-13 17-21"
+from typing import List
+from diffusers import DiffusionPipeline
+import torch
+from tungstenkit import define_model
+
+@define_model(...)
+class TextToImageModel:
+    @staticmethod
+    def post_build():
+        """Download Stable Diffusion weights"""
+        DiffusionPipeline.download(
+            "stabilityai/stable-diffusion-2-1", cache_dir="model_cache"
+        )
+
+    def setup(self):
+        """Load Stable Diffusion weights"""
+        self.pipe = DiffusionPipeline.from_pretrained(
+            "stabilityai/stable-diffusion-2-1", 
+            cache_dir="model_cache",
+            local_files_only=True,
+        )
+
+    def predict(self, inputs: List[Input]) -> List[Output]:
+        ...
+```
+
 ### Define how a demo prediction works
 You can define an object detection model like this:
 
